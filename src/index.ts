@@ -8,7 +8,7 @@ import { config } from "./settings/config";
 // инитим необходимые объекты
 const app = express();
 const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
-let transport: SSEServerTransport | null = null;
+let transportSSE: SSEServerTransport | null = null;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,7 +19,7 @@ app.get(YandexTrackerEndpoint.root, async (req, res) => {
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
-    transport = await yandexTrackerMcpServer.connect(
+    transportSSE = await yandexTrackerMcpServer.connect(
       YandexTrackerEndpoint.messagesEdnpoint,
       res
     );
