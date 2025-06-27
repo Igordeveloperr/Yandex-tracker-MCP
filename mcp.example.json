@@ -5,6 +5,11 @@
       "headers": {
         "Accept": "text/event-stream"
       }
+    },
+    "mcp-yandex-tracker-std": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["dist/index.js"]
     }
   }
 }
