@@ -1,19 +1,18 @@
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
 import express from "express";
-import { logger } from "./settings/logger";
 import { YandexTrackerMcpServer } from "./mcp/YandexTrackerMcpServer";
 import { YandexTrackerEndpoint } from "./enums/YandexTrackerEndpoint";
 import { config } from "./settings/config";
+import { Transport } from "@modelcontextprotocol/sdk/shared/transport";
+import { SSETransportStrategy } from "./mcp/transport_strategy/SSETransportStrategy";
 
 // инитим необходимые объекты
-const app = express();
+
 const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
-let transportSSE: SSEServerTransport | null = null;
-let transportStdio: StdioServerTransport | null = null;
+let transport: Transport | null = null;
+
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 // endpoints
 app.get(YandexTrackerEndpoint.root, async (req, res) => {
   try{
@@ -21,10 +20,12 @@ app.get(YandexTrackerEndpoint.root, async (req, res) => {
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
-    transportSSE = await yandexTrackerMcpServer.connectSSE(
+    const transportStrategy = new SSETransportStrategy(
       YandexTrackerEndpoint.messagesEdnpoint,
-      res
+      res,
+      yandexTrackerMcpServer.transports.sse
     );
+    transport = await yandexTrackerMcpServer.connectWithStrategy(transportStrategy);
   }
   catch(error){
     res.status(500).json({ error: "Internal server error" });
