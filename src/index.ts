@@ -32,7 +32,7 @@ app.get(YandexTrackerEndpoint.root, async (req, res) => {
 });
 
 app.post(YandexTrackerEndpoint.messagesEdnpoint, async (req, res) => {
-  await yandexTrackerMcpServer.handleMessages(req, res);
+  await yandexTrackerMcpServer.handleSSEMessages(req, res);
 });
 
 // запуск сервака на 3000 порту
