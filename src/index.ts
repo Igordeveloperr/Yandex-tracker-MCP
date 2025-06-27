@@ -1,4 +1,5 @@
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
 import express from "express";
 import { logger } from "./settings/logger";
 import { YandexTrackerMcpServer } from "./mcp/YandexTrackerMcpServer";
@@ -9,6 +10,7 @@ import { config } from "./settings/config";
 const app = express();
 const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
 let transportSSE: SSEServerTransport | null = null;
+let transportStdio: StdioServerTransport | null = null;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
