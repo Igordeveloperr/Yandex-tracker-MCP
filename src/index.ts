@@ -21,7 +21,7 @@ app.get(YandexTrackerEndpoint.root, async (req, res) => {
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
-    transportSSE = await yandexTrackerMcpServer.connect(
+    transportSSE = await yandexTrackerMcpServer.connectSSE(
       YandexTrackerEndpoint.messagesEdnpoint,
       res
     );

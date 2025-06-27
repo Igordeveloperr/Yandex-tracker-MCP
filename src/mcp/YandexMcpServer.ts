@@ -34,7 +34,7 @@ export abstract class YandexMcpServer {
   protected abstract addPrompts(): void;
 
   // подключение Mcp сервера
-  public async connect(
+  public async connectSSE(
     endpoint: string,
     response: Response
   ): Promise<SSEServerTransport> {
