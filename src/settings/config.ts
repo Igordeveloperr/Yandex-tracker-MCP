@@ -1,5 +1,6 @@
 import { z } from "zod";
 import dotenv from "dotenv";
+import { OperatingModeName } from "../enums/env/OperatingModeName";
 
 dotenv.config();
 
@@ -16,7 +17,10 @@ const envSchema = z.object({
   RATE_LIMIT_REQUESTS: z.coerce.number().default(100),
   RATE_LIMIT_WINDOW: z.coerce.number().default(60000),
   MODEL_DESCRIPTION_BASE_PATH: z.string(),
-  OPERATING_MODE: z.string()
+  OPERATING_MODE: z.enum([
+    OperatingModeName.SSEMode,
+    OperatingModeName.StdioMode,
+  ]),
 });
 
 export const config = envSchema.parse(process.env);
