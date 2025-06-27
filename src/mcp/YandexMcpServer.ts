@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { Response, Request } from "express";
 import { TransportStrategy } from "./transport_strategy/TransportStrategy";
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport";
+import { config } from "../settings/config";
 
 export abstract class YandexMcpServer {
   protected mcpServer: McpServer;
@@ -44,7 +45,7 @@ export abstract class YandexMcpServer {
     // Делегируем подключение mcpServer
     await this.mcpServer.connect(transport);
     console.info(
-      `Connect to MCP server...`
+      `Connect in ${config.OPERATING_MODE} mode to MCP server...`
     );
     return transport;
   }
