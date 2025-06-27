@@ -55,13 +55,6 @@ export abstract class YandexMcpServer {
     }
   }
 
-  // подключение Mcp сервера по Stdio
-  public async connectStdio(): Promise<StdioServerTransport> {
-    const transport = new StdioServerTransport();
-    await this.mcpServer.connect(transport);
-    return transport;
-  }
-
   public async handleSSEMessages(req: Request, res: Response): Promise<void> {
     try {
       if (!req.body || Object.keys(req.body).length === 0) {
