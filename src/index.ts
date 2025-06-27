@@ -47,5 +47,5 @@ else if (config.OPERATING_MODE == OperatingModeName.StdioMode) {
   (async () =>{
     const transportStrategy = new StdioTransportStrategy();
     transport = await yandexTrackerMcpServer.connectWithStrategy(transportStrategy);
-  });
+  })();
 }
