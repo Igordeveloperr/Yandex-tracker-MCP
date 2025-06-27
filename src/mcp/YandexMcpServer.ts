@@ -41,13 +41,18 @@ export abstract class YandexMcpServer {
   public async connectWithStrategy(
     strategy: TransportStrategy
   ): Promise<Transport> {
-    const transport = strategy.createTransport();
-    // Делегируем подключение mcpServer
-    await this.mcpServer.connect(transport);
-    console.info(
-      `Connect in ${config.OPERATING_MODE} mode to MCP server...`
-    );
-    return transport;
+    try{
+      const transport = strategy.createTransport();
+      // Делегируем подключение mcpServer
+      await this.mcpServer.connect(transport);
+      console.info(
+        `Connect in ${config.OPERATING_MODE} mode to MCP server...`
+      );
+      return transport;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   // подключение Mcp сервера по Stdio
