@@ -50,49 +50,6 @@ export abstract class YandexMcpServer {
     return transport;
   }
 
-  // подключение Mcp сервера по SSE
-  public async connectSSE(
-    endpoint: string,
-    response: Response
-  ): Promise<SSEServerTransport> {
-    try {
-      // Создаем транспорт
-      const transport = new SSEServerTransport(endpoint, response);
-
-      this.transports.sse[transport.sessionId] = transport;
-
-      response.on("close", () => {
-        // TODO: Добавить лог закрытия соединения
-        delete this.transports.sse[transport.sessionId];
-        transport.close();
-      });
-
-      response.on("error", (err) => {
-        // TODO: Добавить лог ошибки соединения
-        delete this.transports.sse[transport.sessionId];
-        transport.close();
-      });
-
-      await this.mcpServer.connect(transport);
-      console.info(
-        `SSE connection established for session: ${transport.sessionId}`
-      );
-
-      return transport;
-      // const transport = new SSEServerTransport(endpoint, response);
-      // this.transports.sse[transport.sessionId] = transport;
-      // response.on("close", () => {
-      //   delete this.transports.sse[transport.sessionId];
-      // });
-      // await this.mcpServer.connect(transport);
-      // // TODO: лог удачного подключения
-      // return transport;
-    } catch (err) {
-      // TODO: лог ошибки подкоючения
-      throw err;
-    }
-  }
-
   // подключение Mcp сервера по Stdio
   public async connectStdio(): Promise<StdioServerTransport> {
     const transport = new StdioServerTransport();
