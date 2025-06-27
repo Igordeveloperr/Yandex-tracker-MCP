@@ -7,8 +7,6 @@ import { SSETransportStrategy } from "./mcp/transport_strategy/SSETransportStrat
 import { OperatingModeName } from "./enums/env/OperatingModeName";
 import { StdioTransportStrategy } from "./mcp/transport_strategy/StdioTransportStrategy";
 
-// инитим необходимые объекты
-
 const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
 let transport: Transport | null = null;
 
