@@ -3,15 +3,12 @@ import { YandexTrackerToolName } from "../enums/YandexTrackerToolName";
 import { z } from "zod";
 import { YandexTrackerAPI } from "../yandex_api/YandexTrackerAPI";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol";
-import { CallToolResult, GetPromptResult, ReadResourceResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
+import { CallToolResult, GetPromptResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
 import { getIssueParamsSchema, getQueuesParamsSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";
 import { Issue } from "../models/issue";
 import { SimpleUser, User } from "../models/user";
 import { Queue } from "../models/queue";
-import { ReadResourceCallback } from "@modelcontextprotocol/sdk/server/mcp";
-import { YandexTrackerResourceName } from "../enums/YandexTrackerResourceName";
 import { config } from "../settings/config";
-import { YandexTrackerResourceUri } from "../enums/YandexTrackerResourceUri";
 import { YandexTrackerPromptName } from "../enums/YandexTrackerPromptName";
 import { IssueType, Priority, Status } from "../models/baseSchemas";
 import * as fs from "fs/promises"
