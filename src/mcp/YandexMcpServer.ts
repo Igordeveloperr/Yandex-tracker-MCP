@@ -3,6 +3,8 @@ import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { CallToolResult, GetPromptResult } from "@modelcontextprotocol/sdk/types";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
 import { Response, Request } from "express";
+import { TransportStrategy } from "./transport_strategy/TransportStrategy";
+import { Transport } from "@modelcontextprotocol/sdk/shared/transport";
 
 export abstract class YandexMcpServer {
   protected mcpServer: McpServer;
@@ -33,6 +35,16 @@ export abstract class YandexMcpServer {
   protected abstract addTools(): void;
   protected abstract addResources(): void;
   protected abstract addPrompts(): void;
+
+  // подключение MCP сервера по выбранной стратегии
+  public async connectWithStrategy(
+    strategy: TransportStrategy
+  ): Promise<Transport> {
+    const transport = strategy.createTransport();
+    // Делегируем подключение mcpServer
+    await this.mcpServer.connect(transport);
+    return transport;
+  }
 
   // подключение Mcp сервера по SSE
   public async connectSSE(
