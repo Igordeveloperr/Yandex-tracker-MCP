@@ -121,4 +121,12 @@ async function test13() {
   console.log(issues);
 }
 
-test13();
+async function test14() {
+  const api = YandexTrackerAPI.getInstance();
+  const transitions = await api.getIssueTransitions(
+    "MAJOR-2768"
+  );
+  console.log(transitions);
+}
+
+test14();
