@@ -9,11 +9,15 @@ export const changelogItemSchema = z.object({
   updatedAt: z.string().optional(),
   updatedBy: userSchemaSimple.optional(),
   type: z.string().optional(),
-  fields: z.array(z.object({
-    field: versionSchema.optional(),
-    from: defaultTypeSchema.optional(),
-    to: defaultTypeSchema.optional()
-  })).optional(),
+  fields: z
+    .array(
+      z.object({
+        field: versionSchema.optional().nullable(),
+        from: z.union([z.string(), defaultTypeSchema]).nullable().optional(),
+        to: z.union([z.string(), defaultTypeSchema]).nullable().optional(),
+      })
+    )
+    .optional(),
 });
 
 export type ChangelogItemType = z.infer<typeof changelogItemSchema>;
