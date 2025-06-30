@@ -107,6 +107,18 @@ export class YandexTrackerAPI {
   }
 
   // получение комментариев задачи
+  async getIssueFields(): Promise<CommentType[]> {
+    try {
+      const response = await this.get(
+        `issues/${issueKey}/comments?perPage=${perPage}&page=${page}`
+      );
+      return commentSchema.array().parse(response);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // получение комментариев задачи
   async getIssueComments(
     issueKey: string,
     perPage: number = 50,
