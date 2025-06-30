@@ -6,7 +6,8 @@
   "scripts": {
     "debug": "npx @modelcontextprotocol/inspector node dist/index.js",
     "compile": "npx tsc",
-    "run": "node dist/index.js"
+    "run": "node dist/index.js",
+    "test": ""
   },
   "repository": {
     "type": "git",
