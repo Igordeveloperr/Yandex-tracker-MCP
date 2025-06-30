@@ -106,10 +106,10 @@ export class YandexTrackerAPI {
   }
 
   // получение параметров чеклиста задачи
-  async getIssueCheckList(issueKey: string): Promise<CheckListType> {
+  async getIssueCheckList(issueKey: string): Promise<CheckListType[]> {
     try{
       const response = await this.get(`issues/${issueKey}/checklistItems`);
-      return checkListSchema.parse(response);
+      return checkListSchema.array().parse(response);
     }
     catch(error){
       throw error;

@@ -137,7 +137,7 @@ async function test15() {
 
 async function test16() {
   const api = YandexTrackerAPI.getInstance();
-  const res = await api.getIssueCheckList("MAJOR-2768");
+  const res = await api.getIssueCheckList("FE-1000");
   console.log(res);
 }
 
