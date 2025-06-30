@@ -108,7 +108,7 @@ export class YandexTrackerAPI {
     return response;
   }
 
-  // получение комментариев задачи
+  // получение полей задачи
   async getIssueFields(): Promise<IssueFieldType[]> {
     try {
       const response = await this.get(`fields`);

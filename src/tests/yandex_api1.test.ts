@@ -147,4 +147,10 @@ async function test17() {
   console.log(res);
 }
 
+async function test18() {
+  const api = YandexTrackerAPI.getInstance();
+  const res = await api.getIssueFields();
+  console.log(res);
+}
+
 test17();
