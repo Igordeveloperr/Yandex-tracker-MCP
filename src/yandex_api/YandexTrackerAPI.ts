@@ -19,6 +19,7 @@ import {
 } from "../models/baseSchemas";
 import { response } from "express";
 import { transitionSchema, TransitionType } from "../models/transition";
+import { changelogItemSchema, ChangelogItemType } from "../models/changelogItem";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerAPI {
@@ -101,6 +102,22 @@ export class YandexTrackerAPI {
   async manualPost(path: string, params?: object): Promise<any> {
     const response = await this.post(path, params);
     return response;
+  }
+
+  // пролучить историю изменений задачи
+  async getIssueChangeLog(
+    issueKey: string,
+    perPage: number = 50,
+    page: number = 1
+  ): Promise<ChangelogItemType[]> {
+    try {
+      const response = await this.get(
+        `issues/${issueKey}/changelog?perPage=${perPage}&page=${page}`
+      );
+      return changelogItemSchema.array().parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   // получение переходов задачи по issueKey
