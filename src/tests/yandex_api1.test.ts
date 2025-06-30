@@ -131,7 +131,7 @@ async function test14() {
 
 async function test15() {
   const api = YandexTrackerAPI.getInstance();
-  const changelog = await api.getIssueChangeLog("MAJOR-2768", 5);
+  const changelog = await api.getIssueChangeLog("MAJOR-2768", 55);
   console.log(changelog);
 }
 

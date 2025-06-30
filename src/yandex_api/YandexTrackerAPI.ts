@@ -114,7 +114,6 @@ export class YandexTrackerAPI {
       const response = await this.get(
         `issues/${issueKey}/changelog?perPage=${perPage}&page=${page}`
       );
-      console.log(response[0].fields);
       return changelogItemSchema.array().parse(response);
     } catch (error) {
       throw error;

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { array, z } from "zod";
 import { defaultTypeSchema, versionSchema } from "./baseSchemas";
 import { userSchemaSimple } from "./user";
 
@@ -13,8 +13,8 @@ export const changelogItemSchema = z.object({
     .array(
       z.object({
         field: versionSchema.optional().nullable(),
-        from: z.union([z.string(), defaultTypeSchema]).nullable().optional(),
-        to: z.union([z.string(), defaultTypeSchema]).nullable().optional(),
+        from: z.any(),
+        to: z.any()
       })
     )
     .optional(),
