@@ -129,4 +129,10 @@ async function test14() {
   console.log(transitions);
 }
 
-test14();
+async function test15() {
+  const api = YandexTrackerAPI.getInstance();
+  const changelog = await api.getIssueChangeLog("MAJOR-2768", 5);
+  console.log(changelog);
+}
+
+test15();
