@@ -15,3 +15,5 @@ export const changelogItemSchema = z.object({
     to: defaultTypeSchema.optional()
   })).optional(),
 });
+
+export type ChangelogItemType = z.infer<typeof changelogItemSchema>;
