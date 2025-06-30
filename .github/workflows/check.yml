@@ -1,5 +1,5 @@
 name: check
-on: push
+on: status
 jobs:
   jobName:
     runs-on: windows-latest
