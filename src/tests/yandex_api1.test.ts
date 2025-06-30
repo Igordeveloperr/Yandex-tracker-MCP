@@ -141,4 +141,10 @@ async function test16() {
   console.log(res);
 }
 
-test16();
+async function test17() {
+  const api = YandexTrackerAPI.getInstance();
+  const res = await api.getIssueComments("MAJOR-2768", 5, 1);
+  console.log(res);
+}
+
+test17();
