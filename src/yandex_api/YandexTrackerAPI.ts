@@ -18,6 +18,7 @@ import {
   statusSchema,
 } from "../models/baseSchemas";
 import { response } from "express";
+import { transitionSchema, TransitionType } from "../models/transition";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerAPI {
@@ -100,6 +101,16 @@ export class YandexTrackerAPI {
   async manualPost(path: string, params?: object): Promise<any> {
     const response = await this.post(path, params);
     return response;
+  }
+
+  // получение переходов задачи по issueKey
+  async getIssueTransitions(issueKey: string): Promise<TransitionType[]> {
+    try {
+      const response = await this.get(`issues/${issueKey}/transitions`);
+      return transitionSchema.array().parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**

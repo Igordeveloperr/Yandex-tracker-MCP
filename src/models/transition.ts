@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { defaultTypeSchema } from "./baseSchemas";
 
-const transitionSchema = z.object({
+export const transitionSchema = z.object({
   id: z.string().describe("Идентификатор перехода"),
   self: z
     .string()
