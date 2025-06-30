@@ -21,6 +21,7 @@ import { response } from "express";
 import { transitionSchema, TransitionType } from "../models/transition";
 import { changelogItemSchema, ChangelogItemType } from "../models/changelogItem";
 import { checkListSchema, CheckListType } from "../models/checklist";
+import { commentSchema, CommentType } from "../models/comment";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerAPI {
@@ -103,6 +104,22 @@ export class YandexTrackerAPI {
   async manualPost(path: string, params?: object): Promise<any> {
     const response = await this.post(path, params);
     return response;
+  }
+
+  // получение комментариев задачи
+  async getIssueComments(
+    issueKey: string,
+    perPage: number = 50,
+    page: number = 1
+  ): Promise<CommentType[]> {
+    try {
+      const response = await this.get(
+        `issues/${issueKey}/comments?perPage=${perPage}&page=${page}`
+      );
+      return commentSchema.array().parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   // получение параметров чеклиста задачи
