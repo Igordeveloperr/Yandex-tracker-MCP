@@ -4,7 +4,7 @@ import { z } from "zod";
 import { YandexTrackerAPI } from "../yandex_api/YandexTrackerAPI";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol";
 import { CallToolResult, GetPromptResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
-import { getBoardSprintsParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";
+import { getBoardSprintsParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";
 import { Issue } from "../models/issues/issue";
 import { SimpleUser, User } from "../models/users/user";
 import { Queue } from "../models/queues/queue";
@@ -253,6 +253,20 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   /*__________________RESOURCES__________________ */
 
   /*__________________TOOLS__________________ */
+
+  // callback для получения спринтов доски в трекере
+  private async getSprintToolCallback(
+    args: z.infer<typeof getSprintParamSchema>, // Типизируем args на основе схемы
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult> {
+    try {
+      const sprint: SprintType =
+        await YandexTrackerAPI.getInstance().getSprint(args.sprintId);
+      return super.receiveCallToolResult<SprintType>(sprint);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // callback для получения спринтов доски в трекере
   private async getBoardSprintsToolCallback(
