@@ -4,7 +4,7 @@ import { z } from "zod";
 import { YandexTrackerAPI } from "../yandex_api/YandexTrackerAPI";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol";
 import { CallToolResult, GetPromptResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
-import { getIssueParamsSchema, getQueuesParamsSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";
+import { getBoardSprintsParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";
 import { Issue } from "../models/issues/issue";
 import { SimpleUser, User } from "../models/users/user";
 import { Queue } from "../models/queues/queue";
@@ -14,6 +14,7 @@ import { IssueType, Priority, Status } from "../models/baseSchemas";
 import * as fs from "fs/promises"
 import { ModelDescriptionName } from "../enums/ModelDescriptionName";
 import { BoardType } from "../models/boards/board";
+import { SprintType } from "../models/boards/sprint";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -253,13 +254,28 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   /*__________________TOOLS__________________ */
 
-  // callback для получения списка доступных очередей
+  // callback для получения спринтов доски в трекере
+  private async getBoardSprintsToolCallback(
+    args: z.infer<typeof getBoardSprintsParamSchema>, // Типизируем args на основе схемы
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult> {
+    try {
+      const sprints: SprintType[] =
+        await YandexTrackerAPI.getInstance().getBoardSprints(args.boardId);
+      return super.receiveCallToolResult<SprintType[]>(sprints);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // callback для досок в трекере
   private async getBoardsToolCallback(
     args: {}, // Типизируем args на основе схемы
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      const boards: BoardType[] = await YandexTrackerAPI.getInstance().getBoards();
+      const boards: BoardType[] =
+        await YandexTrackerAPI.getInstance().getBoards();
       return super.receiveCallToolResult<BoardType[]>(boards);
     } catch (error) {
       throw error;
