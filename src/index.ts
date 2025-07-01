@@ -10,6 +10,44 @@ import { StdioTransportStrategy } from "./mcp/transport_strategy/StdioTransportS
 const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
 let transport: Transport | null = null;
 
+export async function startServer(port: number = 3000, trackerToken?: string) {
+  const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
+
+  // Переопределяем конфиг из аргументов
+  if (trackerToken) {
+    process.env.YANDEX_TRACKER_TOKEN = trackerToken;
+  }
+  const app = express();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  // endpoints
+  app.get(YandexTrackerEndpoint.root, async (req, res) => {
+    try {
+      // Настраиваем заголовки для SSE
+      res.setHeader("Content-Type", "text/event-stream");
+      res.setHeader("Cache-Control", "no-cache");
+      res.setHeader("Connection", "keep-alive");
+      const transportStrategy = new SSETransportStrategy(
+        YandexTrackerEndpoint.messagesEdnpoint,
+        res,
+        yandexTrackerMcpServer.transports.sse
+      );
+      transport = await yandexTrackerMcpServer.connectWithStrategy(
+        transportStrategy
+      );
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.post(YandexTrackerEndpoint.messagesEdnpoint, async (req, res) => {
+    await yandexTrackerMcpServer.handleSSEMessages(req, res);
+  });
+
+  // запуск SSE сервака на 3000 порту
+  app.listen(port);
+}
+
 if(config.OPERATING_MODE == OperatingModeName.SSEMode){
   const app = express();
   app.use(express.json());
