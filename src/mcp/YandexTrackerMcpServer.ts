@@ -19,6 +19,7 @@ import { CommentType } from "../models/issues/comment";
 import { CheckListType } from "../models/issues/checklist";
 import { ChangelogItemType } from "../models/issues/changelogItem";
 import { TransitionType } from "../models/issues/transition";
+import { isAxiosError } from "axios";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -407,7 +408,15 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
         await YandexTrackerAPI.getInstance().getBoardSprints(args.boardId);
       return super.receiveCallToolResult<SprintType[]>(sprints);
     } catch (error) {
-      throw error;
+        // Проверяем, что error является объектом с полем response
+        if (isAxiosError(error)) {
+          if (error.response?.status === 400) {
+            return super.receiveCallToolResult<{ message: string }>({
+              message: "В данной доске нет спринтов",
+            });
+          }
+        }
+        throw error;
     }
   }
 
