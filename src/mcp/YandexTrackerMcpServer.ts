@@ -17,6 +17,7 @@ import { BoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
 import { CommentType } from "../models/issues/comment";
 import { CheckListType } from "../models/issues/checklist";
+import { ChangelogItemType } from "../models/issues/changelogItem";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -255,6 +256,24 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   /*__________________RESOURCES__________________ */
 
   /*__________________TOOLS__________________ */
+
+  // callback для получения истории изменений задачи
+  private async getIssueChangeLogToolCallback(
+    args: z.infer<typeof getIssueDefaultParamSchema>, // Типизируем args на основе схемы
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult> {
+    try {
+      const response: ChangelogItemType[] =
+        await YandexTrackerAPI.getInstance().getIssueChangeLog(
+          args.issueKey,
+          args.perPage,
+          args.page
+        );
+      return super.receiveCallToolResult<ChangelogItemType[]>(response);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // callback для получения чек-листа к задаче
   private async getIssueCheckListToolCallback(
