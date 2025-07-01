@@ -4,11 +4,11 @@ import {
   issueSchema,
   SimpleIssue,
   issueSchemaSimple,
-} from "../models/issue";
+} from "../models/issues/issue";
 import { config } from "../settings/config";
 import { Tracker } from "yandex-tracker-client";
-import { ExpandQueue, Queue, queueSchema } from "../models/queue";
-import { userSchemaSimple, SimpleUser, userSchema, User } from "../models/user";
+import { ExpandQueue, Queue, queueSchema } from "../models/queues/queue";
+import { userSchemaSimple, SimpleUser, userSchema, User } from "../models/users/user";
 import {
   Priority,
   prioritySchema,
@@ -19,11 +19,11 @@ import {
   defaultTypeSchema,
 } from "../models/baseSchemas";
 import { response } from "express";
-import { transitionSchema, TransitionType } from "../models/transition";
-import { changelogItemSchema, ChangelogItemType } from "../models/changelogItem";
-import { checkListSchema, CheckListType } from "../models/checklist";
-import { commentSchema, CommentType } from "../models/comment";
-import { issueFieldSchema, IssueFieldType } from "../models/issueField";
+import { transitionSchema, TransitionType } from "../models/issues/transition";
+import { changelogItemSchema, ChangelogItemType } from "../models/issues/changelogItem";
+import { checkListSchema, CheckListType } from "../models/issues/checklist";
+import { commentSchema, CommentType } from "../models/issues/comment";
+import { issueFieldSchema, IssueFieldType } from "../models/issues/issueField";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerAPI {

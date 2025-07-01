@@ -1,9 +1,9 @@
 import { config } from "../settings/config";
 import { YandexTrackerAPI } from "../yandex_api/YandexTrackerAPI";
 import { Tracker } from "yandex-tracker-client";
-import { userSchemaSimple, SimpleUser, userSchema, User } from "../models/user";
-import { Issue } from "../models/issue";
-import { Queue } from "../models/queue";
+import { userSchemaSimple, SimpleUser, userSchema, User } from "../models/users/user";
+import { Issue } from "../models/issues/issue";
+import { Queue } from "../models/queues/queue";
 import { IssueType, Priority, Status } from "../models/baseSchemas";
 
 async function test0() {

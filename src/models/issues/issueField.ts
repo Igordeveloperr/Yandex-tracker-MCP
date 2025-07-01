@@ -1,5 +1,5 @@
 import z from "zod";
-import { defaultTypeSchema } from "./baseSchemas";
+import { defaultTypeSchema } from "../baseSchemas";
 
 export const issueFieldSchema = z.object({
     id: z.string(),

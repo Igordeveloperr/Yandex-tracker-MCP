@@ -4,8 +4,8 @@ import {
   versionSchema,
   workflowItemSchema,
   issueTypeConfigSchema,
-} from "./baseSchemas";
-import { userSchemaSimple } from "./user";
+} from "../baseSchemas";
+import { userSchemaSimple } from "../users/user";
 
 export const queueSchemaSimple = z.object({
   id: z.union([z.string(), z.number()]),

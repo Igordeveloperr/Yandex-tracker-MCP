@@ -5,9 +5,9 @@ import {
   issueTypeSchema,
   projectSchema,
   parentSchema,
-} from "./baseSchemas";
-import { userSchemaSimple } from "./user";
-import { queueSchema } from "./queue";
+} from "../baseSchemas";
+import { userSchemaSimple } from "../users/user";
+import { queueSchema } from "../queues/queue";
 
 export const issueSchemaSimple = z.object({
   id: z.string(),

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {ExpandQueueEnum} from "./queue"
+import {ExpandQueueEnum} from "./queues/queue"
 
 // схема для определения входных параметром getIssueTool
 export const getIssueParamsSchema = z.object({

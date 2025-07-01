@@ -1,6 +1,6 @@
 import { array, z } from "zod";
-import { defaultTypeSchema, versionSchema } from "./baseSchemas";
-import { userSchemaSimple } from "./user";
+import { defaultTypeSchema, versionSchema } from "../baseSchemas";
+import { userSchemaSimple } from "../users/user";
 
 export const changelogItemSchema = z.object({
   id: z.string(),

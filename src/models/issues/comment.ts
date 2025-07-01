@@ -1,5 +1,5 @@
 import z from "zod";
-import { userSchemaSimple } from "./user";
+import { userSchemaSimple } from "../users/user";
 
 export const commentSchema = z.object({
     id: z.number(),
