@@ -18,6 +18,7 @@ import { SprintType } from "../models/boards/sprint";
 import { CommentType } from "../models/issues/comment";
 import { CheckListType } from "../models/issues/checklist";
 import { ChangelogItemType } from "../models/issues/changelogItem";
+import { TransitionType } from "../models/issues/transition";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -256,6 +257,20 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   /*__________________RESOURCES__________________ */
 
   /*__________________TOOLS__________________ */
+
+  // callback для получения переходов задачи
+  private async getIssueTransitionsToolCallback(
+    args: z.infer<typeof getIssueDefaultParamSchema>, // Типизируем args на основе схемы
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult> {
+    try {
+      const response: TransitionType[] =
+        await YandexTrackerAPI.getInstance().getIssueTransitions(args.issueKey);
+      return super.receiveCallToolResult<TransitionType[]>(response);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // callback для получения истории изменений задачи
   private async getIssueChangeLogToolCallback(
