@@ -99,6 +99,30 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP tools связанные с Yandex Tracker
   protected addTools(): void {
+    // getSprintTool
+    this.mcpServer.tool(
+      YandexTrackerToolName.getSprint,
+      "Получает конкретный спринт по идентификатору",
+      getSprintParamSchema.shape,
+      this.getSprintToolCallback.bind(this)
+    );
+
+    // getBoardSprintsTool
+    this.mcpServer.tool(
+      YandexTrackerToolName.getBoardSprints,
+      "Получает все спринты конкретной доски",
+      getBoardSprintsParamSchema.shape,
+      this.getBoardSprintsToolCallback.bind(this)
+    );
+
+    // getBoardsTool
+    this.mcpServer.tool(
+      YandexTrackerToolName.getBoards,
+      "Получает все доски в трекере",
+      {},
+      this.getBoardsToolCallback
+    );
+
     // getUsersTool
     this.mcpServer.tool(
       YandexTrackerToolName.getUsers,
