@@ -53,7 +53,7 @@ async function test3() {
 async function test4() {
   const api = YandexTrackerAPI.getInstance();
   const usr: Issue = await api.getIssue("MAJOR-1100");
-  console.log(usr);
+  // console.log(usr);
 }
 
 async function test5() {
@@ -113,7 +113,7 @@ async function test12() {
 async function test13() {
   const api = YandexTrackerAPI.getInstance();
   const issues: Issue[] = await api.searchIssueByQuery(
-    'Queue: DISCO "Sort by": Updated DESC',
+    'type: story',
     false,
     1,
     1
