@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { userSchemaSimple } from "../users/user";
 
-const sprintSchema = z.object({
+export const sprintSchema = z.object({
   id: z.number(),
   version: z.number(),
   name: z.string(),
@@ -20,3 +20,5 @@ const sprintSchema = z.object({
   startDateTime: z.string().optional(),
   endDateTime: z.string().optional(),
 });
+
+export type SprintType = z.infer<typeof sprintSchema>;
