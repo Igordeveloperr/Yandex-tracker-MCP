@@ -109,7 +109,17 @@ export class YandexTrackerAPI {
     return response;
   }
 
-  // получение полей задачи
+  // получение спринтов доски
+  async getBoardSprints(boardId: string): Promise<SprintType[]> {
+    try {
+      const response = await this.get(`boards/${boardId}/sprints`);
+      return sprintSchema.array().parse(response);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // получение спринта
   async getSprint(sprintId: string): Promise<SprintType> {
     try {
       const response = await this.get(`sprints/${sprintId}`);
