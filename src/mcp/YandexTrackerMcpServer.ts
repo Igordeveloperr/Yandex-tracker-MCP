@@ -134,7 +134,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     // getSprintTool
     this.mcpServer.tool(
       YandexTrackerToolName.getSprint,
-      "Получает конкретный спринт по идентификатору",
+      "Перед тем как искать конкретный спринт, обязательно вызови - getBoardSprintsTool. Получает конкретный спринт по идентификатору",
       getSprintParamSchema.shape,
       this.getSprintToolCallback.bind(this)
     );
@@ -142,7 +142,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     // getBoardSprintsTool
     this.mcpServer.tool(
       YandexTrackerToolName.getBoardSprints,
-      "Получает все спринты конкретной доски",
+      "Перед тем как искать спринты доски, узнай какие доски вообще есть в трекере - обязательно вызови getBoardsTool. Получает все спринты конкретной доски",
       getBoardSprintsParamSchema.shape,
       this.getBoardSprintsToolCallback.bind(this)
     );
