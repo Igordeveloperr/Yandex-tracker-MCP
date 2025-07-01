@@ -4,7 +4,7 @@ import { z } from "zod";
 import { YandexTrackerAPI } from "../yandex_api/YandexTrackerAPI";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol";
 import { CallToolResult, GetPromptResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
-import { getBoardSprintsParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";
+import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";
 import { Issue } from "../models/issues/issue";
 import { SimpleUser, User } from "../models/users/user";
 import { Queue } from "../models/queues/queue";
@@ -15,6 +15,7 @@ import * as fs from "fs/promises"
 import { ModelDescriptionName } from "../enums/ModelDescriptionName";
 import { BoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
+import { CommentType } from "../models/issues/comment";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -254,14 +255,32 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   /*__________________TOOLS__________________ */
 
+  // callback для получения комментариев к задаче
+  private async getIssueCommentsToolCallback(
+    args: z.infer<typeof getIssueDefaultParamSchema>, // Типизируем args на основе схемы
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult> {
+    try {
+      const issueComments: CommentType[] = await YandexTrackerAPI.getInstance().getIssueComments(
+        args.issueKey,
+        args.perPage,
+        args.page
+      );
+      return super.receiveCallToolResult<CommentType[]>(issueComments);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   // callback для получения спринтов доски в трекере
   private async getSprintToolCallback(
     args: z.infer<typeof getSprintParamSchema>, // Типизируем args на основе схемы
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      const sprint: SprintType =
-        await YandexTrackerAPI.getInstance().getSprint(args.sprintId);
+      const sprint: SprintType = await YandexTrackerAPI.getInstance().getSprint(
+        args.sprintId
+      );
       return super.receiveCallToolResult<SprintType>(sprint);
     } catch (error) {
       throw error;
