@@ -23,7 +23,7 @@ import { transitionSchema, TransitionType } from "../models/transition";
 import { changelogItemSchema, ChangelogItemType } from "../models/changelogItem";
 import { checkListSchema, CheckListType } from "../models/checklist";
 import { commentSchema, CommentType } from "../models/comment";
-import { IssueFieldType } from "../models/issueField";
+import { issueFieldSchema, IssueFieldType } from "../models/issueField";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerAPI {
@@ -112,7 +112,7 @@ export class YandexTrackerAPI {
   async getIssueFields(): Promise<IssueFieldType[]> {
     try {
       const response = await this.get(`fields`);
-      return defaultTypeSchema.array().parse(response);
+      return issueFieldSchema.array().parse(response);
     } catch (error) {
       throw error;
     }

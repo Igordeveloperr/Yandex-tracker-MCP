@@ -113,7 +113,7 @@ async function test12() {
 async function test13() {
   const api = YandexTrackerAPI.getInstance();
   const issues: Issue[] = await api.searchIssueByQuery(
-    'type: story',
+    'queue: major and type: task',
     false,
     1,
     1

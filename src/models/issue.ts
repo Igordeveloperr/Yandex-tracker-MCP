@@ -19,6 +19,7 @@ export const issueSchema = issueSchemaSimple.extend({
   self: z.string().url().optional(),
   version: z.number().optional(),
   lastCommentUpdatedAt: z.string().optional(),
+  storyPoints: z.number().optional(),
   summary: z.string().optional(),
   parent: parentSchema.optional(),
   aliases: z.array(z.string()).optional(),
