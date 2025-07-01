@@ -1,6 +1,32 @@
 import { z } from "zod";
 import {ExpandQueueEnum} from "./queues/queue"
 
+export const getBoardSprintsParamSchema = z.object({
+  boardId: z.string(),
+});
+
+export const getSprintParamSchema = z.object({
+  sprintId: z.string()
+});
+
+export const getIssueDefaultParamSchema = z.object({
+  issueKey: z
+    .string()
+    .describe("Ключ задачи в Yandex Tracker (например: TEST-123)"),
+  perPage: z
+    .number()
+    .int()
+    .positive()
+    .default(20)
+    .describe("Количество элементов на странице (по умолчанию 20)"),
+  page: z
+    .number()
+    .int()
+    .positive()
+    .default(1)
+    .describe("Номер страницы (по умолчанию 1)"),
+});
+
 // схема для определения входных параметром getIssueTool
 export const getIssueParamsSchema = z.object({
     issueKey: z
