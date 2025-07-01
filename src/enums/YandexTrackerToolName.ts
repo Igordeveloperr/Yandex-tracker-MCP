@@ -8,7 +8,6 @@ export enum YandexTrackerToolName {
   getIssueTypes = "getIssueTypesTool",
   getIssuePriorityTypes = "getIssuePriorityTypesTool",
   getIssueStatusTypes = "getIssueStatusTypesTool",
-  getIssueFields = "getIssueFieldsTool",
   getQueueFields = "getQueueFieldsTool",
   getUserFields = "getUserFieldsTool",
   getUsers = "getTrackerUsersTool",
@@ -20,4 +19,5 @@ export enum YandexTrackerToolName {
   getIssueCheckList = "getIssueCheckListTool",
   getIssueChangeLog = "getIssueChangeLogTool",
   getIssueTransitions = "getIssueTransitions",
+  getIssueFields = "getIssueFieldsTool",
 }

@@ -13,6 +13,7 @@ import { YandexTrackerPromptName } from "../enums/YandexTrackerPromptName";
 import { IssueType, Priority, Status } from "../models/baseSchemas";
 import * as fs from "fs/promises"
 import { ModelDescriptionName } from "../enums/ModelDescriptionName";
+import { BoardType } from "../models/boards/board";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -252,6 +253,19 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   /*__________________TOOLS__________________ */
 
+  // callback для получения списка доступных очередей
+  private async getBoardsToolCallback(
+    args: {}, // Типизируем args на основе схемы
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult> {
+    try {
+      const boards: BoardType[] = await YandexTrackerAPI.getInstance().getBoards();
+      return super.receiveCallToolResult<BoardType[]>(boards);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   // callback для получения всех пользователей
   private async getUsersToolCallback(
     args: {},
@@ -482,8 +496,8 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
         );
       const responseData = {
         issueArray,
-        countOfIssues: issueArray.length
-      }
+        countOfIssues: issueArray.length,
+      };
       return super.receiveCallToolResult<object>(responseData);
     } catch (error) {
       throw error;
