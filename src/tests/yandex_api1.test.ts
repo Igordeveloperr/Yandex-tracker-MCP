@@ -161,7 +161,7 @@ async function test19() {
 
 async function test20() {
   const api = YandexTrackerAPI.getInstance();
-  const res = await api.getBoardSprints("78");
+  const res = await api.getBoardSprints("1");
   console.log(res);
 }
 
