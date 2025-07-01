@@ -99,6 +99,38 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP tools связанные с Yandex Tracker
   protected addTools(): void {
+    // getIssueTransitionsTool
+    this.mcpServer.tool(
+      YandexTrackerToolName.getIssueTransitions,
+      "Получает переходы задачи задачи.",
+      getIssueDefaultParamSchema.shape,
+      this.getIssueTransitionsToolCallback.bind(this)
+    );
+
+    // getIssueChangeLogTool
+    this.mcpServer.tool(
+      YandexTrackerToolName.getIssueChangeLog,
+      "Получает историю изменений задачи.",
+      getIssueDefaultParamSchema.shape,
+      this.getIssueChangeLogToolCallback.bind(this)
+    );
+
+    // getIssueCheckListTool
+    this.mcpServer.tool(
+      YandexTrackerToolName.getIssueCheckList,
+      "Получает чек-лист к задаче.",
+      getIssueDefaultParamSchema.shape,
+      this.getIssueCheckListToolCallback.bind(this)
+    );
+
+    // getIssueCommentsTool
+    this.mcpServer.tool(
+      YandexTrackerToolName.getIssueComments,
+      "Получает комментарии к задаче.",
+      getIssueDefaultParamSchema.shape,
+      this.getIssueCommentsToolCallback.bind(this)
+    );
+
     // getSprintTool
     this.mcpServer.tool(
       YandexTrackerToolName.getSprint,
