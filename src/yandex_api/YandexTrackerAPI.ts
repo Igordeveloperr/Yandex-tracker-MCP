@@ -25,6 +25,7 @@ import { checkListSchema, CheckListType } from "../models/issues/checklist";
 import { commentSchema, CommentType } from "../models/issues/comment";
 import { issueFieldSchema, IssueFieldType } from "../models/issues/issueField";
 import { sprintSchema, SprintType } from "../models/boards/sprint";
+import { boardSchema, BoardType } from "../models/boards/board";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerAPI {
@@ -107,6 +108,16 @@ export class YandexTrackerAPI {
   async manualPost(path: string, params?: object): Promise<any> {
     const response = await this.post(path, params);
     return response;
+  }
+
+  // получение досок
+  async getBoards(): Promise<BoardType[]> {
+    try {
+      const response = await this.get(`boards`);
+      return boardSchema.array().parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   // получение спринтов доски
