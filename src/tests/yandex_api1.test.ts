@@ -165,4 +165,10 @@ async function test20() {
   console.log(res);
 }
 
-test20();
+async function test21() {
+  const api = YandexTrackerAPI.getInstance();
+  const res = await api.getBoards();
+  console.log(res);
+}
+
+test21();
