@@ -1,10 +1,10 @@
 {
   "name": "yandex-tracker-mcp-server",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "MCP сервер для работы с Яндекс.Трекерр",
   "main": "index.js",
   "bin": {
-    "yandex-mcp": "./dist/cli.js"
+    "yandex-tracker-mcp-server": "./dist/cli.js"
   },
   "scripts": {
     "debug": "npx @modelcontextprotocol/inspector node dist/index.js",

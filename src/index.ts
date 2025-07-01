@@ -17,71 +17,48 @@ export async function startServer(port: number = 3000, trackerToken?: string) {
   if (trackerToken) {
     process.env.YANDEX_TRACKER_TOKEN = trackerToken;
   }
-  const app = express();
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  // endpoints
-  app.get(YandexTrackerEndpoint.root, async (req, res) => {
-    try {
-      // Настраиваем заголовки для SSE
-      res.setHeader("Content-Type", "text/event-stream");
-      res.setHeader("Cache-Control", "no-cache");
-      res.setHeader("Connection", "keep-alive");
-      const transportStrategy = new SSETransportStrategy(
-        YandexTrackerEndpoint.messagesEdnpoint,
-        res,
-        yandexTrackerMcpServer.transports.sse
-      );
-      transport = await yandexTrackerMcpServer.connectWithStrategy(
-        transportStrategy
-      );
-    } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
-    }
-  });
-
-  app.post(YandexTrackerEndpoint.messagesEdnpoint, async (req, res) => {
-    await yandexTrackerMcpServer.handleSSEMessages(req, res);
-  });
-
-  // запуск SSE сервака на 3000 порту
-  app.listen(port);
-}
-
-if(config.OPERATING_MODE == OperatingModeName.SSEMode){
-  const app = express();
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  // endpoints
-  app.get(YandexTrackerEndpoint.root, async (req, res) => {
-    try {
-      // Настраиваем заголовки для SSE
-      res.setHeader("Content-Type", "text/event-stream");
-      res.setHeader("Cache-Control", "no-cache");
-      res.setHeader("Connection", "keep-alive");
-      const transportStrategy = new SSETransportStrategy(
-        YandexTrackerEndpoint.messagesEdnpoint,
-        res,
-        yandexTrackerMcpServer.transports.sse
-      );
-      transport = await yandexTrackerMcpServer.connectWithStrategy(
-        transportStrategy
-      );
-    } catch (error) {
-      res.status(500).json({ error: "Internal server error" });
-    }
-  });
-
-  app.post(YandexTrackerEndpoint.messagesEdnpoint, async (req, res) => {
-    await yandexTrackerMcpServer.handleSSEMessages(req, res);
-  });
-
-  // запуск SSE сервака на 3000 порту
-  app.listen(3000);
-}
-else if (config.OPERATING_MODE == OperatingModeName.StdioMode) {
-  (async () =>{
+  (async () => {
     const transportStrategy = new StdioTransportStrategy();
-    transport = await yandexTrackerMcpServer.connectWithStrategy(transportStrategy);
+    transport = await yandexTrackerMcpServer.connectWithStrategy(
+      transportStrategy
+    );
   })();
 }
+
+// if(config.OPERATING_MODE == OperatingModeName.SSEMode){
+//   const app = express();
+//   app.use(express.json());
+//   app.use(express.urlencoded({ extended: true }));
+//   // endpoints
+//   app.get(YandexTrackerEndpoint.root, async (req, res) => {
+//     try {
+//       // Настраиваем заголовки для SSE
+//       res.setHeader("Content-Type", "text/event-stream");
+//       res.setHeader("Cache-Control", "no-cache");
+//       res.setHeader("Connection", "keep-alive");
+//       const transportStrategy = new SSETransportStrategy(
+//         YandexTrackerEndpoint.messagesEdnpoint,
+//         res,
+//         yandexTrackerMcpServer.transports.sse
+//       );
+//       transport = await yandexTrackerMcpServer.connectWithStrategy(
+//         transportStrategy
+//       );
+//     } catch (error) {
+//       res.status(500).json({ error: "Internal server error" });
+//     }
+//   });
+
+//   app.post(YandexTrackerEndpoint.messagesEdnpoint, async (req, res) => {
+//     await yandexTrackerMcpServer.handleSSEMessages(req, res);
+//   });
+
+//   // запуск SSE сервака на 3000 порту
+//   app.listen(3000);
+// }
+// else if (config.OPERATING_MODE == OperatingModeName.StdioMode) {
+//   (async () =>{
+//     const transportStrategy = new StdioTransportStrategy();
+//     transport = await yandexTrackerMcpServer.connectWithStrategy(transportStrategy);
+//   })();
+// }
