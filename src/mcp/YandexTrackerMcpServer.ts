@@ -16,6 +16,7 @@ import { ModelDescriptionName } from "../enums/ModelDescriptionName";
 import { BoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
 import { CommentType } from "../models/issues/comment";
+import { CheckListType } from "../models/issues/checklist";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -255,17 +256,36 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   /*__________________TOOLS__________________ */
 
+  // callback для получения чек-листа к задаче
+  private async getIssueCheckListToolCallback(
+    args: z.infer<typeof getIssueDefaultParamSchema>, // Типизируем args на основе схемы
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult> {
+    try {
+      const response: CheckListType[] =
+        await YandexTrackerAPI.getInstance().getIssueCheckList(
+          args.issueKey,
+          args.perPage,
+          args.page
+        );
+      return super.receiveCallToolResult<CheckListType[]>(response);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   // callback для получения комментариев к задаче
   private async getIssueCommentsToolCallback(
     args: z.infer<typeof getIssueDefaultParamSchema>, // Типизируем args на основе схемы
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      const issueComments: CommentType[] = await YandexTrackerAPI.getInstance().getIssueComments(
-        args.issueKey,
-        args.perPage,
-        args.page
-      );
+      const issueComments: CommentType[] =
+        await YandexTrackerAPI.getInstance().getIssueComments(
+          args.issueKey,
+          args.perPage,
+          args.page
+        );
       return super.receiveCallToolResult<CommentType[]>(issueComments);
     } catch (error) {
       throw error;
