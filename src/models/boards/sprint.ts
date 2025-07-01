@@ -5,12 +5,12 @@ export const sprintSchema = z.object({
   id: z.number(),
   version: z.number(),
   name: z.string(),
-  // board: z
-  //   .object({
-  //     id: z.string(),
-  //     display: z.string().optional(),
-  //   })
-  //   .optional(),
+  board: z
+    .object({
+      id: z.string(),
+      display: z.string().optional(),
+    })
+    .optional(),
   // status: z.string().optional(),
   // archived: z.boolean().optional(),
   // createdBy: userSchemaSimple.optional(),
