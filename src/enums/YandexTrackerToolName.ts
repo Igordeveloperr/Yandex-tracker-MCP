@@ -13,4 +13,11 @@ export enum YandexTrackerToolName {
   getUserFields = "getUserFieldsTool",
   getUsers = "getTrackerUsersTool",
   getYandexQueryDoc = "getYandexQueryDocTool",
+  getBoards = "getBoardsTool",
+  getBoardSprints = "getBoardSprintsTool",
+  getSprint = "getSprintTool",
+  getIssueComments = "getIssueCommentsTool",
+  getIssueCheckList = "getIssueCheckListTool",
+  getIssueChangeLog = "getIssueChangeLogTool",
+  getIssueTransitions = "getIssueTransitions",
 }
