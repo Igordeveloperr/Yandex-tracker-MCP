@@ -153,4 +153,10 @@ async function test18() {
   console.log(res);
 }
 
-test18();
+async function test19() {
+  const api = YandexTrackerAPI.getInstance();
+  const res = await api.getSprint("156");
+  console.log(res);
+}
+
+test19();
