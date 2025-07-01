@@ -110,7 +110,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     // getIssueChangeLogTool
     this.mcpServer.tool(
       YandexTrackerToolName.getIssueChangeLog,
-      "Получает историю изменений задачи.",
+      "Получает историю изменений задачи.Если пользовотель не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.",
       getIssueDefaultParamSchema.shape,
       this.getIssueChangeLogToolCallback.bind(this)
     );
@@ -118,7 +118,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     // getIssueCheckListTool
     this.mcpServer.tool(
       YandexTrackerToolName.getIssueCheckList,
-      "Получает чек-лист к задаче.",
+      "Получает чек-лист к задаче.Если пользовотель не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.",
       getIssueDefaultParamSchema.shape,
       this.getIssueCheckListToolCallback.bind(this)
     );
@@ -126,7 +126,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     // getIssueCommentsTool
     this.mcpServer.tool(
       YandexTrackerToolName.getIssueComments,
-      "Получает комментарии к задаче.",
+      "Получает комментарии к задаче.Если пользовотель не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.",
       getIssueDefaultParamSchema.shape,
       this.getIssueCommentsToolCallback.bind(this)
     );
