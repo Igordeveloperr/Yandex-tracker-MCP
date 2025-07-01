@@ -11,7 +11,8 @@ import { queueSchema } from "../queues/queue";
 
 export const issueSchemaSimple = z.object({
   id: z.string(),
-  key: z.string()
+  key: z.string(),
+  storyPoints: z.number().optional(),
 });
 export type SimpleIssue = z.infer<typeof issueSchema>;
 
@@ -19,7 +20,6 @@ export const issueSchema = issueSchemaSimple.extend({
   self: z.string().url().optional(),
   version: z.number().optional(),
   lastCommentUpdatedAt: z.string().optional(),
-  storyPoints: z.number().optional(),
   summary: z.string().optional(),
   parent: parentSchema.optional(),
   aliases: z.array(z.string()).optional(),
