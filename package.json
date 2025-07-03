@@ -1,6 +1,6 @@
 {
-  "name": "yandex-tracker-mcp-server",
-  "version": "1.0.7",
+  "name": "@shizotex/yandex-tracker-mcp-server",
+  "version": "1.0.6",
   "description": "MCP сервер для работы с Яндекс.Трекерр",
   "main": "index.js",
   "bin": {
