@@ -20,7 +20,7 @@ import { CheckListType } from "../models/issues/checklist";
 import { ChangelogItemType } from "../models/issues/changelogItem";
 import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
-import { howToUseQuery, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/models_descrides/resource";
+import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/models_descrides/resource";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -497,13 +497,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      // Чтение файла issue.json
-      const issueFields = await fs.readFile(
-        `${config.MODEL_DESCRIPTION_BASE_PATH}${ModelDescriptionName.issue}`,
-        "utf-8"
-      );
-      const issueFieldsData: object[] = await JSON.parse(issueFields);
-      return super.receiveCallToolResult<object[]>(issueFieldsData);
+      return super.receiveCallToolResult<object[]>(issueFieldsDoc);
     } catch (error) {
       throw error;
     }
