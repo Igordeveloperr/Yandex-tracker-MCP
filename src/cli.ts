@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import { startStdioServer } from "./index";
+import { startYandexTrackerMcpMain } from "./index";
 
 async function mainCli() {
   console.log("🚀 Запуск Yandex Tracker MCP Server...");
-  startStdioServer();
+  await startYandexTrackerMcpMain();
 }
 
 mainCli().catch((err) => {
