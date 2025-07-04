@@ -62,4 +62,4 @@ async function main() {
   await serverStartFunctions[config.OPERATING_MODE]();
 }
 
-main();
+// main();
