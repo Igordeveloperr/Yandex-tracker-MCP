@@ -1,4 +1,4 @@
-export const searchhowtoUse = `
+export const howToUseQuery = `
     1. Базовый синтаксис запроса
     Запрос состоит из условий в формате:
     "Ключ: [Оператор] Значение"
@@ -364,8 +364,7 @@ export const issueFieldsDoc = [
   },
 ];
 
-export const queryParametersDoc = {
-  query_parameters: [
+export const queryParametersDoc = [
     {
       parameter: "Access",
       value: "Логины или имена пользователей",
@@ -817,5 +816,4 @@ export const queryParametersDoc = {
       description: "Поиск задач, за которые отдали заданное число голосов.",
       example: '"Votes": > 6',
     },
-  ],
-};
+];
