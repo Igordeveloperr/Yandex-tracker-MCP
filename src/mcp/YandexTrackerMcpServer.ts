@@ -20,6 +20,7 @@ import { CheckListType } from "../models/issues/checklist";
 import { ChangelogItemType } from "../models/issues/changelogItem";
 import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
+import { howToUseQuery, queryParametersDoc } from "../models/models_descrides/resource";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -455,21 +456,9 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      // Чтение файла query_params.json
-      const queryFieldsJson = await fs.readFile(
-        `${config.MODEL_DESCRIPTION_BASE_PATH}${ModelDescriptionName.query_params}`,
-        "utf-8"
-      );
-      // Чтение файла searchhowto.txt
-      const howToSearchText = await fs.readFile(
-        `${config.MODEL_DESCRIPTION_BASE_PATH}${ModelDescriptionName.howToSearchInfo}`,
-        "utf-8"
-      );
-
-      const queryFieldsData = await JSON.parse(queryFieldsJson);
       const queryDocData = {
-        ...queryFieldsData,
-        howToUseSearch: howToSearchText,
+        queryParameters: queryParametersDoc,
+        howToUseQuerySearch: howToUseQuery,
       };
 
       return super.receiveCallToolResult<object>(queryDocData);
