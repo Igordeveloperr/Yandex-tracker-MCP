@@ -8,7 +8,7 @@ import { OperatingModeName } from "./enums/env/OperatingModeName";
 import { StdioTransportStrategy } from "./mcp/transport_strategy/StdioTransportStrategy";
 
 // запуск в режиме stdio
-export async function startStdioServer() {
+export async function startStdioServer():Promise<void> {
   const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
   let transport: Transport | null = null;
   (async () => {
@@ -20,7 +20,7 @@ export async function startStdioServer() {
 }
 
 // запуск в режиме sse
-export async function startSseServer(port: number){
+export async function startSseServer(port: number):Promise<void> {
   const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
   let transport: Transport | null = null;
   const app = express();
