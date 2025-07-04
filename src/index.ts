@@ -20,7 +20,7 @@ export async function startStdioServer():Promise<void> {
 }
 
 // запуск в режиме sse
-export async function startSseServer(port: number):Promise<void> {
+export async function startSseServer(port: number = 3000):Promise<void> {
   const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
   let transport: Transport | null = null;
   const app = express();
@@ -52,9 +52,14 @@ export async function startSseServer(port: number):Promise<void> {
   app.listen(port);
 }
 
-if(config.OPERATING_MODE == OperatingModeName.SSEMode){
+async function main() {
+  // Создаем словарь с функциями
+  const serverStartFunctions: Record<string, () => Promise<void>> = {
+    [OperatingModeName.StdioMode]: startStdioServer,
+    [OperatingModeName.SSEMode]: startSseServer
+  };
 
+  await serverStartFunctions[config.OPERATING_MODE]();
 }
-else if (config.OPERATING_MODE == OperatingModeName.StdioMode) {
 
-}
+main();
