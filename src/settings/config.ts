@@ -16,7 +16,6 @@ const envSchema = z.object({
   REQUEST_TIMEOUT: z.coerce.number().default(30000),
   RATE_LIMIT_REQUESTS: z.coerce.number().default(100),
   RATE_LIMIT_WINDOW: z.coerce.number().default(60000),
-  MODEL_DESCRIPTION_BASE_PATH: z.string(),
   OPERATING_MODE: z.enum([
     OperatingModeName.SSEMode,
     OperatingModeName.StdioMode,
