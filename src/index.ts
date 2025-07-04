@@ -52,7 +52,7 @@ export async function startSseServer(port: number = 3000):Promise<void> {
   app.listen(port);
 }
 
-export async function YandexTrackerMcpMain() {
+export async function startYandexTrackerMcpMain() {
   // Создаем словарь с функциями
   const serverStartFunctions: Record<string, () => Promise<void>> = {
     [OperatingModeName.StdioMode]: startStdioServer,
