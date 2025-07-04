@@ -7,20 +7,22 @@ import { SSETransportStrategy } from "./mcp/transport_strategy/SSETransportStrat
 import { OperatingModeName } from "./enums/env/OperatingModeName";
 import { StdioTransportStrategy } from "./mcp/transport_strategy/StdioTransportStrategy";
 
-const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
-let transport: Transport | null = null;
-
+// запуск в режиме stdio
 export async function startStdioServer() {
-  const yandexTrackerMcpServerrrrr = new YandexTrackerMcpServer("shiza", "v1.0.0");
+  const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
+  let transport: Transport | null = null;
   (async () => {
     const transportStrategy = new StdioTransportStrategy();
-    transport = await yandexTrackerMcpServerrrrr.connectWithStrategy(
+    transport = await yandexTrackerMcpServer.connectWithStrategy(
       transportStrategy
     );
   })();
 }
 
-if(config.OPERATING_MODE == OperatingModeName.SSEMode){
+// запуск в режиме sse
+export async function startSseServer(port: number){
+  const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
+  let transport: Transport | null = null;
   const app = express();
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -47,18 +49,12 @@ if(config.OPERATING_MODE == OperatingModeName.SSEMode){
   app.post(YandexTrackerEndpoint.messagesEdnpoint, async (req, res) => {
     await yandexTrackerMcpServer.handleSSEMessages(req, res);
   });
+  app.listen(port);
+}
 
-  // запуск SSE сервака на 3000 порту
-  app.listen(3000);
+if(config.OPERATING_MODE == OperatingModeName.SSEMode){
+
 }
 else if (config.OPERATING_MODE == OperatingModeName.StdioMode) {
-  const transportStrategy = new StdioTransportStrategy();
-  yandexTrackerMcpServer.connectWithStrategy(transportStrategy)
-  .then((result) => {
-    transport = result;
-    console.log("Transport получен:", transport);
-  })
-  .catch((error) => {
-    console.error("Ошибка:", error);
-  });
+
 }
