@@ -20,7 +20,7 @@ import { CheckListType } from "../models/issues/checklist";
 import { ChangelogItemType } from "../models/issues/changelogItem";
 import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
-import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/models_descrides/resource";
+import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
