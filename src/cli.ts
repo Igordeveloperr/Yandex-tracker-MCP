@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import { startServer } from "./index";
+import { startStdioServer } from "./index";
 
 async function main() {
   console.log("🚀 Запуск Yandex Tracker MCP Server...");
-  startServer();
+  startStdioServer();
 }
 
 main().catch((err) => {

@@ -10,7 +10,7 @@ import { StdioTransportStrategy } from "./mcp/transport_strategy/StdioTransportS
 const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
 let transport: Transport | null = null;
 
-export async function startServer() {
+export async function startStdioServer() {
   const yandexTrackerMcpServerrrrr = new YandexTrackerMcpServer("shiza", "v1.0.0");
   (async () => {
     const transportStrategy = new StdioTransportStrategy();
