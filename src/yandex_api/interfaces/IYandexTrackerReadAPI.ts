@@ -1,3 +1,4 @@
+import { IssueType, Priority, Status } from "../../models/baseSchemas";
 import { BoardType } from "../../models/boards/board";
 import { SprintType } from "../../models/boards/sprint";
 import { ChangelogItemType } from "../../models/issues/changelogItem";
@@ -54,4 +55,8 @@ export interface IYandexTrackerReadAPI {
   getUsers(): Promise<SimpleUser[]>;
 
   getUser(key: number | string): Promise<User>;
+
+  getPriorities(): Promise<Priority[]>;
+  getIssueTypes(): Promise<IssueType[]>;
+  getStatuses(): Promise<Status[]>;
 }
