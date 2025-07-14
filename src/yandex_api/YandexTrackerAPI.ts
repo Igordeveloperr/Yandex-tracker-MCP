@@ -425,24 +425,4 @@ export class YandexTrackerAPI {
     const response = await this.get("statuses");
     return statusSchema.array().parse(response);
   }
-
-  async createIssue(): Promise<any> {
-    // TODO: Создание новой задачи
-  }
-
-  async updateIssue(): Promise<void> {
-    // TODO: Обновление существующей задачи
-  }
-
-  async transitionIssue(): Promise<void> {
-    // TODO: Изменение статуса задачи
-  }
-
-  async addComment(): Promise<void> {
-    // TODO: Добавление комментария к задаче
-  }
-
-  async getComments(): Promise<void> {
-    // TODO: Получение комментариев задачи
-  }
 }
