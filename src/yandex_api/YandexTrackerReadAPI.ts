@@ -29,38 +29,24 @@ import { boardSchema, BoardType } from "../models/boards/board";
 import { IYandexTrackerReadAPI } from "./interfaces/IYandexTrackerReadAPI";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
-export class YandexTrackerAPI implements IYandexTrackerReadAPI{
-  private readonly client: Tracker;
-  private static instance: YandexTrackerAPI;
-
-  /**
-   * инициализация клиента для яндекс трекера
-   */
-  private constructor() {
-    this.client = new Tracker(
-      config.YANDEX_TRACKER_TOKEN,
-      undefined,
-      config.YANDEX_TRACKER_CLOUD_ORG_ID,
-      config.YANDEX_TRACKER_BASE_URL,
-      config.REQUEST_TIMEOUT
-    );
-  }
+export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
+  private static instance: YandexTrackerReadAPI;
 
   /**
    * Статический метод для получения экземпляра
-   * @returns {YandexTrackerAPI} - объект api яндекса
+   * @returns {YandexTrackerReadAPI} - объект api яндекса
    */
-  public static getInstance(): YandexTrackerAPI {
-    if (!YandexTrackerAPI.instance) {
+  public static getInstance(): YandexTrackerReadAPI {
+    if (!YandexTrackerReadAPI.instance) {
       try {
         logger.debug("Создание экземпляра YandexTrackerAPI");
-        YandexTrackerAPI.instance = new YandexTrackerAPI();
+        YandexTrackerReadAPI.instance = new YandexTrackerReadAPI();
       } catch (error) {
         logger.error("Не удалось создать экземпляр YandexTrackerAPI");
         throw error;
       }
     }
-    return YandexTrackerAPI.instance;
+    return YandexTrackerReadAPI.instance;
   }
 
   public async get(path: string, params?: Record<string, any>): Promise<any> {
