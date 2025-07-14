@@ -40,7 +40,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение досок
-  async getBoards(): Promise<BoardType[]> {
+  public async getBoards(): Promise<BoardType[]> {
     try {
       const response = await super.get(`boards`);
       return boardSchema.array().parse(response);
@@ -50,7 +50,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение спринтов доски
-  async getBoardSprints(boardId: string): Promise<SprintType[]> {
+  public async getBoardSprints(boardId: string): Promise<SprintType[]> {
     try {
       const response = await super.get(`boards/${boardId}/sprints`);
       return sprintSchema.array().parse(response);
@@ -60,7 +60,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение спринта
-  async getSprint(sprintId: string): Promise<SprintType> {
+  public async getSprint(sprintId: string): Promise<SprintType> {
     try {
       const response = await super.get(`sprints/${sprintId}`);
       return sprintSchema.parse(response);
@@ -70,7 +70,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение полей задачи
-  async getIssueFields(): Promise<IssueFieldType[]> {
+  public async getIssueFields(): Promise<IssueFieldType[]> {
     try {
       const response = await super.get(`fields`);
       return issueFieldSchema.array().parse(response);
@@ -80,7 +80,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение комментариев задачи
-  async getIssueComments(
+  public async getIssueComments(
     issueKey: string,
     perPage: number = 50,
     page: number = 1
@@ -96,7 +96,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение параметров чеклиста задачи
-  async getIssueCheckList(
+  public async getIssueCheckList(
     issueKey: string,
     perPage: number = 50,
     page: number = 1
@@ -112,7 +112,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // пролучить историю изменений задачи
-  async getIssueChangeLog(
+  public async getIssueChangeLog(
     issueKey: string,
     perPage: number = 50,
     page: number = 1
@@ -128,7 +128,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение переходов задачи по issueKey
-  async getIssueTransitions(issueKey: string): Promise<TransitionType[]> {
+  public async getIssueTransitions(issueKey: string): Promise<TransitionType[]> {
     try {
       const response = await super.get(`issues/${issueKey}/transitions`);
       return transitionSchema.array().parse(response);
@@ -143,7 +143,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<User>}
    * @memberof YandexTrackerAPI
    */
-  async getMyself(): Promise<User> {
+  public async getMyself(): Promise<User> {
     try {
       const response = await super.get("myself");
       return userSchema.parse(response);
@@ -158,7 +158,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {Promise<Queue[]>}
    * @memberof YandexTrackerAPI
    */
-  async getQueues(options?: { expand?: ExpandQueue[] }): Promise<Queue[]> {
+  public async getQueues(options?: { expand?: ExpandQueue[] }): Promise<Queue[]> {
     try {
       const params: Record<string, string> = {};
       if (options?.expand) {
@@ -179,7 +179,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<Queue>} - модель очереди
    * @memberof YandexTrackerAPI
    */
-  async getQueue(queue_key: string | number): Promise<Queue> {
+  public async getQueue(queue_key: string | number): Promise<Queue> {
     try {
       const response = await super.get(`queues/${queue_key}`);
       return queueSchema.parse(response);
@@ -193,7 +193,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @param {string} issueKey ключ задачи или идентификатор
    * @returns {Promise<Issue>} - модель задачи
    */
-  async getIssue(issueKey: string): Promise<Issue> {
+  public async getIssue(issueKey: string): Promise<Issue> {
     try {
       const response = await super.get(`issues/${issueKey}`);
       return issueSchema.parse(response);
@@ -211,7 +211,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<Issue[]>} возвращает упрощённую модель задачи
    * @memberof YandexTrackerAPI
    */
-  async searchIssueSimple(input: string): Promise<Issue[]> {
+  public async searchIssueSimple(input: string): Promise<Issue[]> {
     try {
       const response = await super.get("issues/_suggest", {
         input: input,
@@ -242,7 +242,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<Issue[]>}
    * @memberof YandexTrackerAPI
    */
-  async searchIssueByFilter(
+  public async searchIssueByFilter(
     filter: Record<string, any>,
     order?: string,
     perPage: number = 50,
@@ -279,7 +279,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<Issue[]>}
    * @memberof YandexTrackerAPI
    */
-  async searchIssueByQuery(
+  public async searchIssueByQuery(
     query: string,
     isSimple: boolean = true,
     perPage: number = 50,
@@ -305,7 +305,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<SimpleUser[]>}Список простых моделей пользователей (имя + id)
    * @memberof YandexTrackerAPI
    */
-  async getUsers(): Promise<SimpleUser[]> {
+  public async getUsers(): Promise<SimpleUser[]> {
     const response = await super.get("users");
     return userSchemaSimple.array().parse(response);
   }
@@ -317,7 +317,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<User>} - найденный пользователь
    * @memberof YandexTrackerAPI
    */
-  async getUser(key: number | string): Promise<User> {
+  public async getUser(key: number | string): Promise<User> {
     const response = await super.get(`users/${key}`);
     return userSchema.parse(response);
   }
@@ -328,7 +328,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<Priority[]>}
    * @memberof YandexTrackerAPI
    */
-  async getPriorities(): Promise<Priority[]> {
+  public async getPriorities(): Promise<Priority[]> {
     const response = await super.get("priorities");
     return prioritySchema.array().parse(response);
   }
@@ -339,7 +339,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<IssueType[]>}
    * @memberof YandexTrackerAPI
    */
-  async getIssueTypes(): Promise<IssueType[]> {
+  public async getIssueTypes(): Promise<IssueType[]> {
     const response = await super.get("issuetypes");
     return issueTypeSchema.array().parse(response);
   }
@@ -350,7 +350,7 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {*}  {Promise<Status[]>}
    * @memberof YandexTrackerAPI
    */
-  async getStatuses(): Promise<Status[]> {
+  public async getStatuses(): Promise<Status[]> {
     const response = await super.get("statuses");
     return statusSchema.array().parse(response);
   }
