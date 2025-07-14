@@ -24,13 +24,12 @@ import { IYandexTrackerReadAPI } from "./interfaces/IYandexTrackerReadAPI";
 import { YandexTrackerAPI } from "./YandexTrackerAPI";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
-export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTrackerReadAPI {
-  /**
-   * Статический метод для получения экземпляра
-   * @returns {YandexTrackerReadAPI} - объект api яндекса
-   */
-  public static getInstance(): YandexTrackerAPI {
-    return YandexTrackerAPI.instance;
+export class YandexTrackerReadAPI
+  extends YandexTrackerAPI
+  implements IYandexTrackerReadAPI
+{
+  protected constructor() {
+    super();
   }
 
   // получение досок
@@ -122,7 +121,9 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
   }
 
   // получение переходов задачи по issueKey
-  public async getIssueTransitions(issueKey: string): Promise<TransitionType[]> {
+  public async getIssueTransitions(
+    issueKey: string
+  ): Promise<TransitionType[]> {
     try {
       const response = await super.get(`issues/${issueKey}/transitions`);
       return transitionSchema.array().parse(response);
@@ -152,7 +153,9 @@ export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTra
    * @return {Promise<Queue[]>}
    * @memberof YandexTrackerAPI
    */
-  public async getQueues(options?: { expand?: ExpandQueue[] }): Promise<Queue[]> {
+  public async getQueues(options?: {
+    expand?: ExpandQueue[];
+  }): Promise<Queue[]> {
     try {
       const params: Record<string, string> = {};
       if (options?.expand) {

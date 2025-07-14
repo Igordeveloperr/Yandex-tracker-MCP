@@ -2,10 +2,10 @@ import { Tracker } from "yandex-tracker-client";
 import { config } from "../settings/config";
 import { logger } from "../settings/logger";
 
-export class YandexTrackerAPI{
+export class YandexTrackerAPI {
   protected readonly client: Tracker;
-  protected static instance: YandexTrackerAPI;
-  protected constructor(){
+  private static _instances: Map<Function, YandexTrackerAPI> = new Map();
+  protected constructor() {
     this.client = new Tracker(
       config.YANDEX_TRACKER_TOKEN,
       undefined,
@@ -13,18 +13,41 @@ export class YandexTrackerAPI{
       config.YANDEX_TRACKER_BASE_URL,
       config.REQUEST_TIMEOUT
     );
-    if (!YandexTrackerAPI.instance) {
+  }
+
+  //   public static getInstance<T extends YandexTrackerAPI>(this: new () => T): T {
+  //     if (!YandexTrackerAPI._instances.has(this)) {
+  //       try {
+  //         logger.debug(`Создание экземпляра ${this.name}`);
+  //         const instance = new this();
+  //         YandexTrackerAPI._instances.set(this, instance);
+  //       } catch (error) {
+  //         logger.error(`Не удалось создать экземпляр ${this.name}`);
+  //         throw error;
+  //       }
+  //     }
+  //     return YandexTrackerAPI._instances.get(this) as T;
+  //   }
+  public static getInstance<T extends YandexTrackerAPI>(): T {
+    const ctor = this as unknown as { new (): T; name: string };
+
+    if (!YandexTrackerAPI._instances.has(ctor)) {
       try {
-        logger.debug("Создание экземпляра YandexTrackerAPI");
-        YandexTrackerAPI.instance = new YandexTrackerAPI();
+        logger.debug(`Создание экземпляра ${ctor.name}`);
+        const instance = new ctor();
+        YandexTrackerAPI._instances.set(ctor, instance);
       } catch (error) {
-        logger.error("Не удалось создать экземпляр YandexTrackerAPI");
+        logger.error(`Не удалось создать экземпляр ${ctor.name}`);
         throw error;
       }
     }
+    return YandexTrackerAPI._instances.get(ctor) as T;
   }
 
-  protected async get(path: string, params?: Record<string, any>): Promise<any> {
+  protected async get(
+    path: string,
+    params?: Record<string, any>
+  ): Promise<any> {
     try {
       const response = await this.client.get(path, params);
       logger.info({ path, params }, "GET");

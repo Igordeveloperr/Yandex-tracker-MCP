@@ -26,22 +26,6 @@ async function test1() {
   console.log(usr);
 }
 
-async function test2() {
-  const api = YandexTrackerReadAPI.getInstance();
-  const params = {
-    filter: {
-      queue: "MAJOR",
-      type: {
-        id: 1,
-      },
-      tags: ["backend"],
-    },
-    order: "+status",
-  };
-  const usr = await api.manualPost("issues/_search?perPage=1&page=2", params);
-  console.log(usr);
-}
-
 async function test3() {
   const api = YandexTrackerReadAPI.getInstance();
   const ques = await api.getQueues({
