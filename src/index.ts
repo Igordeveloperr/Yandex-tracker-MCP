@@ -62,4 +62,4 @@ export async function startYandexTrackerMcpMain() {
   await serverStartFunctions[config.OPERATING_MODE]();
 }
 
-// main();
+startYandexTrackerMcpMain();
