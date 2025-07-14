@@ -31,8 +31,6 @@ import { YandexTrackerAPI } from "./YandexTrackerAPI";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTrackerReadAPI {
-  // private static instance: YandexTrackerReadAPI;
-
   /**
    * Статический метод для получения экземпляра
    * @returns {YandexTrackerReadAPI} - объект api яндекса
