@@ -23,11 +23,13 @@ import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
+  private _api: YandexTrackerReadAPI;
   /**
    * колим контруктор суперкласса
    */
   constructor(name: string, version: string) {
     super(name, version);
+    this._api = YandexTrackerReadAPI.getInstance();
     this.addResources();
     this.addPrompts();
     this.addTools();
@@ -324,7 +326,9 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const response: TransitionType[] =
-        await YandexTrackerReadAPI.getInstance().getIssueTransitions(args.issueKey);
+        await this._api.getIssueTransitions(
+          args.issueKey
+        );
       return super.receiveCallToolResult<TransitionType[]>(response);
     } catch (error) {
       throw error;
@@ -338,7 +342,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const response: ChangelogItemType[] =
-        await YandexTrackerReadAPI.getInstance().getIssueChangeLog(
+        await this._api.getIssueChangeLog(
           args.issueKey,
           args.perPage,
           args.page
@@ -356,7 +360,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const response: CheckListType[] =
-        await YandexTrackerReadAPI.getInstance().getIssueCheckList(
+        await this._api.getIssueCheckList(
           args.issueKey,
           args.perPage,
           args.page
@@ -374,7 +378,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const issueComments: CommentType[] =
-        await YandexTrackerReadAPI.getInstance().getIssueComments(
+        await this._api.getIssueComments(
           args.issueKey,
           args.perPage,
           args.page
@@ -391,7 +395,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      const sprint: SprintType = await YandexTrackerReadAPI.getInstance().getSprint(
+      const sprint: SprintType = await this._api.getSprint(
         args.sprintId
       );
       return super.receiveCallToolResult<SprintType>(sprint);
@@ -407,7 +411,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const sprints: SprintType[] =
-        await YandexTrackerReadAPI.getInstance().getBoardSprints(args.boardId);
+        await this._api.getBoardSprints(args.boardId);
       return super.receiveCallToolResult<SprintType[]>(sprints);
     } catch (error) {
         // Проверяем, что error является объектом с полем response
@@ -429,7 +433,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const boards: BoardType[] =
-        await YandexTrackerReadAPI.getInstance().getBoards();
+        await this._api.getBoards();
       return super.receiveCallToolResult<BoardType[]>(boards);
     } catch (error) {
       throw error;
@@ -443,7 +447,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const response: SimpleUser[] =
-        await YandexTrackerReadAPI.getInstance().getUsers();
+        await this._api.getUsers();
       return super.receiveCallToolResult<SimpleUser[]>(response);
     } catch (error) {
       throw error;
@@ -510,7 +514,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const response: Status[] =
-        await YandexTrackerReadAPI.getInstance().getStatuses();
+        await this._api.getStatuses();
       return super.receiveCallToolResult<Status[]>(response);
     } catch (error) {
       throw error;
@@ -524,7 +528,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const response: Priority[] =
-        await YandexTrackerReadAPI.getInstance().getPriorities();
+        await this._api.getPriorities();
       return super.receiveCallToolResult<Priority[]>(response);
     } catch (error) {
       throw error;
@@ -538,7 +542,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const response: IssueType[] =
-        await YandexTrackerReadAPI.getInstance().getIssueTypes();
+        await this._api.getIssueTypes();
       return super.receiveCallToolResult<IssueType[]>(response);
     } catch (error) {
       throw error;
@@ -551,7 +555,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      const queues: Queue[] = await YandexTrackerReadAPI.getInstance().getQueues({
+      const queues: Queue[] = await this._api.getQueues({
         expand: args.expand,
       });
       return super.receiveCallToolResult<Queue[]>(queues);
@@ -566,7 +570,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      const response: User = await YandexTrackerReadAPI.getInstance().getMyself();
+      const response: User = await this._api.getMyself();
       return super.receiveCallToolResult<User>(response);
     } catch (error) {
       throw error;
@@ -580,7 +584,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       // Получаем задачу по ключу
-      const issue: Issue = await YandexTrackerReadAPI.getInstance().getIssue(
+      const issue: Issue = await this._api.getIssue(
         args.issueKey
       );
       return super.receiveCallToolResult<Issue>(issue);
@@ -595,7 +599,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
   ): Promise<CallToolResult> {
     try {
-      const user: User = await YandexTrackerReadAPI.getInstance().getUser(args.key);
+      const user: User = await this._api.getUser(args.key);
       return super.receiveCallToolResult<User>(user);
     } catch (error) {
       throw error;
@@ -609,7 +613,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const issueArray: Issue[] =
-        await YandexTrackerReadAPI.getInstance().searchIssueByFilter(
+        await this._api.searchIssueByFilter(
           args.filter,
           args?.order,
           args.perPage,
@@ -628,7 +632,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   ): Promise<CallToolResult> {
     try {
       const issueArray: Issue[] =
-        await YandexTrackerReadAPI.getInstance().searchIssueByQuery(
+        await this._api.searchIssueByQuery(
           args.query,
           args.isSimple,
           args.perPage,
