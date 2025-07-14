@@ -26,9 +26,10 @@ import { commentSchema, CommentType } from "../models/issues/comment";
 import { issueFieldSchema, IssueFieldType } from "../models/issues/issueField";
 import { sprintSchema, SprintType } from "../models/boards/sprint";
 import { boardSchema, BoardType } from "../models/boards/board";
+import { IYandexTrackerReadAPI } from "./interfaces/IYandexTrackerReadAPI";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
-export class YandexTrackerAPI {
+export class YandexTrackerAPI implements IYandexTrackerReadAPI{
   private readonly client: Tracker;
   private static instance: YandexTrackerAPI;
 
