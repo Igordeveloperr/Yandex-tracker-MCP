@@ -14,20 +14,7 @@ export class YandexTrackerAPI {
       config.REQUEST_TIMEOUT
     );
   }
-
-  //   public static getInstance<T extends YandexTrackerAPI>(this: new () => T): T {
-  //     if (!YandexTrackerAPI._instances.has(this)) {
-  //       try {
-  //         logger.debug(`Создание экземпляра ${this.name}`);
-  //         const instance = new this();
-  //         YandexTrackerAPI._instances.set(this, instance);
-  //       } catch (error) {
-  //         logger.error(`Не удалось создать экземпляр ${this.name}`);
-  //         throw error;
-  //       }
-  //     }
-  //     return YandexTrackerAPI._instances.get(this) as T;
-  //   }
+  
   private static createInstance<T extends YandexTrackerAPI>(): T {
     const ctor = this as unknown as { new (): T; name: string };
 
