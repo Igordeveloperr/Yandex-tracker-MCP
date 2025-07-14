@@ -3,9 +3,9 @@ import { config } from "../settings/config";
 import { logger } from "../settings/logger";
 
 export class YandexTrackerAPI{
-  private readonly client: Tracker;
-  private static instance: YandexTrackerAPI;
-  private constructor(){
+  protected readonly client: Tracker;
+  protected static instance: YandexTrackerAPI;
+  protected constructor(){
     this.client = new Tracker(
       config.YANDEX_TRACKER_TOKEN,
       undefined,
@@ -13,13 +13,6 @@ export class YandexTrackerAPI{
       config.YANDEX_TRACKER_BASE_URL,
       config.REQUEST_TIMEOUT
     );
-  }
-
-  /**
-   * Статический метод для получения экземпляра
-   * @returns {YandexTrackerAPI} - объект api яндекса
-   */
-  protected static getInstance(): YandexTrackerAPI {
     if (!YandexTrackerAPI.instance) {
       try {
         logger.debug("Создание экземпляра YandexTrackerAPI");
@@ -29,7 +22,6 @@ export class YandexTrackerAPI{
         throw error;
       }
     }
-    return YandexTrackerAPI.instance;
   }
 
   protected async get(path: string, params?: Record<string, any>): Promise<any> {

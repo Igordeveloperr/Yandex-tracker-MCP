@@ -27,80 +27,24 @@ import { issueFieldSchema, IssueFieldType } from "../models/issues/issueField";
 import { sprintSchema, SprintType } from "../models/boards/sprint";
 import { boardSchema, BoardType } from "../models/boards/board";
 import { IYandexTrackerReadAPI } from "./interfaces/IYandexTrackerReadAPI";
+import { YandexTrackerAPI } from "./YandexTrackerAPI";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
-export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
-  private static instance: YandexTrackerReadAPI;
+export class YandexTrackerReadAPI extends YandexTrackerAPI implements IYandexTrackerReadAPI {
+  // private static instance: YandexTrackerReadAPI;
 
   /**
    * Статический метод для получения экземпляра
    * @returns {YandexTrackerReadAPI} - объект api яндекса
    */
-  public static getInstance(): YandexTrackerReadAPI {
-    if (!YandexTrackerReadAPI.instance) {
-      try {
-        logger.debug("Создание экземпляра YandexTrackerAPI");
-        YandexTrackerReadAPI.instance = new YandexTrackerReadAPI();
-      } catch (error) {
-        logger.error("Не удалось создать экземпляр YandexTrackerAPI");
-        throw error;
-      }
-    }
-    return YandexTrackerReadAPI.instance;
-  }
-
-  public async get(path: string, params?: Record<string, any>): Promise<any> {
-    try {
-      const response = await this.client.get(path, params);
-      logger.info({ path, params }, "GET");
-      return response;
-    } catch (error) {
-      logger.error({ path, params, error }, "GET");
-      throw error;
-    }
-  }
-
-  public async post(path: string, data?: Record<string, any>): Promise<any> {
-    try {
-      const response = await this.client.post(path, data);
-      logger.info({ status: response.status, path, data }, "POST");
-      return response;
-    } catch (error) {
-      logger.error({ status: response.status, path, data, error }, "POST");
-      throw error;
-    }
-  }
-
-  /**
-   * функция для тестирования get запросов
-   *
-   * @param {string} path не должен начинаться с /
-   * @param {object} [params]
-   * @return {*}  {Promise <any>}
-   * @memberof YandexTrackerAPI
-   */
-  async manualGet(path: string, params?: object): Promise<any> {
-    const response = await this.get(path, params);
-    return response;
-  }
-
-  /**
-   * Функция для тестирования post запросов
-   *
-   * @param {string} path
-   * @param {object} [params]
-   * @return {*}  {Promise<any>}
-   * @memberof YandexTrackerAPI
-   */
-  async manualPost(path: string, params?: object): Promise<any> {
-    const response = await this.post(path, params);
-    return response;
+  public static getInstance(): YandexTrackerAPI {
+    return YandexTrackerAPI.instance;
   }
 
   // получение досок
   async getBoards(): Promise<BoardType[]> {
     try {
-      const response = await this.get(`boards`);
+      const response = await super.get(`boards`);
       return boardSchema.array().parse(response);
     } catch (error) {
       throw error;
@@ -110,7 +54,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
   // получение спринтов доски
   async getBoardSprints(boardId: string): Promise<SprintType[]> {
     try {
-      const response = await this.get(`boards/${boardId}/sprints`);
+      const response = await super.get(`boards/${boardId}/sprints`);
       return sprintSchema.array().parse(response);
     } catch (error) {
       throw error;
@@ -120,7 +64,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
   // получение спринта
   async getSprint(sprintId: string): Promise<SprintType> {
     try {
-      const response = await this.get(`sprints/${sprintId}`);
+      const response = await super.get(`sprints/${sprintId}`);
       return sprintSchema.parse(response);
     } catch (error) {
       throw error;
@@ -130,7 +74,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
   // получение полей задачи
   async getIssueFields(): Promise<IssueFieldType[]> {
     try {
-      const response = await this.get(`fields`);
+      const response = await super.get(`fields`);
       return issueFieldSchema.array().parse(response);
     } catch (error) {
       throw error;
@@ -144,7 +88,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
     page: number = 1
   ): Promise<CommentType[]> {
     try {
-      const response = await this.get(
+      const response = await super.get(
         `issues/${issueKey}/comments?perPage=${perPage}&page=${page}`
       );
       return commentSchema.array().parse(response);
@@ -160,7 +104,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
     page: number = 1
   ): Promise<CheckListType[]> {
     try {
-      const response = await this.get(
+      const response = await super.get(
         `issues/${issueKey}/checklistItems?perPage=${perPage}&page=${page}`
       );
       return checkListSchema.array().parse(response);
@@ -176,7 +120,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
     page: number = 1
   ): Promise<ChangelogItemType[]> {
     try {
-      const response = await this.get(
+      const response = await super.get(
         `issues/${issueKey}/changelog?perPage=${perPage}&page=${page}`
       );
       return changelogItemSchema.array().parse(response);
@@ -188,7 +132,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
   // получение переходов задачи по issueKey
   async getIssueTransitions(issueKey: string): Promise<TransitionType[]> {
     try {
-      const response = await this.get(`issues/${issueKey}/transitions`);
+      const response = await super.get(`issues/${issueKey}/transitions`);
       return transitionSchema.array().parse(response);
     } catch (error) {
       throw error;
@@ -203,7 +147,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    */
   async getMyself(): Promise<User> {
     try {
-      const response = await this.get("myself");
+      const response = await super.get("myself");
       return userSchema.parse(response);
     } catch (error) {
       throw error;
@@ -223,7 +167,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
         params.expand = options.expand.join(",");
       }
 
-      const response = await this.get("queues", params);
+      const response = await super.get("queues", params);
       return queueSchema.array().parse(response);
     } catch (error) {
       throw error;
@@ -239,7 +183,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    */
   async getQueue(queue_key: string | number): Promise<Queue> {
     try {
-      const response = await this.get(`queues/${queue_key}`);
+      const response = await super.get(`queues/${queue_key}`);
       return queueSchema.parse(response);
     } catch (error) {
       throw error;
@@ -253,7 +197,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    */
   async getIssue(issueKey: string): Promise<Issue> {
     try {
-      const response = await this.get(`issues/${issueKey}`);
+      const response = await super.get(`issues/${issueKey}`);
       return issueSchema.parse(response);
     } catch (error) {
       throw error;
@@ -271,7 +215,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    */
   async searchIssueSimple(input: string): Promise<Issue[]> {
     try {
-      const response = await this.get("issues/_suggest", {
+      const response = await super.get("issues/_suggest", {
         input: input,
         full: true,
         fields: "summary",
@@ -312,7 +256,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
     };
 
     try {
-      const response = await this.post(
+      const response = await super.post(
         `issues/_search?perPage=${perPage}&page=${page}`,
         body
       );
@@ -344,7 +288,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
     page: number = 1
   ): Promise<Issue[]> {
     try {
-      const response = await this.post(
+      const response = await super.post(
         `issues/_search?perPage=${perPage}&page=${page}`,
         { query }
       );
@@ -364,7 +308,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    * @memberof YandexTrackerAPI
    */
   async getUsers(): Promise<SimpleUser[]> {
-    const response = await this.get("users");
+    const response = await super.get("users");
     return userSchemaSimple.array().parse(response);
   }
 
@@ -376,7 +320,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    * @memberof YandexTrackerAPI
    */
   async getUser(key: number | string): Promise<User> {
-    const response = await this.get(`users/${key}`);
+    const response = await super.get(`users/${key}`);
     return userSchema.parse(response);
   }
 
@@ -387,7 +331,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    * @memberof YandexTrackerAPI
    */
   async getPriorities(): Promise<Priority[]> {
-    const response = await this.get("priorities");
+    const response = await super.get("priorities");
     return prioritySchema.array().parse(response);
   }
 
@@ -398,7 +342,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    * @memberof YandexTrackerAPI
    */
   async getIssueTypes(): Promise<IssueType[]> {
-    const response = await this.get("issuetypes");
+    const response = await super.get("issuetypes");
     return issueTypeSchema.array().parse(response);
   }
 
@@ -409,7 +353,7 @@ export class YandexTrackerReadAPI implements IYandexTrackerReadAPI {
    * @memberof YandexTrackerAPI
    */
   async getStatuses(): Promise<Status[]> {
-    const response = await this.get("statuses");
+    const response = await super.get("statuses");
     return statusSchema.array().parse(response);
   }
 }
