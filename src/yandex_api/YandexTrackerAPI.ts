@@ -28,7 +28,7 @@ export class YandexTrackerAPI {
   //     }
   //     return YandexTrackerAPI._instances.get(this) as T;
   //   }
-  public static createInstance<T extends YandexTrackerAPI>(): T {
+  private static createInstance<T extends YandexTrackerAPI>(): T {
     const ctor = this as unknown as { new (): T; name: string };
 
     if (!YandexTrackerAPI._instances.has(ctor)) {
