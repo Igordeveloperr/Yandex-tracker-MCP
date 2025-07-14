@@ -1,7 +1,7 @@
 import { YandexMcpServer } from "./YandexMcpServer";
 import { YandexTrackerToolName } from "../enums/YandexTrackerToolName";
 import { z } from "zod";
-import { YandexTrackerAPI } from "../yandex_api/YandexTrackerAPI";
+import { YandexTrackerAPI } from "../yandex_api/YandexTrackerReadAPI";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol";
 import { CallToolResult, GetPromptResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
 import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../models/paramShemas";

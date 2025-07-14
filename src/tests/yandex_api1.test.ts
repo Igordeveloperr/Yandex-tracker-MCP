@@ -1,5 +1,5 @@
 import { config } from "../settings/config";
-import { YandexTrackerAPI } from "../yandex_api/YandexTrackerAPI";
+import { YandexTrackerAPI } from "../yandex_api/YandexTrackerReadAPI";
 import { Tracker } from "yandex-tracker-client";
 import { userSchemaSimple, SimpleUser, userSchema, User } from "../models/users/user";
 import { Issue } from "../models/issues/issue";
