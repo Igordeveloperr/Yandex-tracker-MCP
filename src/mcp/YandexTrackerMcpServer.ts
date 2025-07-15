@@ -8,11 +8,8 @@ import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsS
 import { Issue } from "../models/issues/issue";
 import { SimpleUser, User } from "../models/users/user";
 import { Queue } from "../models/queues/queue";
-import { config } from "../settings/config";
 import { YandexTrackerPromptName } from "../enums/YandexTrackerPromptName";
 import { IssueType, Priority, Status } from "../models/baseSchemas";
-import * as fs from "fs/promises"
-import { ModelDescriptionName } from "../enums/ModelDescriptionName";
 import { BoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
 import { CommentType } from "../models/issues/comment";
