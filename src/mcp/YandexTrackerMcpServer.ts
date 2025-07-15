@@ -19,7 +19,7 @@ import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 import { searchIssuePromptParam, taskSummaryPromptParam } from "../models/mcp_params/promptParams";
-import { getIssueTransitionsToolParam } from "../models/mcp_params/toolParams";
+import { getIssueChangeLogToolParam, getIssueTransitionsToolParam } from "../models/mcp_params/toolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -98,9 +98,9 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
     // getIssueChangeLogTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssueChangeLog,
-      "Получает историю изменений задачи.Если пользовотель не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.",
-      getIssueDefaultParamSchema.shape,
+      getIssueChangeLogToolParam.name,
+      getIssueChangeLogToolParam.systemPrompt,
+      getIssueChangeLogToolParam.paramsSchema,
       this.getIssueChangeLogToolCallback.bind(this)
     );
 
