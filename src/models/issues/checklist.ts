@@ -21,3 +21,17 @@ export const checkListSchema = z.object({
 });
 
 export type CheckListType = z.infer<typeof checkListSchema>;
+
+export const createCheckListSchema = z.object({
+  text: z.string(),
+  checked: z.boolean().optional(),
+  assignee: z.string().optional(),
+  deadline: z
+    .object({
+      date: z.string(),
+      deadlineType: z.string(),
+    })
+    .optional(),
+});
+
+export type CreateCheckListType = z.infer<typeof createCheckListSchema>;
