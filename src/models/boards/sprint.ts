@@ -15,8 +15,8 @@ export const sprintSchema = z.object({
   // archived: z.boolean().optional(),
   // createdBy: userSchemaSimple.optional(),
   // createdAt: z.string().optional(),
-  // startDate: z.string().optional(),
-  // endDate: z.string().optional(),
+  startDate: z.string(),
+  endDate: z.string(),
   // startDateTime: z.string().optional(),
   // endDateTime: z.string().optional(),
 });
