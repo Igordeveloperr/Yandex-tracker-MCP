@@ -3,7 +3,7 @@ import { userSchemaSimple } from "../users/user";
 
 export const commentSchema = z.object({
     id: z.number(),
-    text: z.string().optional(),
+    text: z.string(),
     createdBy: userSchemaSimple.optional(),
     updatedBy: userSchemaSimple.optional(),
 });
