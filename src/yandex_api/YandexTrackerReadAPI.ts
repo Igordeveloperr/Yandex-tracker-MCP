@@ -22,14 +22,30 @@ import { sprintSchema, SprintType } from "../models/boards/sprint";
 import { boardSchema, BoardType } from "../models/boards/board";
 import { IYandexTrackerReadAPI } from "./interfaces/IYandexTrackerReadAPI";
 import { YandexTrackerAPI } from "./YandexTrackerAPI";
+import { logger } from "../settings/logger";
 
 // данный класс реализует паттерн singelton для доступа к API Yandex Tracker
 export class YandexTrackerReadAPI
   extends YandexTrackerAPI
   implements IYandexTrackerReadAPI
 {
-  public constructor() {
+  private static _instance: YandexTrackerReadAPI;
+
+  private constructor() {
     super();
+  }
+
+  public static getInstance(): YandexTrackerReadAPI {
+    if (!YandexTrackerReadAPI._instance) {
+      try {
+        logger.debug("Создание экземпляра YandexTrackerAPI");
+        YandexTrackerReadAPI._instance = new YandexTrackerReadAPI();
+      } catch (error) {
+        logger.error("Не удалось создать экземпляр YandexTrackerAPI");
+        throw error;
+      }
+    }
+    return YandexTrackerReadAPI._instance;
   }
 
   // получение досок
