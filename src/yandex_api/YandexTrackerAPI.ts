@@ -38,4 +38,42 @@ export class YandexTrackerAPI {
       throw error;
     }
   }
+
+  protected async put(path: string, data?: Record<string, any>): Promise<any> {
+    try {
+      const response = await this._yandexTrackerClient.put(path, data);
+      logger.info({ status: response.status, path, data }, "PUT");
+      return response;
+    } catch (error) {
+      logger.error({ path, data, error }, "PUT");
+      throw error;
+    }
+  }
+
+  protected async patch(
+    path: string,
+    data?: Record<string, any>
+  ): Promise<any> {
+    try {
+      const response = await this._yandexTrackerClient.patch(path, data);
+      logger.info({ status: response.status, path, data }, "PATCH");
+      return response;
+    } catch (error) {
+      logger.error({ path, data, error }, "PATCH");
+      throw error;
+    }
+  }
+
+  protected async delete(
+    path: string
+  ): Promise<any> {
+    try {
+      const response = await this._yandexTrackerClient.delete(path);
+      logger.info({ status: response.status, path }, "DELETE");
+      return response;
+    } catch (error) {
+      logger.error({ path, error }, "DELETE");
+      throw error;
+    }
+  }
 }
