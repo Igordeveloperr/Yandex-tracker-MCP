@@ -38,7 +38,7 @@ export class YandexTrackerUpdateAPI
   /*
     https://yandex.ru/support/tracker/ru/concepts/issues/edit-checklist
   */
-  public async updateCheckList(
+  public async updateIssueCheckList(
     issueKey: string,
     checkListItemKey: string,
     data: CheckListType
@@ -49,7 +49,7 @@ export class YandexTrackerUpdateAPI
   /*
     https://yandex.ru/support/tracker/ru/concepts/issues/edit-comment
   */
-  public async updateComment(
+  public async updateIssueComment(
     issueKey: string,
     commentKey: string | number,
     data: CommentType

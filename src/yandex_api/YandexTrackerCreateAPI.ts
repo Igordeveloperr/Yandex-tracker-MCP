@@ -56,7 +56,8 @@ export class YandexTrackerCreateAPI
   /*
     https://yandex.ru/support/tracker/ru/concepts/issues/add-checklist-item
   */
-  public async createCheckListItem(
+  public async createIssueCheckListItem(
+    issueKey: string,
     data: CheckListType
   ): Promise<CheckListType> {
     throw new Error("Method not implemented.");

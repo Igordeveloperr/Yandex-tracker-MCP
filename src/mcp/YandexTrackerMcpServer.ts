@@ -8,11 +8,8 @@ import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsS
 import { Issue } from "../models/issues/issue";
 import { SimpleUser, User } from "../models/users/user";
 import { Queue } from "../models/queues/queue";
-import { config } from "../settings/config";
 import { YandexTrackerPromptName } from "../enums/YandexTrackerPromptName";
 import { IssueType, Priority, Status } from "../models/baseSchemas";
-import * as fs from "fs/promises"
-import { ModelDescriptionName } from "../enums/ModelDescriptionName";
 import { BoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
 import { CommentType } from "../models/issues/comment";
@@ -21,6 +18,7 @@ import { ChangelogItemType } from "../models/issues/changelogItem";
 import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
+import { searchIssuePromptParam, taskSummaryPromptParam } from "../models/mcp_params/promptParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -36,28 +34,16 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   // регистрируем все MCP prompts связанные с Yandex Tracker
   protected addPrompts(): void {
     this.mcpServer.prompt(
-      YandexTrackerPromptName.taskSummary,
-      "Краткое изложение задачи: суть задачи, статус, приоритет, исполнитель",
-      { issueKey: z.string().describe("Ключ задачи") },
+      taskSummaryPromptParam.name,
+      taskSummaryPromptParam.systemPrompt,
+      taskSummaryPromptParam.argsSchema,
       this.getTaskSummaryPromptCallBack.bind(this)
     );
 
     this.mcpServer.prompt(
-      YandexTrackerPromptName.searchIssue,
-      "Поиск задач по основным полям",
-      {
-        issueCount: z
-          .string()
-          .regex(/^[1-9]\d*$/, {
-            message: "Должно быть целое число больше нуля",
-          })
-          .describe("Кол-во задач"),
-        queueKey: z.string().describe("Ключ очереди"),
-        status: z.string().describe("Статус задачи"),
-        priority: z.string().describe("Приоритет задачи"),
-        issueType: z.string().describe("Тип задачи"),
-        name: z.string().describe("Имя и Фамилия исполнителя"),
-      },
+      searchIssuePromptParam.name,
+      searchIssuePromptParam.systemPrompt,
+      searchIssuePromptParam.argsSchema,
       this.searchIssuePromptCallBack.bind(this)
     );
   }
