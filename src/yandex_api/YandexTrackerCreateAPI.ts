@@ -1,4 +1,4 @@
-import { BoardType, ExtendBoardType } from "../models/boards/board";
+import { boardSchema, BoardType, CreateBoard, createBoardSchema, ExtendBoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
 import {
   checkListSchema,
@@ -110,7 +110,7 @@ export class YandexTrackerCreateAPI
    * Создание новой очереди
    *
    * https://yandex.ru/support/tracker/ru/concepts/queues/create-queue
-   * 
+   *
    * @param {CreateQueue} data
    * @return {*}  {Promise<Queue>}
    * @memberof YandexTrackerCreateAPI
@@ -124,11 +124,22 @@ export class YandexTrackerCreateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/post-board
-  */
-  public async createBoard(data: ExtendBoardType): Promise<BoardType> {
-    throw new Error("Method not implemented.");
+  /**
+   * Создание новой доски
+   *
+   * https://yandex.ru/support/tracker/ru/post-board
+   *
+   * @param {CreateBoard} data
+   * @return {*}  {Promise<BoardType>}
+   * @memberof YandexTrackerCreateAPI
+   */
+  public async createBoard(data: CreateBoard): Promise<BoardType> {
+    try {
+      const response = super.post("boards/", data);
+      return boardSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
