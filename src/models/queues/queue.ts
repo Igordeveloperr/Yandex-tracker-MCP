@@ -41,3 +41,15 @@ export const ExpandQueueEnum = z.enum([
 
 export type Queue = z.infer<typeof queueSchema>;
 export type ExpandQueue = z.infer<typeof ExpandQueueEnum>;
+
+
+export const createQueueSchema = z.object({
+  key: z.string(),
+  name: z.string(),
+  lead: z.string(),
+  defaultType: z.string(),
+  defaultPriority: z.string(),
+  issueTypesConfig: z.array(issueTypeConfigSchema),
+});
+
+export type CreateQueue = z.infer<typeof createQueueSchema>;
