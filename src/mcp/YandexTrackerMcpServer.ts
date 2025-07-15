@@ -19,6 +19,7 @@ import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 import { searchIssuePromptParam, taskSummaryPromptParam } from "../models/mcp_params/promptParams";
+import { getIssueTransitionsToolParam } from "../models/mcp_params/toolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -89,9 +90,9 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
   protected addTools(): void {
     // getIssueTransitionsTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssueTransitions,
-      "Получает переходы задачи задачи.",
-      getIssueDefaultParamSchema.shape,
+      getIssueTransitionsToolParam.name,
+      getIssueTransitionsToolParam.systemPrompt,
+      getIssueTransitionsToolParam.paramsSchema,
       this.getIssueTransitionsToolCallback.bind(this)
     );
 
