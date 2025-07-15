@@ -1,6 +1,6 @@
 import { BoardType, ExtendBoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
-import { CheckListType } from "../models/issues/checklist";
+import { checkListSchema, CheckListType, CreateCheckListType } from "../models/issues/checklist";
 import { CommentType } from "../models/issues/comment";
 import {
   Issue,
@@ -53,14 +53,26 @@ export class YandexTrackerCreateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/add-checklist-item
-  */
+  /**
+   * Создание нового чеклиста
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/add-checklist-item
+   * 
+   * @param {string} issueKey
+   * @param {CreateCheckListType} data
+   * @return {*}  {Promise<Issue>}
+   * @memberof YandexTrackerCreateAPI
+   */
   public async createIssueCheckListItem(
     issueKey: string,
-    data: CheckListType
-  ): Promise<CheckListType> {
-    throw new Error("Method not implemented.");
+    data: CreateCheckListType
+  ): Promise<Issue> {
+    try {
+      const response = super.post(`issues/${issueKey}/checklistItems`, data);
+      return issueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
