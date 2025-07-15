@@ -28,7 +28,7 @@ export class YandexTrackerReadAPI
   extends YandexTrackerAPI
   implements IYandexTrackerReadAPI
 {
-  protected constructor() {
+  public constructor() {
     super();
   }
 
