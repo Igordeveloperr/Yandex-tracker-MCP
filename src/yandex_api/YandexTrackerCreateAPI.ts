@@ -1,5 +1,5 @@
 import { boardSchema, BoardType, CreateBoard, createBoardSchema, ExtendBoardType } from "../models/boards/board";
-import { SprintType } from "../models/boards/sprint";
+import { CreateSprint, sprintSchema, SprintType } from "../models/boards/sprint";
 import {
   checkListSchema,
   CheckListType,
@@ -142,10 +142,21 @@ export class YandexTrackerCreateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/post-sprint
-  */
-  public async createSprint(data: SprintType): Promise<SprintType> {
-    throw new Error("Method not implemented.");
+  /**
+   * Создание нового спринта
+   *
+   * https://yandex.ru/support/tracker/ru/post-sprint
+   *
+   * @param {CreateSprint} data
+   * @return {*}  {Promise<SprintType>}
+   * @memberof YandexTrackerCreateAPI
+   */
+  public async createSprint(data: CreateSprint): Promise<SprintType> {
+    try {
+      const response = super.post("sprints/", data);
+      return sprintSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 }
