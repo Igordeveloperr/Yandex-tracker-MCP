@@ -1,7 +1,16 @@
 import { BoardType, ExtendBoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
-import { checkListSchema, CheckListType, CreateCheckListType } from "../models/issues/checklist";
-import { CommentType } from "../models/issues/comment";
+import {
+  checkListSchema,
+  CheckListType,
+  CreateCheckListType,
+} from "../models/issues/checklist";
+import {
+  commentSchema,
+  CommentType,
+  createCommentSchema,
+  CreateComment
+} from "../models/issues/comment";
 import {
   Issue,
   issueSchema,
@@ -57,7 +66,7 @@ export class YandexTrackerCreateAPI
    * Создание нового чеклиста
    *
    * https://yandex.ru/support/tracker/ru/concepts/issues/add-checklist-item
-   * 
+   *
    * @param {string} issueKey
    * @param {CreateCheckListType} data
    * @return {*}  {Promise<Issue>}
@@ -75,14 +84,26 @@ export class YandexTrackerCreateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/add-comment
-  */
+  /**
+   * Создание нового комментария 
+   * 
+   * https://yandex.ru/support/tracker/ru/concepts/issues/add-comment
+   * 
+   * @param {string} issueKey
+   * @param {CreateComment} data
+   * @return {*}  {Promise<CommentType>}
+   * @memberof YandexTrackerCreateAPI
+   */
   public async createIssueComment(
     issueKey: string,
-    data: CommentType
+    data: CreateComment
   ): Promise<CommentType> {
-    throw new Error("Method not implemented.");
+    try {
+      const response = super.post(`issues/${issueKey}/comments`, data);
+      return commentSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
