@@ -17,7 +17,7 @@ import {
   CreateIssue,
   createIssueSchema,
 } from "../models/issues/issue";
-import { Queue } from "../models/queues/queue";
+import { CreateQueue, createQueueSchema, Queue, queueSchema } from "../models/queues/queue";
 import { logger } from "../settings/logger";
 import { IYandexTrackerCreateAPI } from "./interfaces/IYandexTrackerCreateAPI";
 import { YandexTrackerAPI } from "./YandexTrackerAPI";
@@ -85,10 +85,10 @@ export class YandexTrackerCreateAPI
   }
 
   /**
-   * Создание нового комментария 
-   * 
+   * Создание нового комментария
+   *
    * https://yandex.ru/support/tracker/ru/concepts/issues/add-comment
-   * 
+   *
    * @param {string} issueKey
    * @param {CreateComment} data
    * @return {*}  {Promise<CommentType>}
@@ -106,11 +106,22 @@ export class YandexTrackerCreateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/queues/create-queue
-  */
-  public async createQueue(data: Queue): Promise<Queue> {
-    throw new Error("Method not implemented.");
+  /**
+   * Создание новой очереди
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/queues/create-queue
+   * 
+   * @param {CreateQueue} data
+   * @return {*}  {Promise<Queue>}
+   * @memberof YandexTrackerCreateAPI
+   */
+  public async createQueue(data: CreateQueue): Promise<Queue> {
+    try {
+      const response = super.post("queues/", data);
+      return queueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
