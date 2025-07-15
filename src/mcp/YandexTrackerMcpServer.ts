@@ -19,7 +19,7 @@ import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 import { searchIssuePromptParam, taskSummaryPromptParam } from "../models/mcp_params/promptParams";
-import { getBoardSprintsToolParam, getBoardsToolParam, getIssueChangeLogToolParam, getIssueCheckListToolParam, getIssueCommentsToolParam, getIssueFieldsToolParam, getIssuePriorityTypesToolParam, getIssueStatusTypesToolParam, getIssueToolParam, getIssueTransitionsToolParam, getIssueTypesToolParam, getMySelfToolParam, getQueueFieldsToolParam, getQueuesToolParam, getSprintToolParam, getUserFieldsToolParam, getUsersToolParam, getUserToolParam, getYandexQueryDocToolParam, searchIssueByQueryToolParam } from "../models/mcp_params/toolParams";
+import { toolArray } from "../models/mcp_params/toolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -88,147 +88,17 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP tools связанные с Yandex Tracker
   protected addTools(): void {
-    // getIssueTransitionsTool
-    this.mcpServer.tool(
-      getIssueTransitionsToolParam.name,
-      getIssueTransitionsToolParam.systemPrompt,
-      getIssueTransitionsToolParam.paramsSchema,
-      this.getIssueTransitionsToolCallback.bind(this)
-    );
-
-    // getIssueChangeLogTool
-    this.mcpServer.tool(
-      getIssueChangeLogToolParam.name,
-      getIssueChangeLogToolParam.systemPrompt,
-      getIssueChangeLogToolParam.paramsSchema,
-      this.getIssueChangeLogToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getIssueCheckListToolParam.name,
-      getIssueCheckListToolParam.systemPrompt,
-      getIssueCheckListToolParam.paramsSchema,
-      this.getIssueCheckListToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getIssueCommentsToolParam.name,
-      getIssueCommentsToolParam.systemPrompt,
-      getIssueCommentsToolParam.paramsSchema,
-      this.getIssueCommentsToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getSprintToolParam.name,
-      getSprintToolParam.systemPrompt,
-      getSprintToolParam.paramsSchema,
-      this.getSprintToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getBoardSprintsToolParam.name,
-      getBoardSprintsToolParam.systemPrompt,
-      getBoardSprintsToolParam.paramsSchema,
-      this.getBoardSprintsToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getBoardsToolParam.name,
-      getBoardsToolParam.systemPrompt,
-      getBoardsToolParam.paramsSchema,
-      this.getBoardsToolCallback
-    );
-
-    this.mcpServer.tool(
-      getUsersToolParam.name,
-      getUsersToolParam.systemPrompt,
-      getUsersToolParam.paramsSchema,
-      this.getUsersToolCallback
-    );
-
-    this.mcpServer.tool(
-      getUserFieldsToolParam.name,
-      getUserFieldsToolParam.systemPrompt,
-      getUserFieldsToolParam.paramsSchema,
-      this.getUserFieldsToolCallback
-    );
-
-    this.mcpServer.tool(
-      getQueueFieldsToolParam.name,
-      getQueueFieldsToolParam.systemPrompt,
-      getQueueFieldsToolParam.paramsSchema,
-      this.getQueueFieldsToolCallback
-    );
-
-    this.mcpServer.tool(
-      getIssueFieldsToolParam.name,
-      getIssueFieldsToolParam.systemPrompt,
-      getIssueFieldsToolParam.paramsSchema,
-      this.getIssueFieldsToolCallback
-    );
-
-    this.mcpServer.tool(
-      getIssueStatusTypesToolParam.name,
-      getIssueStatusTypesToolParam.systemPrompt,
-      getIssueStatusTypesToolParam.paramsSchema,
-      this.getIssueStatusTypesToolCallback
-    );
-
-    this.mcpServer.tool(
-      getIssuePriorityTypesToolParam.name,
-      getIssuePriorityTypesToolParam.systemPrompt,
-      getIssuePriorityTypesToolParam.paramsSchema,
-      this.getIssuePriorityTypesToolCallback
-    );
-
-    this.mcpServer.tool(
-      getIssueTypesToolParam.name,
-      getIssueTypesToolParam.systemPrompt,
-      getIssueTypesToolParam.paramsSchema,
-      this.getIssueTypesToolCallback
-    );
-
-    this.mcpServer.tool(
-      getYandexQueryDocToolParam.name,
-      getYandexQueryDocToolParam.systemPrompt,
-      getYandexQueryDocToolParam.paramsSchema,
-      this.getYandexQueryDocToolCallback
-    );
-
-    this.mcpServer.tool(
-      searchIssueByQueryToolParam.name,
-      searchIssueByQueryToolParam.systemPrompt,
-      searchIssueByQueryToolParam.paramsSchema,
-      this.searchIssueByQueryToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getQueuesToolParam.name,
-      getQueuesToolParam.systemPrompt,
-      getQueuesToolParam.paramsSchema,
-      this.getQueuesToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getMySelfToolParam.name,
-      getMySelfToolParam.systemPrompt,
-      getMySelfToolParam.paramsSchema,
-      this.getMySelfToolCallback
-    );
-
-    this.mcpServer.tool(
-      getIssueToolParam.name,
-      getIssueToolParam.systemPrompt,
-      getIssueToolParam.paramsSchema,
-      this.getIssueToolCallback.bind(this)
-    );
-
-    this.mcpServer.tool(
-      getUserToolParam.name,
-      getUserToolParam.systemPrompt,
-      getUserToolParam.paramsSchema,
-      this.getUserToolCallback.bind(this)
-    );
+    toolArray.forEach(tool => {
+      const method = this[tool.callbackKey as keyof this];
+      if (typeof method === 'function') {
+        this.mcpServer.tool(
+          tool.name,
+          tool.systemPrompt,
+          tool.paramsSchema,
+          method.bind(this)
+        );
+      }
+    });
   }
 
   /*__________________PROMPTS__________________ */
