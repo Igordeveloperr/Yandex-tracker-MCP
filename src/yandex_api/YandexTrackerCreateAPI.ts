@@ -1,7 +1,16 @@
 import { BoardType, ExtendBoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
-import { CheckListType } from "../models/issues/checklist";
-import { CommentType } from "../models/issues/comment";
+import {
+  checkListSchema,
+  CheckListType,
+  CreateCheckListType,
+} from "../models/issues/checklist";
+import {
+  commentSchema,
+  CommentType,
+  createCommentSchema,
+  CreateComment
+} from "../models/issues/comment";
 import {
   Issue,
   issueSchema,
@@ -53,24 +62,48 @@ export class YandexTrackerCreateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/add-checklist-item
-  */
+  /**
+   * Создание нового чеклиста
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/add-checklist-item
+   *
+   * @param {string} issueKey
+   * @param {CreateCheckListType} data
+   * @return {*}  {Promise<Issue>}
+   * @memberof YandexTrackerCreateAPI
+   */
   public async createIssueCheckListItem(
     issueKey: string,
-    data: CheckListType
-  ): Promise<CheckListType> {
-    throw new Error("Method not implemented.");
+    data: CreateCheckListType
+  ): Promise<Issue> {
+    try {
+      const response = super.post(`issues/${issueKey}/checklistItems`, data);
+      return issueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/add-comment
-  */
+  /**
+   * Создание нового комментария 
+   * 
+   * https://yandex.ru/support/tracker/ru/concepts/issues/add-comment
+   * 
+   * @param {string} issueKey
+   * @param {CreateComment} data
+   * @return {*}  {Promise<CommentType>}
+   * @memberof YandexTrackerCreateAPI
+   */
   public async createIssueComment(
     issueKey: string,
-    data: CommentType
+    data: CreateComment
   ): Promise<CommentType> {
-    throw new Error("Method not implemented.");
+    try {
+      const response = super.post(`issues/${issueKey}/comments`, data);
+      return commentSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
