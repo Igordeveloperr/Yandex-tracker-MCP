@@ -19,7 +19,7 @@ import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 import { searchIssuePromptParam, taskSummaryPromptParam } from "../models/mcp_params/promptParams";
-import { getIssueChangeLogToolParam, getIssueTransitionsToolParam } from "../models/mcp_params/toolParams";
+import { getBoardSprintsToolParam, getBoardsToolParam, getIssueChangeLogToolParam, getIssueCheckListToolParam, getIssueCommentsToolParam, getIssueFieldsToolParam, getIssuePriorityTypesToolParam, getIssueStatusTypesToolParam, getIssueToolParam, getIssueTransitionsToolParam, getIssueTypesToolParam, getMySelfToolParam, getQueueFieldsToolParam, getQueuesToolParam, getSprintToolParam, getUserFieldsToolParam, getUsersToolParam, getUserToolParam, getYandexQueryDocToolParam, searchIssueByQueryToolParam } from "../models/mcp_params/toolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -104,154 +104,129 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
       this.getIssueChangeLogToolCallback.bind(this)
     );
 
-    // getIssueCheckListTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssueCheckList,
-      "Получает чек-лист к задаче.Если пользовотель не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.",
-      getIssueDefaultParamSchema.shape,
+      getIssueCheckListToolParam.name,
+      getIssueCheckListToolParam.systemPrompt,
+      getIssueCheckListToolParam.paramsSchema,
       this.getIssueCheckListToolCallback.bind(this)
     );
 
-    // getIssueCommentsTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssueComments,
-      "Получает комментарии к задаче.Если пользовотель не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.",
-      getIssueDefaultParamSchema.shape,
+      getIssueCommentsToolParam.name,
+      getIssueCommentsToolParam.systemPrompt,
+      getIssueCommentsToolParam.paramsSchema,
       this.getIssueCommentsToolCallback.bind(this)
     );
 
-    // getSprintTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getSprint,
-      "Перед тем как искать конкретный спринт, обязательно вызови - getBoardSprintsTool. Получает конкретный спринт по идентификатору",
-      getSprintParamSchema.shape,
+      getSprintToolParam.name,
+      getSprintToolParam.systemPrompt,
+      getSprintToolParam.paramsSchema,
       this.getSprintToolCallback.bind(this)
     );
 
-    // getBoardSprintsTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getBoardSprints,
-      "Перед тем как искать спринты доски, узнай какие доски вообще есть в трекере - обязательно вызови getBoardsTool. Получает все спринты конкретной доски",
-      getBoardSprintsParamSchema.shape,
+      getBoardSprintsToolParam.name,
+      getBoardSprintsToolParam.systemPrompt,
+      getBoardSprintsToolParam.paramsSchema,
       this.getBoardSprintsToolCallback.bind(this)
     );
 
-    // getBoardsTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getBoards,
-      "Получает все доски в трекере",
-      {},
+      getBoardsToolParam.name,
+      getBoardsToolParam.systemPrompt,
+      getBoardsToolParam.paramsSchema,
       this.getBoardsToolCallback
     );
 
-    // getUsersTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getUsers,
-      "Получает всех пользователей трекера",
-      {},
+      getUsersToolParam.name,
+      getUsersToolParam.systemPrompt,
+      getUsersToolParam.paramsSchema,
       this.getUsersToolCallback
     );
 
-    // getUserFieldsTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getUserFields,
-      "Получает все поля пользователя с их описанием",
-      {},
+      getUserFieldsToolParam.name,
+      getUserFieldsToolParam.systemPrompt,
+      getUserFieldsToolParam.paramsSchema,
       this.getUserFieldsToolCallback
     );
 
-    // getQueueFieldsTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getQueueFields,
-      "Получает все поля очереди с их описанием",
-      {},
+      getQueueFieldsToolParam.name,
+      getQueueFieldsToolParam.systemPrompt,
+      getQueueFieldsToolParam.paramsSchema,
       this.getQueueFieldsToolCallback
     );
 
-    // getIssueFieldsTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssueFields,
-      "Получает все поля задачи с их описанием",
-      {},
+      getIssueFieldsToolParam.name,
+      getIssueFieldsToolParam.systemPrompt,
+      getIssueFieldsToolParam.paramsSchema,
       this.getIssueFieldsToolCallback
     );
 
-    // getIssueStatusTypesTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssueStatusTypes,
-      "Получает все типы статусов для задач, которые есть в яндекс трекере",
-      {},
+      getIssueStatusTypesToolParam.name,
+      getIssueStatusTypesToolParam.systemPrompt,
+      getIssueStatusTypesToolParam.paramsSchema,
       this.getIssueStatusTypesToolCallback
     );
 
-    // getIssuePriorityTypesTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssuePriorityTypes,
-      "Получает все типы приоритетов для задач, которые есть в яндекс трекере",
-      {},
+      getIssuePriorityTypesToolParam.name,
+      getIssuePriorityTypesToolParam.systemPrompt,
+      getIssuePriorityTypesToolParam.paramsSchema,
       this.getIssuePriorityTypesToolCallback
     );
 
-    // getIssueTypesTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssueTypes,
-      "Получает все типы задач, которые есть в яндекс трекере",
-      {},
+      getIssueTypesToolParam.name,
+      getIssueTypesToolParam.systemPrompt,
+      getIssueTypesToolParam.paramsSchema,
       this.getIssueTypesToolCallback
     );
 
-    // getYandexQueryDocTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getYandexQueryDoc,
-      "getYandexQueryDocTool - получает всю необходимую информацию для выполнения корретного поиска задач.",
-      {},
+      getYandexQueryDocToolParam.name,
+      getYandexQueryDocToolParam.systemPrompt,
+      getYandexQueryDocToolParam.paramsSchema,
       this.getYandexQueryDocToolCallback
     );
 
-    // searchIssueByQueryTool
     this.mcpServer.tool(
-      YandexTrackerToolName.searchIssueByQuery,
-      `
-        Если пользовотель не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.
-        Если у какой-то задачи нет поля storyPoints, то пропускай ее.
-        Перед поиском задачи по запросу, сначала вызови инструмент "getYandexQueryDocTool", чтобы получить необходимые параметры для поиска. 
-        Только после этого используй "searchIssueByQueryTool". Поиск задачи по любым параметрам с использованием языка запросов Yandex tracker.
-        Позволяет получить список задач, удовлетворяющих запросу. Если выгружается больше 3 задач использовать формат простых задач, параметр isSimple=true
-        Возвращает: issueArray - массив задач, countOfIssues - количсетво задач в массиве.
-      `,
-      searchIssueByQueryParamsShema.shape,
+      searchIssueByQueryToolParam.name,
+      searchIssueByQueryToolParam.systemPrompt,
+      searchIssueByQueryToolParam.paramsSchema,
       this.searchIssueByQueryToolCallback.bind(this)
     );
 
-    // getQueuesTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getQueues,
-      "Получения списка доступных очередей",
-      getQueuesParamsSchema.shape,
+      getQueuesToolParam.name,
+      getQueuesToolParam.systemPrompt,
+      getQueuesToolParam.paramsSchema,
       this.getQueuesToolCallback.bind(this)
     );
 
-    // getMySelfTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getMySelf,
-      "Получает информацию о текущем пользователе",
-      {},
+      getMySelfToolParam.name,
+      getMySelfToolParam.systemPrompt,
+      getMySelfToolParam.paramsSchema,
       this.getMySelfToolCallback
     );
 
-    // getIssueTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getIssue,
-      "Получает информацию о задаче по ее id или key",
-      getIssueParamsSchema.shape,
+      getIssueToolParam.name,
+      getIssueToolParam.systemPrompt,
+      getIssueToolParam.paramsSchema,
       this.getIssueToolCallback.bind(this)
     );
 
-    // getUserTool
     this.mcpServer.tool(
-      YandexTrackerToolName.getUser,
-      "Получает ползователя по id или login",
-      getUserParamsSchema.shape,
+      getUserToolParam.name,
+      getUserToolParam.systemPrompt,
+      getUserToolParam.paramsSchema,
       this.getUserToolCallback.bind(this)
     );
   }
