@@ -2,7 +2,12 @@ import { BoardType, ExtendBoardType } from "../models/boards/board";
 import { SprintType } from "../models/boards/sprint";
 import { CheckListType } from "../models/issues/checklist";
 import { CommentType } from "../models/issues/comment";
-import { Issue } from "../models/issues/issue";
+import {
+  Issue,
+  issueSchema,
+  CreateIssue,
+  createIssueSchema,
+} from "../models/issues/issue";
 import { Queue } from "../models/queues/queue";
 import { logger } from "../settings/logger";
 import { IYandexTrackerCreateAPI } from "./interfaces/IYandexTrackerCreateAPI";
@@ -30,11 +35,22 @@ export class YandexTrackerCreateAPI
     return YandexTrackerCreateAPI._instance;
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/create-issue
-  */
-  public async createIssue(data: Issue): Promise<Issue> {
-    throw new Error("Method not implemented.");
+  /**
+   * Создание новой задачи
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/create-issue
+   *
+   * @param {CreateIssue} data
+   * @return {*}  {Promise<Issue>}
+   * @memberof YandexTrackerCreateAPI
+   */
+  public async createIssue(data: CreateIssue): Promise<Issue> {
+    try {
+      const response = super.post("issues/", data);
+      return issueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
