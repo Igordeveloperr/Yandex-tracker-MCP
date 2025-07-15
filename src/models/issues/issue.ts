@@ -67,4 +67,4 @@ export const createIssueSchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
-export type CreateIssue = z.infer<typeof issueSchema>;
+export type CreateIssue = z.infer<typeof createIssueSchema>;
