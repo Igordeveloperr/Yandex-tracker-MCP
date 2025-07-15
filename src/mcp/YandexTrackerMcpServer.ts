@@ -88,7 +88,6 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP tools связанные с Yandex Tracker
   protected addTools(): void {
-    // getIssueTransitionsTool
     this.mcpServer.tool(
       getIssueTransitionsToolParam.name,
       getIssueTransitionsToolParam.systemPrompt,
@@ -96,7 +95,6 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
       this.getIssueTransitionsToolCallback.bind(this)
     );
 
-    // getIssueChangeLogTool
     this.mcpServer.tool(
       getIssueChangeLogToolParam.name,
       getIssueChangeLogToolParam.systemPrompt,
