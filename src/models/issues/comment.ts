@@ -10,12 +10,17 @@ export const commentSchema = z.object({
 
 export type CommentType = z.infer<typeof commentSchema>;
 
-export const createCommentSchema = z.object({
+export const updateCommentSchema = z.object({
   text: z.string(),
   attachmentIds: z.array(z.string()).optional(),
+  markupType: z.string().optional(),
+});
+
+export type UpdateComment = z.infer<typeof updateCommentSchema>
+
+export const createCommentSchema = updateCommentSchema.extend({
   summonees: z.array(z.union([userSchemaSimple, z.string()])).optional(),
   maillistSummonees: z.array(z.string()).optional(),
-  markupType: z.string().optional(),
 });
 
 export type CreateComment = z.infer<typeof createCommentSchema>;
