@@ -1,6 +1,10 @@
-import { BoardType } from "../models/boards/board";
+import { boardSchema, BoardType, UpdateBoard } from "../models/boards/board";
 import { CheckListType, UpdateCheckListType } from "../models/issues/checklist";
-import { commentSchema, CommentType, UpdateComment } from "../models/issues/comment";
+import {
+  commentSchema,
+  CommentType,
+  UpdateComment,
+} from "../models/issues/comment";
 import { Issue, issueSchema, UpdateIssue } from "../models/issues/issue";
 import { logger } from "../settings/logger";
 import { IYandexTrackerUpdateAPI } from "./interfaces/IYandexTrackerUpdateAPI";
@@ -104,13 +108,25 @@ export class YandexTrackerUpdateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/patch-board
-  */
+  /**
+   * Обновление доски
+   *
+   * https://yandex.ru/support/tracker/ru/patch-board
+   *
+   * @param {number} boardId
+   * @param {UpdateBoard} data
+   * @return {*}  {Promise<BoardType>}
+   * @memberof YandexTrackerUpdateAPI
+   */
   public async updateBoard(
     boardId: number,
-    data: BoardType
+    data: UpdateBoard
   ): Promise<BoardType> {
-    throw new Error("Method not implemented.");
+    try {
+      const response = super.patch(`boards/${boardId}`, data);
+      return boardSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 }
