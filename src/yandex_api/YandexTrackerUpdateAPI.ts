@@ -1,6 +1,6 @@
 import { BoardType } from "../models/boards/board";
 import { CheckListType, UpdateCheckListType } from "../models/issues/checklist";
-import { CommentType } from "../models/issues/comment";
+import { commentSchema, CommentType, UpdateComment } from "../models/issues/comment";
 import { Issue, issueSchema, UpdateIssue } from "../models/issues/issue";
 import { logger } from "../settings/logger";
 import { IYandexTrackerUpdateAPI } from "./interfaces/IYandexTrackerUpdateAPI";
@@ -77,15 +77,31 @@ export class YandexTrackerUpdateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/edit-comment
-  */
+  /**
+   * Обновление комментария
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/edit-comment
+   *
+   * @param {string} issueKey
+   * @param {(string | number)} commentKey
+   * @param {UpdateComment} data
+   * @return {*}  {Promise<CommentType>}
+   * @memberof YandexTrackerUpdateAPI
+   */
   public async updateIssueComment(
     issueKey: string,
     commentKey: string | number,
-    data: CommentType
+    data: UpdateComment
   ): Promise<CommentType> {
-    throw new Error("Method not implemented.");
+    try {
+      const response = super.patch(
+        `issues/${issueKey}/comments/${commentKey}`,
+        data
+      );
+      return commentSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
