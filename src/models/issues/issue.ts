@@ -8,7 +8,7 @@ import {
 } from "../baseSchemas";
 import { userSchemaSimple } from "../users/user";
 import { queueSchema } from "../queues/queue";
-import { describe } from "yargs";
+import { describe, number } from "yargs";
 import { sprintSchema } from "../boards/sprint";
 
 export const issueSchemaSimple = z.object({
@@ -67,4 +67,19 @@ export const createIssueSchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
-export type CreateIssue = z.infer<typeof createIssueSchema>;
+export const updateIssueSchema = z.object({
+  summary: z.string().optional(),
+  parent: z.union([parentSchema, z.string()]).optional(),
+  description: z.string().optional(),
+  markupType: z.string().optional(),
+  sprint: z.union([z.array(z.string()), z.array(sprintSchema)]).optional(),
+  type: z.union([issueTypeSchema, z.string(), z.number()]).optional(),
+  priority: z.union([prioritySchema, z.string(), z.number()]).optional(),
+  followers: z.union([z.array(userSchemaSimple), z.array(z.string()), z.array(z.number())]).optional(),
+  project: projectSchema.optional(),
+  attachmentIds: z.array(z.string()).optional(),
+  descriptionAttachmentIds: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
+});
+
+export type UpdateIssue = z.infer<typeof updateIssueSchema>;
