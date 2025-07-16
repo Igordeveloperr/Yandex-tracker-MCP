@@ -18,7 +18,7 @@ import { ChangelogItemType } from "../models/issues/changelogItem";
 import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
-import { searchIssuePromptParam, taskSummaryPromptParam } from "../models/mcp_params/promptParams";
+import { promptArray } from "../models/mcp_params/promptParams";
 import { toolArray } from "../models/mcp_params/toolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
@@ -34,19 +34,17 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP prompts связанные с Yandex Tracker
   protected addPrompts(): void {
-    this.mcpServer.prompt(
-      taskSummaryPromptParam.name,
-      taskSummaryPromptParam.systemPrompt,
-      taskSummaryPromptParam.argsSchema,
-      this.getTaskSummaryPromptCallBack.bind(this)
-    );
-
-    this.mcpServer.prompt(
-      searchIssuePromptParam.name,
-      searchIssuePromptParam.systemPrompt,
-      searchIssuePromptParam.argsSchema,
-      this.searchIssuePromptCallBack.bind(this)
-    );
+    promptArray.forEach(prompt => {
+      const method = this[prompt.callbackKey as keyof this];
+      if (typeof method === 'function'){
+        this.mcpServer.prompt(
+          prompt.name,
+          prompt.systemPrompt,
+          prompt.paramsSchema,
+          method.bind(this)
+        );
+      }
+    });
   }
 
   // регистрируем все MCP resources связанные с Yandex Tracker
