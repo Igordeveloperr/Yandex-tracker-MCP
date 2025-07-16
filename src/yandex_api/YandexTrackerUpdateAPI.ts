@@ -50,9 +50,17 @@ export class YandexTrackerUpdateAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/edit-checklist
-  */
+  /**
+   * Обновление чеклиста
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/edit-checklist
+   *
+   * @param {string} issueKey
+   * @param {string} checkListItemKey
+   * @param {UpdateCheckListType} data
+   * @return {*}  {Promise<Issue>}
+   * @memberof YandexTrackerUpdateAPI
+   */
   public async updateIssueCheckList(
     issueKey: string,
     checkListItemKey: string,
