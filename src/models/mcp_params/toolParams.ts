@@ -1,8 +1,8 @@
 import { YandexTrackerToolName } from "../../enums/YandexTrackerToolName";
-import { IToolConfig } from "../../mcp/IToolConfig";
+import { IParamConfig } from "../../mcp/IParamConfig";
 import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByQueryParamsShema } from "../paramShemas";
 
-export const toolArray: IToolConfig[] = [
+export const toolArray: IParamConfig[] = [
   {
     name: YandexTrackerToolName.getIssueTransitions,
     systemPrompt: "Получает переходы задачи задачи.",

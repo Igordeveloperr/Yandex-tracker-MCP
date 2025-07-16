@@ -7,6 +7,9 @@ export const refPromptParam = {
   argsSchema: {},
 };
 
+export const promptArray = [
+  
+];
 export const taskSummaryPromptParam = {
   name: YandexTrackerPromptName.taskSummary,
   systemPrompt:

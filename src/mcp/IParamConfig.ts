@@ -1,6 +1,6 @@
 import { ZodRawShape } from "zod";
 
-export interface IToolConfig {
+export interface IParamConfig {
   name: string;
   systemPrompt: string;
   paramsSchema: ZodRawShape;
