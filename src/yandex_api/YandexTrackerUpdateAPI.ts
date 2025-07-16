@@ -1,7 +1,7 @@
 import { BoardType } from "../models/boards/board";
-import { CheckListType } from "../models/issues/checklist";
+import { CheckListType, UpdateCheckListType } from "../models/issues/checklist";
 import { CommentType } from "../models/issues/comment";
-import { Issue } from "../models/issues/issue";
+import { Issue, issueSchema, UpdateIssue } from "../models/issues/issue";
 import { logger } from "../settings/logger";
 import { IYandexTrackerUpdateAPI } from "./interfaces/IYandexTrackerUpdateAPI";
 import { YandexTrackerAPI } from "./YandexTrackerAPI";
@@ -28,11 +28,26 @@ export class YandexTrackerUpdateAPI
     return YandexTrackerUpdateAPI._instance;
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/patch-issue
-  */
-  public async updateIssue(issueKey: string, data: Issue): Promise<Issue> {
-    throw new Error("Method not implemented.");
+  /**
+   * Обновление задачи
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/patch-issue
+   *
+   * @param {string} issueKey
+   * @param {UpdateIssue} data
+   * @return {*}  {Promise<Issue>}
+   * @memberof YandexTrackerUpdateAPI
+   */
+  public async updateIssue(
+    issueKey: string,
+    data: UpdateIssue
+  ): Promise<Issue> {
+    try {
+      const response = super.patch(`issues/${issueKey}`, data);
+      return issueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
@@ -41,9 +56,17 @@ export class YandexTrackerUpdateAPI
   public async updateIssueCheckList(
     issueKey: string,
     checkListItemKey: string,
-    data: CheckListType
-  ): Promise<CheckListType> {
-    throw new Error("Method not implemented.");
+    data: UpdateCheckListType
+  ): Promise<Issue> {
+    try {
+      const response = super.patch(
+        `issues/${issueKey}/checklistItems/${checkListItemKey}`,
+        data
+      );
+      return issueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
