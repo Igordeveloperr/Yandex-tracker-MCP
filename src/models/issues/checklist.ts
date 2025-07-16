@@ -35,3 +35,6 @@ export const createCheckListSchema = z.object({
 });
 
 export type CreateCheckListType = z.infer<typeof createCheckListSchema>;
+
+export const updateCheckListSchema = createCheckListSchema;
+export type UpdateCheckListType = z.infer<typeof updateCheckListSchema>;
