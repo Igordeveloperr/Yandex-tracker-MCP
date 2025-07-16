@@ -10,6 +10,7 @@ import { userSchemaSimple } from "../users/user";
 import { queueSchema } from "../queues/queue";
 import { describe, number } from "yargs";
 import { sprintSchema } from "../boards/sprint";
+import { checkListSchema } from "./checklist";
 
 export const issueSchemaSimple = z.object({
   id: z.string(),
@@ -41,6 +42,7 @@ export const issueSchema = issueSchemaSimple.extend({
   status: statusSchema.optional(),
   previousStatus: statusSchema.optional(),
   favorite: z.boolean().optional(),
+  checklistItems: z.array(checkListSchema).optional()
 });
 
 export type Issue = z.infer<typeof issueSchema>;
