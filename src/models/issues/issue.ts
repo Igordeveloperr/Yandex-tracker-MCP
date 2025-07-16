@@ -69,6 +69,8 @@ export const createIssueSchema = z.object({
   tags: z.array(z.string()).optional(),
 });
 
+export type CreateIssue = z.infer<typeof createIssueSchema>;
+
 export const updateIssueSchema = z.object({
   summary: z.string().optional(),
   parent: z.union([parentSchema, z.string()]).optional(),
