@@ -30,3 +30,9 @@ export const createBoardSchema = z.object({
 });
 
 export type CreateBoard = z.infer<typeof createBoardSchema>;
+
+export const updateBoardSchema = createBoardSchema.partial({
+  name: true,
+});
+
+export type UpdateBoard = z.infer<typeof updateBoardSchema>;
