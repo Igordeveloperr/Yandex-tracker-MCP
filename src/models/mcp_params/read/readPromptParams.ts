@@ -1,6 +1,6 @@
 import z from "zod";
 import { YandexTrackerPromptName } from "../../../enums/YandexTrackerPromptName";
-import { IParamConfig } from "../../../mcp/IParamConfig";
+import { IParamConfig } from "../IParamConfig";
 import { IReadPromptCallback } from "../../../mcp/callback_interfaces/read/IReadPromptCallback";
 
 export const readPromptArray: IParamConfig<IReadPromptCallback>[] = [

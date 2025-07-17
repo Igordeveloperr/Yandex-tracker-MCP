@@ -1,6 +1,6 @@
 import { YandexTrackerToolName } from "../../../enums/YandexTrackerToolName";
 import { IReadToolCallback } from "../../../mcp/callback_interfaces/read/IReadToolCallback";
-import { IParamConfig } from "../../../mcp/IParamConfig";
+import { IParamConfig } from "../IParamConfig";
 import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByQueryParamsShema } from "../../paramShemas";
 
 export const readToolArray: IParamConfig<IReadToolCallback>[] = [
