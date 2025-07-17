@@ -34,17 +34,17 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP prompts связанные с Yandex Tracker
   protected addPrompts(): void {
-    // promptArray.forEach(prompt => {
-    //   const method = this[prompt.callbackKey as keyof this];
-    //   if (typeof method === 'function'){
-    //     this.mcpServer.prompt(
-    //       prompt.name,
-    //       prompt.systemPrompt,
-    //       prompt.paramsSchema,
-    //       method.bind(this)
-    //     );
-    //   }
-    // });
+    promptArray.forEach(prompt => {
+      const method = this[prompt.callbackKey as keyof this];
+      if (typeof method === 'function'){
+        this.mcpServer.prompt(
+          prompt.name,
+          prompt.systemPrompt,
+          prompt.paramsSchema,
+          method.bind(this)
+        );
+      }
+    });
   }
 
   // регистрируем все MCP resources связанные с Yandex Tracker
