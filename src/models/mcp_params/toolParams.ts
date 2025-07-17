@@ -3,7 +3,7 @@ import { IReadCallback } from "../../mcp/callback/IReadCallback";
 import { IParamConfig } from "../../mcp/IParamConfig";
 import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByQueryParamsShema } from "../paramShemas";
 
-export const toolArray: IParamConfig<IReadCallback>[] = [
+export const readToolArray: IParamConfig<IReadCallback>[] = [
   {
     name: YandexTrackerToolName.getIssueTransitions,
     systemPrompt: "Получает переходы задачи задачи.",

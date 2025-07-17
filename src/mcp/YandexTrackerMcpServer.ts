@@ -19,7 +19,7 @@ import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 import { promptArray } from "../models/mcp_params/promptParams";
-import { toolArray } from "../models/mcp_params/toolParams";
+import { readToolArray } from "../models/mcp_params/toolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
@@ -34,17 +34,17 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP prompts связанные с Yandex Tracker
   protected addPrompts(): void {
-    promptArray.forEach(prompt => {
-      const method = this[prompt.callbackKey as keyof this];
-      if (typeof method === 'function'){
-        this.mcpServer.prompt(
-          prompt.name,
-          prompt.systemPrompt,
-          prompt.paramsSchema,
-          method.bind(this)
-        );
-      }
-    });
+    // promptArray.forEach(prompt => {
+    //   const method = this[prompt.callbackKey as keyof this];
+    //   if (typeof method === 'function'){
+    //     this.mcpServer.prompt(
+    //       prompt.name,
+    //       prompt.systemPrompt,
+    //       prompt.paramsSchema,
+    //       method.bind(this)
+    //     );
+    //   }
+    // });
   }
 
   // регистрируем все MCP resources связанные с Yandex Tracker
@@ -86,7 +86,7 @@ export class YandexTrackerMcpServer extends YandexMcpServer {
 
   // регистрируем все MCP tools связанные с Yandex Tracker
   protected addTools(): void {
-    toolArray.forEach(tool => {
+    readToolArray.forEach(tool => {
       const method = this[tool.callbackKey as keyof this];
       if (typeof method === 'function') {
         this.mcpServer.tool(
