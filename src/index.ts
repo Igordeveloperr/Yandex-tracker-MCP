@@ -1,5 +1,5 @@
 import express from "express";
-import { YandexTrackerMcpServer } from "./mcp/YandexTrackerMcpServer";
+import { YandexTrackerMcpServer } from "./mcp/server/YandexTrackerMcpServer";
 import { YandexTrackerEndpoint } from "./enums/YandexTrackerEndpoint";
 import { config } from "./settings/config";
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport";

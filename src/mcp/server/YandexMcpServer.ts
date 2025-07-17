@@ -2,9 +2,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { CallToolResult, GetPromptResult } from "@modelcontextprotocol/sdk/types";
 import { Response, Request } from "express";
-import { TransportStrategy } from "./transport_strategy/TransportStrategy";
+import { TransportStrategy } from "../transport_strategy/TransportStrategy";
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport";
-import { config } from "../settings/config";
+import { config } from "../../settings/config";
 
 export abstract class YandexMcpServer {
   protected mcpServer: McpServer;
