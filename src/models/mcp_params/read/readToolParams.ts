@@ -1,5 +1,5 @@
 import { YandexTrackerToolName } from "../../../enums/YandexTrackerToolName";
-import { IReadToolCallback } from "../../../mcp/callback/IReadToolCallback";
+import { IReadToolCallback } from "../../../mcp/callback/read/IReadToolCallback";
 import { IParamConfig } from "../../../mcp/IParamConfig";
 import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByQueryParamsShema } from "../../paramShemas";
 
