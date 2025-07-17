@@ -19,7 +19,7 @@ import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
 import { promptArray } from "../models/mcp_params/promptParams";
-import { readToolArray } from "../models/mcp_params/toolParams";
+import { readToolArray } from "../models/mcp_params/readToolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
   /**
