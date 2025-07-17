@@ -31,11 +31,6 @@ export abstract class YandexMcpServer {
     );
   }
 
-  // все наследники обязаны реализовывать
-  protected abstract addTools(): void;
-  protected abstract addResources(): void;
-  protected abstract addPrompts(): void;
-
   // подключение MCP сервера по выбранной стратегии
   public async connectWithStrategy(
     strategy: TransportStrategy
@@ -80,64 +75,6 @@ export abstract class YandexMcpServer {
     } catch (error) {
       console.error("Message handling error:", error);
       res.status(500).json({ error: "Internal server error" });
-    }
-  }
-
-  // формирование ответа для tools
-  protected receiveCallToolResult<Type>(response: Type): CallToolResult {
-    try {
-      return {
-        content: [
-          {
-            type: "text",
-            text:
-              typeof response === "string"
-                ? response
-                : JSON.stringify(response),
-          },
-        ],
-      };
-    } catch (error) {
-      return {
-        content: [
-          {
-            type: "text",
-            text: `Ошибка: ${
-              error instanceof Error ? error.message : "Неизвестная ошибка"
-            }`,
-          },
-        ],
-        isError: true,
-      };
-    }
-  }
-
-  // формирование ответа для promts
-  protected receivePromptResult(response: string): GetPromptResult {
-    try {
-      return {
-        messages: [
-          {
-            role: "user" as const, // Важно указать константный тип
-            content: {
-              type: "text" as const, // Тип контента - текст
-              text: response,
-            },
-          },
-        ],
-      };
-    } catch (error) {
-      return {
-        messages: [
-          {
-            role: "user" as const,
-            content: {
-              type: "text" as const,
-              text: "Ошибка выполнения промпта",
-            },
-          },
-        ],
-      };
     }
   }
 }
