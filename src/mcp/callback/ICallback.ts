@@ -1,1 +1,3 @@
-export interface ICallback{}
+export interface ICallback {
+  _marker?: never; // Фиктивное поле, чтобы отличать ICallback от других интерфейсов
+}
