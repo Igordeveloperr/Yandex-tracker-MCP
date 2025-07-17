@@ -18,7 +18,7 @@ import { ChangelogItemType } from "../models/issues/changelogItem";
 import { TransitionType } from "../models/issues/transition";
 import { isAxiosError } from "axios";
 import { howToUseQuery, issueFieldsDoc, queryParametersDoc, queueFieldsDoc, userFieldsDoc } from "../models/resource";
-import { promptArray } from "../models/mcp_params/read/promptParams";
+import { readPromptArray } from "../models/mcp_params/read/readPromptParams";
 import { readToolArray } from "../models/mcp_params/read/readToolParams";
 
 export class YandexTrackerMcpServer extends YandexMcpServer {
