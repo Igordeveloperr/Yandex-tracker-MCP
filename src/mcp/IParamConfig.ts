@@ -5,5 +5,5 @@ export interface IParamConfig<ICallbackType extends ICallback> {
   name: string;
   systemPrompt: string;
   paramsSchema: ZodRawShape;
-  callbackKey: ICallbackType;
+  callbackKey: keyof ICallbackType;
 }
