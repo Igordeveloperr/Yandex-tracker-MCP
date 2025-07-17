@@ -28,9 +28,6 @@ export class McpReadComponent implements IMcpComponent {
   private _mcpServer: McpServer;
   constructor(mcpServer: McpServer) {
     this._mcpServer = mcpServer;
-    this.addResources();
-    this.addPrompts();
-    this.addTools();
   }
 
   // регистрируем все MCP prompts связанные с Yandex Tracker
