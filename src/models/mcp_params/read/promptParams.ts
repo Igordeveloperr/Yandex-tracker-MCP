@@ -1,6 +1,6 @@
 import z from "zod";
-import { YandexTrackerPromptName } from "../../enums/YandexTrackerPromptName";
-import { IParamConfig } from "../../mcp/IParamConfig";
+import { YandexTrackerPromptName } from "../../../enums/YandexTrackerPromptName";
+import { IParamConfig } from "../../../mcp/IParamConfig";
 
 export const promptArray = [];
 // export const promptArray: IParamConfig[] = [
