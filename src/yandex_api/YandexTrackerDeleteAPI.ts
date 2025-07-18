@@ -1,3 +1,4 @@
+import { Issue, issueSchema } from "../models/issues/issue";
 import { logger } from "../settings/logger";
 import { IYandexTrackerDeleteAPI } from "./interfaces/IYandexTrackerDeleteAPI";
 import { YandexTrackerAPI } from "./YandexTrackerAPI";
@@ -24,11 +25,22 @@ export class YandexTrackerDeleteAPI
     return YandexTrackerDeleteAPI._instance;
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/delete-checklist
-  */
-  public async deleteIssueCheckList(issueKey: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  /**
+   * Удаление чеклиста
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/delete-checklist
+   *
+   * @param {string} issueKey
+   * @return {*}  {Promise<Issue>}
+   * @memberof YandexTrackerDeleteAPI
+   */
+  public async deleteIssueCheckList(issueKey: string): Promise<Issue> {
+    try {
+      const response = super.patch(`issues/${issueKey}/checklistItems`);
+      return issueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
