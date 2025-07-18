@@ -36,7 +36,7 @@ export class YandexTrackerDeleteAPI
    */
   public async deleteIssueCheckList(issueKey: string): Promise<Issue> {
     try {
-      const response = super.patch(`issues/${issueKey}/checklistItems`);
+      const response = super.delete(`issues/${issueKey}/checklistItems`);
       return issueSchema.parse(response);
     } catch (error) {
       throw error;
