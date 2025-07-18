@@ -83,17 +83,28 @@ export class YandexTrackerDeleteAPI
       const response = await super.delete(
         `issues/${issueKey}/comments/${commentKey}`
       );
-      return (response.status == 204) ? 0 : 1;
+      return response.status == 204 ? 0 : 1;
     } catch (error) {
       throw error;
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/queues/delete-queue
-  */
-  public async deleteQueue(queueKey: string | number): Promise<void> {
-    throw new Error("Method not implemented.");
+  /**
+   * Удаление очереди
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/queues/delete-queue
+   *
+   * @param {(string | number)} queueKey
+   * @return {*}  {Promise<number>} 0 если успешно, иначе 1
+   * @memberof YandexTrackerDeleteAPI
+   */
+  public async deleteQueue(queueKey: string | number): Promise<number> {
+    try {
+      const response = await super.delete(`queues/${queueKey}`);
+      return response.status == 204 ? 0 : 1;
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
