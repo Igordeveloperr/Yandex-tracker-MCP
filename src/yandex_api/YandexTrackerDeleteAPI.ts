@@ -43,24 +43,50 @@ export class YandexTrackerDeleteAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/delete-checklist-item
-  */
+  /**
+   * Удаление элемента чеклиста
+   *
+   * https://yandex.ru/support/tracker/ru/concepts/issues/delete-checklist-item
+   *
+   * @param {string} issueKey
+   * @param {string} checkListItemKey
+   * @return {*}  {Promise<Issue>}
+   * @memberof YandexTrackerDeleteAPI
+   */
   public async deleteIssueCheckListItem(
     issueKey: string,
     checkListItemKey: string
-  ): Promise<void> {
-    throw new Error("Method not implemented.");
+  ): Promise<Issue> {
+    try {
+      const response = super.delete(
+        `issues/${issueKey}/checklistItems/${checkListItemKey}`
+      );
+      return issueSchema.parse(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/concepts/issues/delete-comment
-  */
+  /**
+   * Удаление комментария
+   *
+   * @param {string} issueKey
+   * @param {(string | number)} commentKey
+   * @return {*}  {Promise<number>} 0 если успешно, иначе 1
+   * @memberof YandexTrackerDeleteAPI
+   */
   public async deleteIssueComment(
     issueKey: string,
     commentKey: string | number
-  ): Promise<void> {
-    throw new Error("Method not implemented.");
+  ): Promise<number> {
+    try {
+      const response = await super.delete(
+        `issues/${issueKey}/comments/${commentKey}`
+      );
+      return (response.status == 204) ? 0 : 1;
+    } catch (error) {
+      throw error;
+    }
   }
 
   /*
