@@ -107,10 +107,21 @@ export class YandexTrackerDeleteAPI
     }
   }
 
-  /*
-    https://yandex.ru/support/tracker/ru/delete-board
-  */
-  public async deleteBoard(boardId: number): Promise<void> {
-    throw new Error("Method not implemented.");
+  /**
+   * Удаление доски
+   *
+   * https://yandex.ru/support/tracker/ru/delete-board
+   *
+   * @param {number} boardId
+   * @return {*}  {Promise<number>} 0 если успешно, иначе 1
+   * @memberof YandexTrackerDeleteAPI
+   */
+  public async deleteBoard(boardId: number): Promise<number> {
+    try {
+      const response = await super.delete(`boards/${boardId}`);
+      return response.status == 204 ? 0 : 1;
+    } catch (error) {
+      throw error;
+    }
   }
 }
