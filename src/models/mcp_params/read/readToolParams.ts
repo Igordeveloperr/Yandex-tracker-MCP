@@ -1,9 +1,27 @@
 import { YandexTrackerToolName } from "../../../enums/YandexTrackerToolName";
 import { IReadToolCallback } from "../../../mcp/callback_interfaces/read/IReadToolCallback";
 import { IParamConfig } from "../IParamConfig";
-import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByQueryParamsShema } from "../../paramShemas";
+import { getBoardSprintsParamSchema, getDocumentationParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByQueryParamsShema } from "../../paramShemas";
 
 export const readToolArray: IParamConfig<IReadToolCallback>[] = [
+  {
+    name: YandexTrackerToolName.getDocumentation,
+    systemPrompt: `
+      Выполняет обращение к базе знаний для расширения контекста.
+      Например если пользователь просит найти задачу, то можно сначала получить поля задачи из базы знаний
+      query = Поля задачи, а потом информацию о том как использовать язык запросов яндекс трекера
+      query = язык запросов
+
+      Вот еще примеры основных значений параметра query:
+      1. Поля задачи
+      2. Поля очереди
+      3. Поля пользователя
+      4. Язык запросов яндекс трекера
+      и так далее все что касается документации по Яндекс трекеру, но учитывай, что база знаний может быть не полной
+    `,
+    paramsSchema: getDocumentationParamSchema.shape,
+    callbackKey: "getDocumentationToolCallback",
+  },
   {
     name: YandexTrackerToolName.getIssueTransitions,
     systemPrompt: "Получает переходы задачи задачи.",
