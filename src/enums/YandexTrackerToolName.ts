@@ -20,4 +20,5 @@ export enum YandexTrackerToolName {
   getIssueChangeLog = "getIssueChangeLogTool",
   getIssueTransitions = "getIssueTransitions",
   getIssueFields = "getIssueFieldsTool",
+  getDocumentation = "getDocumentationTool",
 }
