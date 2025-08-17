@@ -83,24 +83,24 @@ export const readToolArray: IParamConfig<IReadToolCallback>[] = [
     paramsSchema: {},
     callbackKey: "getUsersToolCallback",
   },
-  {
-    name: YandexTrackerToolName.getUserFields,
-    systemPrompt: "Получает все поля пользователя с их описанием",
-    paramsSchema: {},
-    callbackKey: "getUserFieldsToolCallback",
-  },
-  {
-    name: YandexTrackerToolName.getQueueFields,
-    systemPrompt: "Получает все поля очереди с их описанием",
-    paramsSchema: {},
-    callbackKey: "getQueueFieldsToolCallback",
-  },
-  {
-    name: YandexTrackerToolName.getIssueFields,
-    systemPrompt: "Получает все поля задачи с их описанием",
-    paramsSchema: {},
-    callbackKey: "getIssueFieldsToolCallback",
-  },
+  // {
+  //   name: YandexTrackerToolName.getUserFields,
+  //   systemPrompt: "Получает все поля пользователя с их описанием",
+  //   paramsSchema: {},
+  //   callbackKey: "getUserFieldsToolCallback",
+  // },
+  // {
+  //   name: YandexTrackerToolName.getQueueFields,
+  //   systemPrompt: "Получает все поля очереди с их описанием",
+  //   paramsSchema: {},
+  //   callbackKey: "getQueueFieldsToolCallback",
+  // },
+  // {
+  //   name: YandexTrackerToolName.getIssueFields,
+  //   systemPrompt: "Получает все поля задачи с их описанием",
+  //   paramsSchema: {},
+  //   callbackKey: "getIssueFieldsToolCallback",
+  // },
   {
     name: YandexTrackerToolName.getIssueStatusTypes,
     systemPrompt:
@@ -121,19 +121,18 @@ export const readToolArray: IParamConfig<IReadToolCallback>[] = [
     paramsSchema: {},
     callbackKey: "getIssueTypesToolCallback",
   },
-  {
-    name: YandexTrackerToolName.getYandexQueryDoc,
-    systemPrompt:
-      "getYandexQueryDocTool - получает всю необходимую информацию для выполнения корректного поиска задач.",
-    paramsSchema: {},
-    callbackKey: "getYandexQueryDocToolCallback",
-  },
+  // {
+  //   name: YandexTrackerToolName.getYandexQueryDoc,
+  //   systemPrompt:
+  //     "getYandexQueryDocTool - получает всю необходимую информацию для выполнения корректного поиска задач.",
+  //   paramsSchema: {},
+  //   callbackKey: "getYandexQueryDocToolCallback",
+  // },
   {
     name: YandexTrackerToolName.searchIssueByQuery,
     systemPrompt: `Если пользователь не указал perPage или page, то ничего от себя не придумывай и не добавляй эти параметры в запрос.
     Если у какой-то задачи нет поля storyPoints, то пропускай ее.
-    Перед поиском задачи по запросу, сначала вызови инструмент "getYandexQueryDocTool", чтобы получить необходимые параметры для поиска. 
-    Только после этого используй "searchIssueByQueryTool". Поиск задачи по любым параметрам с использованием языка запросов Yandex tracker.
+    Перед поиском задачи по запросу, сначала вызови инструмент "getDocumentationTool", чтобы получить всю необходимую документацию. Поиск задачи по любым параметрам с использованием языка запросов Yandex tracker.
     Позволяет получить список задач, удовлетворяющих запросу. Если выгружается больше 3 задач использовать формат простых задач, параметр isSimple=true
     Возвращает: issueArray - массив задач, countOfIssues - количество задач в массиве.`,
     paramsSchema: searchIssueByQueryParamsShema.shape,
