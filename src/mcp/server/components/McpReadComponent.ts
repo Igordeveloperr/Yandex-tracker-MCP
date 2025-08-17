@@ -5,7 +5,7 @@ import { YandexTrackerReadAPI } from "../../../yandex_api/YandexTrackerReadAPI";
 import { Issue } from "../../../models/issues/issue";
 import { CallToolResult, GetPromptResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol";
-import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../../../models/paramShemas";
+import { getBoardSprintsParamSchema, getDocumentationParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../../../models/paramShemas";
 import z from "zod";
 import { SimpleUser, User } from "../../../models/users/user";
 import { Queue } from "../../../models/queues/queue";
@@ -23,6 +23,9 @@ import { IReadToolCallback } from "../../callback_interfaces/read/IReadToolCallb
 import { McpRegisterService } from "../services/McpRegisterService";
 import { readPromptArray } from "../../../models/mcp_params/read/readPromptParams";
 import { IReadPromptCallback } from "../../callback_interfaces/read/IReadPromptCallback";
+import { config } from "../../../settings/config";
+import { HuggingFaceInferenceEmbeddings  } from "@langchain/community/embeddings/hf"
+import { QdrantVectorStore } from "@langchain/qdrant";
 
 export class McpReadComponent implements IMcpComponent {
   private _mcpServer: McpServer;
@@ -132,6 +135,43 @@ export class McpReadComponent implements IMcpComponent {
   /*__________________RESOURCES__________________ */
 
   /*__________________TOOLS__________________ */
+
+
+  private async   getDocumentationToolCallback(
+      args: z.infer<typeof getDocumentationParamSchema>,
+      extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+    ): Promise<CallToolResult>{
+      try{
+        const embeddingModel = new HuggingFaceInferenceEmbeddings({
+          apiKey: `${config.HF_TOKEN}`,
+          model: "ai-forever/ru-en-RoSBERTa", // Или другая модель
+        });
+
+        const vectorStore = await QdrantVectorStore.fromExistingCollection(embeddingModel, {
+          url: config.QDRANT_CLOUD_URL,
+          collectionName: "yandex-tracker-doc",
+        });
+
+        const response:object[] = await vectorStore.client.search(
+          vectorStore.collectionName,
+          {
+            vector: await embeddingModel.embedQuery(args.query),
+            limit: 10, // Количество результатов
+            offset: 0, // смещение относительно начала
+            with_payload: true, // Возвращать payload
+		        score_threshold: 0.6,
+            with_vector: false // Не возвращать векторы
+          }
+        );
+
+        return McpRequestManagerService.receiveCallToolResult<object[]>(
+          response
+        );
+      }
+      catch(error){
+        throw error;
+      }
+    }
 
   // callback для получения переходов задачи
   private async getIssueTransitionsToolCallback(

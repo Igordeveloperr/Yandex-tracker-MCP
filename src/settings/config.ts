@@ -22,6 +22,7 @@ const envSchema = z.object({
   ]),
   QDRANT_API_KEY: z.string(),
   QDRANT_CLOUD_URL: z.string(),
+  HF_TOKEN: z.string(),
 });
 
 export const config = envSchema.parse(process.env);
