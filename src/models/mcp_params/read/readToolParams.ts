@@ -34,7 +34,7 @@ export const readToolArray: IParamConfig<IReadToolCallback>[] = [
   {
     name: YandexTrackerToolName.getSprint,
     systemPrompt:
-      "Перед тем как искать конкретный спринт, обязательно вызови - getBoardSprintsTool. Получает конкретный спринт по идентификатору",
+      "Перед тем как искать конкретный спринт, обязательно получи текущего пользователя - getMySelfTool, определи в каких очередях данный пользователь работает, а после этого можно идти проверять спринты. Получает конкретный спринт по идентификатору",
     paramsSchema: getSprintParamSchema.shape,
     callbackKey: "getSprintToolCallback",
   },
