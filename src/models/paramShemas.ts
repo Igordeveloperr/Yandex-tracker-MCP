@@ -9,6 +9,16 @@ export const getSprintParamSchema = z.object({
   sprintId: z.string()
 });
 
+export const getDocumentationParamSchema = z.object({
+  query: z.string().describe(
+    `
+      query - это запрос к базе знаний для расширения контекста.
+      Например если пользователь просит найти задачу, то можно сначала получить поля задачи из базы знаний
+      query = Поля задачи, а потом информацию о том как использовать язык запросов яндекс трекера
+      query = язык запросов
+    `),
+});
+
 export const getIssueDefaultParamSchema = z.object({
   issueKey: z
     .string()

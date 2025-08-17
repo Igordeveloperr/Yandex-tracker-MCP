@@ -1,10 +1,15 @@
 import z from "zod";
 import { ICallback } from "../ICallback";
-import { getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../../../models/paramShemas";
+import { getDocumentationParamSchema, getBoardSprintsParamSchema, getIssueDefaultParamSchema, getIssueParamsSchema, getQueuesParamsSchema, getSprintParamSchema, getUserParamsSchema, searchIssueByFilterParamsSchema, searchIssueByQueryParamsShema } from "../../../models/paramShemas";
 import { RequestHandlerExtra } from "@modelcontextprotocol/sdk/shared/protocol";
 import { CallToolResult, ServerNotification, ServerRequest } from "@modelcontextprotocol/sdk/types";
 
 export interface IReadToolCallback extends ICallback {
+  getDocumentationToolCallback(
+    args: z.infer<typeof getDocumentationParamSchema>,
+    extra: RequestHandlerExtra<ServerRequest, ServerNotification>
+  ): Promise<CallToolResult>;
+
   getIssueTransitionsToolCallback(
     args: z.infer<typeof getIssueDefaultParamSchema>,
     extra: RequestHandlerExtra<ServerRequest, ServerNotification>
