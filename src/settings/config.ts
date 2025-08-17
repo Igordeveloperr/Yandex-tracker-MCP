@@ -20,6 +20,8 @@ const envSchema = z.object({
     OperatingModeName.SSEMode,
     OperatingModeName.StdioMode,
   ]),
+  QDRANT_API_KEY: z.string(),
+  QDRANT_CLOUD_URL: z.string(),
 });
 
 export const config = envSchema.parse(process.env);
