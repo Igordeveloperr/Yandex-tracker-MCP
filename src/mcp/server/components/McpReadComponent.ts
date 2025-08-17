@@ -156,8 +156,8 @@ export class McpReadComponent implements IMcpComponent {
           vectorStore.collectionName,
           {
             vector: await embeddingModel.embedQuery(args.query),
-            limit: 20, // Количество результатов
-            offset: 0, // смещение относительно начала
+            limit: 10, // Количество результатов
+            offset: args.offset, // смещение относительно начала
             with_payload: true, // Возвращать payload
 		        score_threshold: 0.6,
             with_vector: false // Не возвращать векторы

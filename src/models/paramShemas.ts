@@ -17,6 +17,15 @@ export const getDocumentationParamSchema = z.object({
       query = Поля задачи, а потом информацию о том как использовать язык запросов яндекс трекера
       query = язык запросов
     `),
+  offset: z.number().default(0).describe(
+    `
+      offset - это смещение относительно начала базы знаний
+      offset = (page - 1) * limit
+      page – текущая страница (начинается с 1),
+      limit – количество элементов на странице(по умолчанию 10),
+      offset – смещение (сколько элементов пропустить).
+    `
+  ),
 });
 
 export const getIssueDefaultParamSchema = z.object({
