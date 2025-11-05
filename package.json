@@ -1,6 +1,6 @@
 {
   "name": "@shizotex/yandex-tracker-mcp-server",
-  "version": "1.0.8",
+  "version": "1.1.2",
   "description": "MCP сервер для работы с Яндекс.Трекерр",
   "main": "index.js",
   "bin": {
@@ -10,6 +10,7 @@
     "debug": "npx @modelcontextprotocol/inspector node dist/index.js",
     "compile": "npx tsc",
     "run": "node dist/index.js",
+    "mcpJAM": "npx @mcpjam/inspector@latest",
     "test": ""
   },
   "repository": {
