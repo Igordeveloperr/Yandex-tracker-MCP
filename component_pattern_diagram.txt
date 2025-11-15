@@ -1,0 +1,116 @@
+@startuml
+' Диаграмма классов UML для паттерна Component в YandexTrackerMcpServer
+
+title Паттерн Component - Yandex Tracker MCP Сервер
+
+top to bottom direction
+
+package "Паттерн Component" {
+  interface IMcpComponent {
+    + addTools(): void
+    + addResources(): void
+    + addPrompts(): void
+  }
+
+  class McpReadComponent {
+    - _mcpServer: McpServer
+    + addTools(): void
+    + addResources(): void
+    + addPrompts(): void
+    - searchIssuePromptCallBack()
+    - getTaskSummaryPromptCallBack()
+    - getDocumentationToolCallback()
+    - getIssueTransitionsToolCallback()
+    - getIssueChangeLogToolCallback()
+    - getIssueCheckListToolCallback()
+    - getIssueCommentsToolCallback()
+    - getSprintToolCallback()
+    - getBoardSprintsToolCallback()
+    - getBoardsToolCallback()
+    - getUsersToolCallback()
+    - getYandexQueryDocToolCallback()
+    - getUserFieldsToolCallback()
+    - getQueueFieldsToolCallback()
+    - getIssueFieldsToolCallback()
+    - getIssueStatusTypesToolCallback()
+    - getIssuePriorityTypesToolCallback()
+    - getIssueTypesToolCallback()
+    - getQueuesToolCallback()
+    - getMySelfToolCallback()
+    - getIssueToolCallback()
+    - getUserToolCallback()
+    - searchIssueByFilterToolCallback()
+    - searchIssueByQueryToolCallback()
+  }
+
+  class McpWriteComponent {
+    - _mcpServer: McpServer
+    + addTools(): void
+    + addResources(): void
+    + addPrompts(): void
+  }
+
+  class McpUpdateComponent {
+    - _mcpServer: McpServer
+    + addTools(): void
+    + addResources(): void
+    + addPrompts(): void
+  }
+
+  class McpDeleteComponent {
+    - _mcpServer: McpServer
+    + addTools(): void
+    + addResources(): void
+    + addPrompts(): void
+  }
+
+  class YandexTrackerMcpServer {
+    - _mcpServer: McpServer
+    - _components: IMcpComponent[]
+    + constructor(name: string, version: string)
+    + connectWithStrategy(strategy: TransportStrategy): Promise<Transport>
+  }
+  
+  class McpServer {
+    + connect(transport: Transport)
+  }
+}
+
+' Размещение элементов по уровням
+YandexTrackerMcpServer -[hidden]--> McpServer
+
+' Отношения
+IMcpComponent <|-- McpReadComponent : реализует
+IMcpComponent <|-- McpWriteComponent : реализует
+IMcpComponent <|-- McpUpdateComponent : реализует
+IMcpComponent <|-- McpDeleteComponent : реализует
+
+YandexTrackerMcpServer --> IMcpComponent : содержит
+YandexTrackerMcpServer --> McpServer : использует
+
+McpReadComponent --> McpServer : использует
+McpWriteComponent --> McpServer : использует
+McpUpdateComponent --> McpServer : использует
+McpDeleteComponent --> McpServer : использует
+
+@enduml
+
+' Описание паттерна Component
+'
+' Паттерн Component используется в YandexTrackerMcpServer для разделения 
+' функциональности на независимые модули, каждый из которых отвечает за 
+' определенный аспект взаимодействия с Yandex Tracker.
+'
+' IMcpComponent - общий интерфейс для всех компонентов, определяющий 
+' основные методы: добавление инструментов (addTools), ресурсов (addResources) 
+' и подсказок (addPrompts).
+'
+' Конкретные реализации компонентов:
+' - McpReadComponent: отвечает за операции чтения из Yandex Tracker
+' - McpWriteComponent: отвечает за операции записи в Yandex Tracker
+' - McpUpdateComponent: отвечает за операции обновления в Yandex Tracker
+' - McpDeleteComponent: отвечает за операции удаления в Yandex Tracker
+'
+' YandexTrackerMcpServer координирует работу всех компонентов, 
+' создавая их экземпляры и вызывая их методы для регистрации 
+' различных возможностей MCP.
