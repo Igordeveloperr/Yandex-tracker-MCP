@@ -1,0 +1,138 @@
+@startuml ttt
+!theme plain
+
+abstract class YandexTrackerAPI {
+  - _yandexTrackerClient: Tracker
+  -- 
+  + constructor()
+  - get(path: string, params?: Record<string, any>): Promise<any>
+  - post(path: string, data?: Record<string, any>): Promise<any>
+  - put(path: string, data?: Record<string, any>): Promise<any>
+  - patch(path: string, data?: Record<string, any>): Promise<any>
+  - delete(path: string): Promise<any>
+}
+
+class YandexTrackerCreateAPI {
+  - _instance: YandexTrackerCreateAPI
+  - constructor()
+  + getInstance(): YandexTrackerCreateAPI
+  + createIssue(data: CreateIssue): Promise<Issue>
+  + createIssueCheckListItem(issueKey: string, data: CreateCheckListType): Promise<Issue>
+  + createIssueComment(issueKey: string, data: CreateComment): Promise<CommentType>
+  + createQueue(data: CreateQueue): Promise<Queue>
+  + createBoard(data: CreateBoard): Promise<BoardType>
+  + createSprint(data: CreateSprint): Promise<SprintType>
+}
+
+class YandexTrackerDeleteAPI {
+  - _instance: YandexTrackerDeleteAPI
+  - constructor()
+  + getInstance(): YandexTrackerDeleteAPI
+  + deleteIssueCheckList(issueKey: string): Promise<Issue>
+  + deleteIssueCheckListItem(issueKey: string, checkListItemKey: string): Promise<Issue>
+  + deleteIssueComment(issueKey: string, commentKey: string | number): Promise<number>
+  + deleteQueue(queueKey: string | number): Promise<number>
+  + deleteBoard(boardId: number): Promise<number>
+}
+
+class YandexTrackerReadAPI {
+  - _instance: YandexTrackerReadAPI
+  - constructor()
+  + getInstance(): YandexTrackerReadAPI
+  + getBoards(): Promise<BoardType[]>
+  + getBoardSprints(boardId: string): Promise<SprintType[]>
+  + getSprint(sprintId: string): Promise<SprintType>
+  + getIssueFields(): Promise<IssueFieldType[]>
+  + getIssueComments(issueKey: string, perPage?: number, page?: number): Promise<CommentType[]>
+  + getIssueCheckList(issueKey: string, perPage?: number, page?: number): Promise<CheckListType[]>
+  + getIssueChangeLog(issueKey: string, perPage?: number, page?: number): Promise<ChangelogItemType[]>
+  + getIssueTransitions(issueKey: string): Promise<TransitionType[]>
+  + getMyself(): Promise<User>
+  + getQueues(options?: { expand?: ExpandQueue[] }): Promise<Queue[]>
+  + getQueue(queue_key: string | number): Promise<Queue>
+  + getIssue(issueKey: string): Promise<Issue>
+  + searchIssueSimple(input: string): Promise<Issue[]>
+  + searchIssueByFilter(filter: Record<string, any>, order?: string, perPage?: number, page?: number): Promise<Issue[]>
+  + searchIssueByQuery(query: string, isSimple?: boolean, perPage?: number, page?: number): Promise<Issue[]>
+  + getUsers(): Promise<SimpleUser[]>
+  + getUser(key: number | string): Promise<User>
+  + getPriorities(): Promise<Priority[]>
+  + getIssueTypes(): Promise<IssueType[]>
+  + getStatuses(): Promise<Status[]>
+}
+
+class YandexTrackerUpdateAPI {
+  - _instance: YandexTrackerUpdateAPI
+  - constructor()
+  + getInstance(): YandexTrackerUpdateAPI
+  + updateIssue(issueKey: string, data: UpdateIssue): Promise<Issue>
+  + updateIssueCheckList(issueKey: string, checkListItemKey: string, data: UpdateCheckListType): Promise<Issue>
+  + updateIssueComment(issueKey: string, commentKey: string | number, data: UpdateComment): Promise<CommentType>
+  + updateBoard(boardId: number, data: UpdateBoard): Promise<BoardType>
+}
+
+interface IYandexTrackerCreateAPI {
+}
+
+interface IYandexTrackerDeleteAPI {
+}
+
+interface IYandexTrackerReadAPI {
+  + getBoards(): Promise<BoardType[]>
+  + getBoardSprints(boardId: string): Promise<SprintType[]>
+  + getSprint(sprintId: string): Promise<SprintType>
+  + getIssueFields(): Promise<IssueFieldType[]>
+  + getIssueComments(issueKey: string, perPage?: number, page?: number): Promise<CommentType[]>
+  + getIssueCheckList(issueKey: string, perPage?: number, page?: number): Promise<CheckListType[]>
+  + getIssueChangeLog(issueKey: string, perPage?: number, page?: number): Promise<ChangelogItemType[]>
+  + getIssueTransitions(issueKey: string): Promise<TransitionType[]>
+  + getQueues(options?: { expand?: ExpandQueue[] }): Promise<Queue[]>
+  + getQueue(queue_key: string | number): Promise<Queue>
+  + getIssue(issueKey: string): Promise<Issue>
+  + searchIssueByQuery(query: string, isSimple?: boolean, perPage?: number, page?: number): Promise<Issue[]>
+  + getUsers(): Promise<SimpleUser[]>
+  + getUser(key: number | string): Promise<User>
+  + getPriorities(): Promise<Priority[]>
+  + getIssueTypes(): Promise<IssueType[]>
+  + getStatuses(): Promise<Status[]>
+}
+
+interface IYandexTrackerUpdateAPI {
+}
+
+YandexTrackerAPI <|-- YandexTrackerCreateAPI
+YandexTrackerAPI <|-- YandexTrackerDeleteAPI
+YandexTrackerAPI <|-- YandexTrackerReadAPI
+YandexTrackerAPI <|-- YandexTrackerUpdateAPI
+
+YandexTrackerCreateAPI --|> IYandexTrackerCreateAPI
+YandexTrackerDeleteAPI --|> IYandexTrackerDeleteAPI
+YandexTrackerReadAPI --|> IYandexTrackerReadAPI
+YandexTrackerUpdateAPI --|> IYandexTrackerUpdateAPI
+
+note top of YandexTrackerAPI
+  Базовый класс для взаимодействия с API Яндекс Трекера
+  Содержит методы для выполнения HTTP-запросов (GET, POST, PUT, PATCH, DELETE)
+end note
+
+note top of YandexTrackerCreateAPI
+  Класс для создания сущностей в Яндекс Трекере
+  Реализует паттерн Singleton
+end note
+
+note top of YandexTrackerDeleteAPI
+  Класс для удаления сущностей в Яндекс Трекере
+  Реализует паттерн Singleton
+end note
+
+note top of YandexTrackerReadAPI
+  Класс для чтения сущностей в Яндекс Трекере
+  Реализует паттерн Singleton
+end note
+
+note top of YandexTrackerUpdateAPI
+  Класс для обновления сущностей в Яндекс Трекере
+  Реализует паттерн Singleton
+end note
+
+@enduml
