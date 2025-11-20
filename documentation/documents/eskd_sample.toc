@@ -1,0 +1,48 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{\numberline {1}Анализ предметной области}{6}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Обзор современных образовательных технологий}{6}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Анализ аналогов разрабатываемого устройства}{6}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Заключение}{6}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Техническое задание}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Пользовательские истории}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Пользовательские сценарии}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Основания для разработки}{9}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Назначение разработки}{9}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Функциональные требования}{9}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Эксплуатационное назначение}{10}{subsubsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.5}Требования к цифровому устройству}{10}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Требования к составу выполняемых функций}{10}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}Требования к организации входных и выходных данных}{11}{subsubsection.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.5.3}Требования к временным характеристикам}{11}{subsubsection.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.5.4}Требования к надежности}{12}{subsubsection.2.5.4}%
+\contentsline {subsubsection}{\numberline {2.5.5}Требования к обеспечению надежного функционирования системы}{12}{subsubsection.2.5.5}%
+\contentsline {subsubsection}{\numberline {2.5.6}Время восстановления после отказа}{12}{subsubsection.2.5.6}%
+\contentsline {subsubsection}{\numberline {2.5.7}Условия эксплуатации}{12}{subsubsection.2.5.7}%
+\contentsline {subsubsection}{\numberline {2.5.8}Климатические условия эксплуатации}{13}{subsubsection.2.5.8}%
+\contentsline {subsubsection}{\numberline {2.5.9}Требования к видам обслуживания}{13}{subsubsection.2.5.9}%
+\contentsline {subsubsection}{\numberline {2.5.10}Требования к численности и квалификации персонала}{13}{subsubsection.2.5.10}%
+\contentsline {subsubsection}{\numberline {2.5.11}Требования к составу и параметрам технических средств}{13}{subsubsection.2.5.11}%
+\contentsline {subsubsection}{\numberline {2.5.12}Требования к аппаратной совместимости}{14}{subsubsection.2.5.12}%
+\contentsline {subsubsection}{\numberline {2.5.13}Требование к маркировке и упаковке}{14}{subsubsection.2.5.13}%
+\contentsline {subsubsection}{\numberline {2.5.14}Требования к транспортированию и хранению}{14}{subsubsection.2.5.14}%
+\contentsline {subsubsection}{\numberline {2.5.15}Специальные требования}{14}{subsubsection.2.5.15}%
+\contentsline {subsection}{\numberline {2.6}Требования к программной документации}{15}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Технико-экономические показатели}{15}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Стадии и этапы разработки}{15}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Порядок контроля и приемки}{16}{subsection.2.9}%
+\contentsline {subsection}{\numberline {2.10}Заключение}{16}{subsection.2.10}%
+\contentsline {section}{\numberline {3}Проектирование устройства}{17}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Функциональная методология}{17}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Функциональная схема}{17}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Принципиальная схема}{17}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Заключение}{17}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Реализация устройства}{18}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Элементная база}{18}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Сборка устройства}{18}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Заключение}{18}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Тестирование}{19}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Заключение}{19}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Заключение}{20}{section.6}%
+\contentsline {section}{\numberline {7}Список литературы}{21}{section.7}%
+\contentsline {section}{Приложение А}{22}{section.7}%
+\contentsline {subsection}{Лобораторная установка}{22}{section*.1}%

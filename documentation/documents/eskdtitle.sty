@@ -1,0 +1,207 @@
+% Copyright 2006 Konstantin Korikov <lostclus@ua.fm>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2003/12/01 or later.
+%
+% This work has the LPPL maintenance status "maintained".
+% 
+% This Current Maintainer of this work is Konstantin Korikov.
+%
+% This work consists of all files listed in manifest.txt.
+%
+
+%
+% This is automaticaly generated file, do not edit it.
+%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{eskdtitle}[2010/01/14 v0.98 Title GOST 2.105]
+
+\RequirePackage{eskdstamp}
+\RequirePackage{eskdlang}
+\RequirePackage{eskdinfo}
+\RequirePackage{eskdtitlebase}
+
+\newcommand{\ESKD@title@split@field}[2]{%
+  \parbox[t]{.4\hsize}{\raggedright#1}\hfill
+  \parbox[t]{.4\hsize}{\raggedright#2}}
+
+\renewcommand{\ESKDtheTitleFieldI}{%
+  \ESKDtheDepartment\par\ESKDtheCompany}
+
+\def\ESKDtheTitleFieldIIl{}
+\renewcommand{\ESKDtheTitleFieldIIl}{%
+  \ESKDtheClassCode}
+\def\ESKDtheTitleFieldIIr{}
+\renewcommand{\ESKDtheTitleFieldIIr}{}
+\renewcommand{\ESKDtheTitleFieldII}{%
+  \ESKD@title@split@field{\ESKDtheTitleFieldIIl}{\ESKDtheTitleFieldIIr}}
+
+\def\ESKDtheTitleFieldIIIl{}
+\renewcommand{\ESKDtheTitleFieldIIIl}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \expandafter\ifx\csname ESKD@title@agreed@name@1\endcsname\relax\else
+      \textbf{\MakeUppercase{\ESKDagreedName}}\\
+      \ESKD@title@make@stamp{agreed}{1}
+    \fi
+  \else
+    \textbf{\MakeUppercase{\ESKDapprovedName}}\\
+    \ESKD@title@approving@sheet
+  \fi}
+\def\ESKDtheTitleFieldIIIr{}
+\renewcommand{\ESKDtheTitleFieldIIIr}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \expandafter\ifx\csname ESKD@title@approved@name@1\endcsname\relax\else
+      \textbf{\MakeUppercase{\ESKDapprovingName}}\\
+      \ESKD@title@make@stamp{approved}{1}
+    \fi
+  \fi}
+\renewcommand{\ESKDtheTitleFieldIII}{%
+  \ESKD@title@split@field{\ESKDtheTitleFieldIIIl}{\ESKDtheTitleFieldIIIr}}
+
+\renewcommand{\ESKDtheTitleFieldIV}{%
+  \MakeUppercase{\ESKDtheTitle}\par\ESKDtheDocName}
+
+\renewcommand{\ESKDtheTitleFieldV}{}
+
+\renewcommand{\ESKDtheTitleFieldVI}{%
+  \MakeUppercase{\ESKDtheSignature}}
+
+\renewcommand{\ESKDtheTitleFieldVII}{}
+
+\def\ESKDtheTitleFieldVIIIl{}
+\renewcommand{\ESKDtheTitleFieldVIIIl}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \ESKD@tmpcnta = 1
+    \loop
+    \ifnum \ESKD@tmpcnta < \ESKD@title@agreed@cnt
+      \advance \ESKD@tmpcnta 1
+      \ESKD@title@make@stamp{agreed}{\number\ESKD@tmpcnta}
+      \par\vspace{5mm}
+    \repeat
+  \fi}
+\def\ESKDtheTitleFieldVIIIr{}
+\renewcommand{\ESKDtheTitleFieldVIIIr}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \ESKD@tmpcnta = 0
+    \loop
+    \ifnum \ESKD@tmpcnta < \ESKD@title@designed@cnt
+      \advance \ESKD@tmpcnta 1
+      \ESKD@title@make@stamp{designed}{\number\ESKD@tmpcnta}
+      \par\vspace{5mm}
+    \repeat
+  \fi}
+\renewcommand{\ESKDtheTitleFieldVIII}{%
+  \ESKD@title@split@field{\ESKDtheTitleFieldVIIIl}{\ESKDtheTitleFieldVIIIr}}
+
+\renewcommand{\ESKDtheTitleFieldX}{\ESKDtheYear}
+
+\renewcommand{\ESKDtitleFontI}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontII}{\ESKDfontIII}
+\renewcommand{\ESKDtitleFontIII}{%
+  \ESKDfontIII\renewcommand{\baselinestretch}{1.50}\selectfont}
+\renewcommand{\ESKDtitleFontIV}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontV}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontVI}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontVII}{\ESKDfontIII}
+\renewcommand{\ESKDtitleFontVIII}{%
+  \ESKDfontIII\renewcommand{\baselinestretch}{1.25}\selectfont}
+\renewcommand{\ESKDtitleFontX}{\ESKDfontV}
+
+\renewcommand{\maketitle}{%
+  \begin{ESKDtitlePage}
+  \setlength{\topsep}{0mm}
+  \noindent
+  \parbox[c][.28\vsize][t]{\hsize}{%
+    \begin{center}
+МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ
+
+Федеральное государственное бюджетное образовательное учреждение высшего образования
+
+\textbf{«Вятский государственный университет»}\\\textbf{(ФГБОУ ВО <<ВятГУ>>)}
+
+Факультет автоматики и вычислительной техники
+
+Кафедра электронных вычислительных машин
+\end{center}
+\begin{flushright}
+  Допущено к защите\\
+  Руководитель проекта\\
+  %Преподаватель\\
+  \underline{\hspace{15mm}}/Караваева О.В./\\
+  <<\underline{\hspace{5mm}}>>\underline{\hspace{15mm}}2025г.
+\end{flushright}
+\vspace*{15mm}
+\begin{center}
+Разработка цифрового устройства для выполнения лабораторных работ по дисциплине информатика  \\
+\vspace*{5mm}
+Пояснительная записка курсового проекта по дисциплине\\ <<Комплекс знаний бакалавра>>\\ ТПЖА.090301.842 ПЗ    
+\end{center}
+\vspace*{20mm}
+
+Разработал студент группы ИВТб-3301 \hspace*{20mm} \underline{\hspace{23mm}} /Бикметов И. Р./
+
+Руководитель \hspace*{76mm} \underline{\hspace{25mm}}/Караваева О.В./
+
+Консультант \hspace*{77mm} \underline{\hspace{25mm}} /Коржавина А.С./
+
+\begin{flushright}
+\vspace*{5mm}
+
+Проект защищен с оценкой <<\underline{\hspace{25mm}}>>\underline{\hspace{25mm}}
+
+\hspace*{55mm}(оценка)\hspace*{15mm}(дата)
+
+
+\vspace*{5mm}
+
+Члены комиссии\hspace*{5mm} \underline{\hspace{30mm}} /\underline{\hspace{30mm}}/
+
+\small{(подпись)\hspace*{25mm}(ФИО)\hspace*{10mm}}
+
+\hspace*{36mm}\underline{\hspace{30mm}} /\underline{\hspace{30mm}}/
+
+\small{(подпись)\hspace*{25mm}(ФИО)\hspace*{10mm}}
+
+\hspace*{36mm}\underline{\hspace{30mm}} /\underline{\hspace{30mm}}/
+
+\small{(подпись)\hspace*{25mm}(ФИО)\hspace*{10mm}}
+
+\end{flushright}
+
+\vspace*{10mm}
+
+\begin{center}
+Киров 2025
+\end{center}
+}
+
+\newpage
+\begin{center}
+Реферат
+\end{center}  
+
+Бикметов И. Р. Разработка цифрового устройства для выполнения лабораторных работ по дисциплине информатика. ТПЖА.090301.842 ПЗ:   Курс. проект / ВятГУ, каф.  ЭВМ; рук. Караваева О.В. - Киров,  2025. – ПЗ 52 с, 33 рис, 1 прил.
+
+\vspace*{20mm}
+
+СХЕМОТЕХНИКА, ПЕЧАТНАЯ ПЛАТА, ЦИФРОВОЕ УСТРОЙСТВО, УСТАНОВКА ДЛЯ ЛАБОРАТОРНЫХ РАБОТ
+
+\vspace*{20mm}
+
+Объект курсового проекта –- техническое и программное обеспечение для проведения лабораторных работ.
+
+Предмет курсового проекта –- цифровое устройство.
+
+Цель курсового проекта –- Оптимизация учебного процесса по дисциплине информатика.
+
+Результатом выполнения курсового проекта является цифровое устройство для выполнения лабораторных работ.
+
+  
+  \end{ESKDtitlePage}}
+
