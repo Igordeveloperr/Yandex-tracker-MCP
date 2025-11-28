@@ -11,7 +11,7 @@
     "compile": "npx tsc",
     "run": "node dist/index.js",
     "mcpJAM": "npx @mcpjam/inspector@latest",
-    "test": ""
+    "test": "node dist/tests/yandex_api1.test.js"
   },
   "repository": {
     "type": "git",

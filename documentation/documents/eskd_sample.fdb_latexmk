@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1763627932.62381 "c:/Users/gbikm/OneDrive/Рабочий стол/programming/Feroom/Yandex-tracker-MCP/documentation/documents/eskd_sample.tex" "eskd_sample.pdf" "eskd_sample" 1763627934.56275 0
+["pdflatex"] 1764357542.71823 "c:/Users/gbikm/OneDrive/Рабочий стол/programming/Feroom/Yandex-tracker-MCP/documentation/documents/eskd_sample.tex" "eskd_sample.pdf" "eskd_sample" 1764357546.64774 0
   "c:/Users/gbikm/.texlive2025/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm" 1763625020 3304 6a543c07045572737981351171e0505e ""
   "c:/Users/gbikm/.texlive2025/texmf-var/fonts/tfm/lh/lh-t2a/larm1000.tfm" 1763625012 3220 0e417eaf233b160335902e97259a6c77 ""
   "c:/Users/gbikm/.texlive2025/texmf-var/fonts/tfm/lh/lh-t2a/larm1200.tfm" 1763590656 3240 c2435f2b5cd66d4930bc29b8df87967e ""
@@ -10,9 +10,11 @@
   "c:/Users/gbikm/.texlive2025/texmf-var/fonts/tfm/lh/lh-t2a/lasl1200.tfm" 1763625018 3472 6d14f8899639fa703bd66d6b31a67f8b ""
   "c:/Users/gbikm/.texlive2025/texmf-var/fonts/tfm/lh/lh-t2a/lasl1728.tfm" 1763625016 3488 519b81cc4f17cdb53c668b49e65a5c20 ""
   "c:/Users/gbikm/.texlive2025/texmf-var/fonts/tfm/lh/lh-t2a/lasl2074.tfm" 1763625010 3500 9f2a9e8d4d6745c4bd660d0fac8da0b3 ""
-  "c:/Users/gbikm/OneDrive/Рабочий стол/programming/Feroom/Yandex-tracker-MCP/documentation/documents/eskd_sample.tex" 1763627929 2572 7e96681ee8a20c011e552f63dc63ad67 ""
+  "c:/Users/gbikm/OneDrive/Рабочий стол/programming/Feroom/Yandex-tracker-MCP/documentation/documents/eskd_sample.tex" 1764357537 66281 92bed0e815a9d538787f326416761abe ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1763580835 3141 82d5616418ed8d5de703b3951bedecb4 ""
+  "c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1763580835 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1763582311 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1440.tfm" 1763581600 1536 3290a75021d32d016616fe527bc9884c ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1763579632 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1763579632 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1763580817 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
@@ -128,10 +130,10 @@
   "c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1763589421 5587484 30eee748fa419a911c40b0c750dd21ba ""
   "c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1763590103 3635913 88f31396bd3248d7f3aae42e915ce5b4 ""
   "c:/texlive/2025/texmf.cnf" 1763589351 713 e69b156964470283e0530f5060668171 ""
-  "eskd_sample.aux" 1763627934 430 9e960950f122411a3c682bd84ed3d848 "pdflatex"
-  "eskd_sample.out" 1763627933 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "eskd_sample.tex" 1763627929 2572 7e96681ee8a20c011e552f63dc63ad67 ""
-  "eskd_sample.toc" 1763627934 30 2d8a1fef41d29eebbad5d03729944434 "pdflatex"
+  "eskd_sample.aux" 1764357546 5885 cfe6c4c468a2d43d2e236aef31438ec8 "pdflatex"
+  "eskd_sample.out" 1764357546 9593 c0f6a938da1893167dafa9a8ef77fbcb "pdflatex"
+  "eskd_sample.tex" 1764357537 66281 92bed0e815a9d538787f326416761abe ""
+  "eskd_sample.toc" 1764357546 4115 7dda5e2b34f0a96f6119a174066d85dc "pdflatex"
   "eskdstamp.sty" 1763624546 39719 e4a3f0ccafc2f84a6a44165f47b2ffe8 ""
   "eskdtitle.sty" 1763627814 7052 f5f81eea2ed985432b870a3827c5f6cf ""
   (generated)

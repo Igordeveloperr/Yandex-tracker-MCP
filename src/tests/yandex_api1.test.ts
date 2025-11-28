@@ -137,7 +137,7 @@ async function test20() {
 
 async function test21() {
   const api: YandexTrackerReadAPI = YandexTrackerReadAPI.getInstance();
-  const res = await api.getBoards();
+  const res = await api.getIssueFields();
   console.log(res);
 }
 

@@ -1,1 +1,33 @@
 \babel@toc {russian}{}\relax 
+\contentsline {section}{Введение}{5}{Doc-Start}%
+\contentsline {section}{\numberline {1}Техническое задание}{6}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Пользовательские истории}{6}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Пользовательские сценарии}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Основания для разработки}{9}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Назначение разработки}{10}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Функциональные требования}{10}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Эксплуатационное назначение}{11}{subsubsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.5}Требования к MCP-серверу}{11}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Требования к составу выполняемых функций}{12}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}Требования к организации входных и выходных данных}{15}{subsubsection.1.5.2}%
+\contentsline {subsubsection}{\numberline {1.5.3}Требования к временным характеристикам}{16}{subsubsection.1.5.3}%
+\contentsline {subsubsection}{\numberline {1.5.4}Требования к надежности}{16}{subsubsection.1.5.4}%
+\contentsline {subsubsection}{\numberline {1.5.5}Требования к обеспечению надежного функционирования системы}{16}{subsubsection.1.5.5}%
+\contentsline {subsubsection}{\numberline {1.5.6}Время восстановления после отказа}{17}{subsubsection.1.5.6}%
+\contentsline {subsubsection}{\numberline {1.5.7}Условия эксплуатации}{17}{subsubsection.1.5.7}%
+\contentsline {subsubsection}{\numberline {1.5.8}Климатические условия эксплуатации}{18}{subsubsection.1.5.8}%
+\contentsline {subsubsection}{\numberline {1.5.9}Требования к видам обслуживания}{18}{subsubsection.1.5.9}%
+\contentsline {subsubsection}{\numberline {1.5.10}Требования к численности и квалификации персонала}{19}{subsubsection.1.5.10}%
+\contentsline {subsubsection}{\numberline {1.5.11}Требование к маркировке и упаковке}{19}{subsubsection.1.5.11}%
+\contentsline {subsubsection}{\numberline {1.5.12}Требования к транспортированию и хранению}{19}{subsubsection.1.5.12}%
+\contentsline {subsubsection}{\numberline {1.5.13}Специальные требования}{19}{subsubsection.1.5.13}%
+\contentsline {subsection}{\numberline {1.6}Требования к программной документации}{19}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Технико-экономические показатели}{20}{subsection.1.7}%
+\contentsline {subsection}{\numberline {1.8}Стадии и этапы разработки}{20}{subsection.1.8}%
+\contentsline {subsection}{\numberline {1.9}Порядок контроля и приемки}{21}{subsection.1.9}%
+\contentsline {subsection}{\numberline {1.10}Заключение}{21}{subsection.1.10}%
+\contentsline {section}{\numberline {2}Анализ предметной области}{22}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Общая характеристика системы}{22}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Анализ существующих проблем}{22}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Анализ требований по решению существующих проблем}{24}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Обзор существующих решений}{26}{subsection.2.4}%
