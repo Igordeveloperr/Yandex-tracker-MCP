@@ -31,3 +31,6 @@
 \contentsline {subsection}{\numberline {2.2}Анализ существующих проблем}{22}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Анализ требований по решению существующих проблем}{24}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Обзор существующих решений}{26}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Сравнительный анализ решений}{27}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Выбор архитектуры}{28}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Заключение}{32}{subsection.2.7}%
