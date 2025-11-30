@@ -34,3 +34,9 @@
 \contentsline {subsection}{\numberline {2.5}Сравнительный анализ решений}{27}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Выбор архитектуры}{28}{subsection.2.6}%
 \contentsline {subsection}{\numberline {2.7}Заключение}{32}{subsection.2.7}%
+\contentsline {section}{\numberline {3}Выбор технологий и инструментов для реализации проекта}{33}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Анализ и обоснование выбора языка программирования}{33}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Выбор библиотек}{35}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Выбор системы контроля версий}{36}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Заключение}{39}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Проектирование}{40}{section.4}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.20)  29 NOV 2025 16:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.20)  30 NOV 2025 17:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1425,7 +1425,209 @@ Package fancyhdr Warning: \footskip is too small (0.0pt):
 (fancyhdr)                Make it at least 5.10005pt, for example:
 (fancyhdr)                \setlength{\footskip}{5.10005pt}.
 
-[32] 
+[32]
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[33]
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[34]
+Underfull \hbox (badness 1394) in paragraph at lines 1023--1024
+[]\T2A/cmr/m/n/14.4 Express - биб-лио-те-ка для со-зда-ния веб-сервера и марш-ру-ти-за-ции
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[35]
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[36]
+Underfull \hbox (badness 4713) in paragraph at lines 1091--1091
+\T2A/cmr/m/n/14.4 ся быст-ро, так как
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
+[]\T2A/cmr/m/n/14.4 Средняя - боль-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
+\T2A/cmr/m/n/14.4 шин-ство опе-ра-ций
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
+\T2A/cmr/m/n/14.4 тре-бу-ют под-клю-че-
+ []
+
+
+Underfull \hbox (badness 3449) in paragraph at lines 1091--1092
+\T2A/cmr/m/n/14.4 ния к цен-траль-но-му
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
+\T2A/cmr/m/n/14.4 сер-ве-ру, что мо-жет
+ []
+
+
+Underfull \hbox (badness 3068) in paragraph at lines 1093--1093
+[]\T2A/cmr/m/n/14.4 Высокая - рас-пре-де-
+ []
+
+
+Underfull \hbox (badness 6094) in paragraph at lines 1093--1093
+\T2A/cmr/m/n/14.4 лен-ность обес-пе-чи-ва-
+ []
+
+
+Underfull \hbox (badness 6625) in paragraph at lines 1095--1095
+[]\T2A/cmr/m/n/14.4 Высокий - ши-ро-кая
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1095
+\T2A/cmr/m/n/14.4 под-держ-ка и ин-те-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1095
+\T2A/cmr/m/n/14.4 гра-ция с боль-шин-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1095
+\T2A/cmr/m/n/14.4 ством со-вре-мен-ных
+ []
+
+
+Underfull \hbox (badness 5147) in paragraph at lines 1095--1095
+\T2A/cmr/m/n/14.4 чая GitHub Actions,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1096
+[]\T2A/cmr/m/n/14.4 Средний - мень-шее
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1096
+\T2A/cmr/m/n/14.4 ко-ли-че-ство ин-те-гра-
+ []
+
+
+Underfull \hbox (badness 2600) in paragraph at lines 1095--1096
+\T2A/cmr/m/n/14.4 ций с со-вре-мен-ны-ми
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1096
+\T2A/cmr/m/n/14.4 CI/CD си-сте-ма-ми,
+ []
+
+
+Underfull \hbox (badness 8170) in paragraph at lines 1095--1096
+\T2A/cmr/m/n/14.4 хо-тя под-держ-ка ос-
+ []
+
+
+Underfull \hbox (badness 1163) in paragraph at lines 1095--1096
+\T2A/cmr/m/n/14.4 нов-ных ин-стру-мен-тов
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[37]
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[38]
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[39]
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 17.0pt, for example:
+(fancyhdr)                \setlength{\headheight}{17.0pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-17.0pt}.
+
+
+Package fancyhdr Warning: \footskip is too small (0.0pt): 
+(fancyhdr)                Make it at least 5.10005pt, for example:
+(fancyhdr)                \setlength{\footskip}{5.10005pt}.
+
+[40] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (./eskd_sample.aux)
  ***********
@@ -1438,21 +1640,21 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
 
 Package rerunfilecheck Info: File `eskd_sample.out' has not changed.
-(rerunfilecheck)             Checksum: 49D81AA0ED6544D6DFB618B2E15BB3AB;10207.
+(rerunfilecheck)             Checksum: CC37F180995C1BC8B1F67F80F59AAEA1;11903.
  ) 
 Here is how much of TeX's memory you used:
- 17180 strings out of 467538
- 275572 string characters out of 5423724
- 734088 words of memory out of 5000000
- 45649 multiletter control sequences out of 15000+600000
+ 17210 strings out of 467538
+ 275868 string characters out of 5423724
+ 733088 words of memory out of 5000000
+ 45655 multiletter control sequences out of 15000+600000
  641117 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,25n,107p,1238b,764s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsl1000.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsl1200.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfsl2074.pfb>
-Output written on eskd_sample.pdf (32 pages, 193971 bytes).
+Output written on eskd_sample.pdf (40 pages, 213147 bytes).
 PDF statistics:
- 493 PDF objects out of 1000 (max. 8388607)
- 441 compressed objects within 5 object streams
- 168 named destinations out of 1000 (max. 500000)
- 281 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 574 PDF objects out of 1000 (max. 8388607)
+ 513 compressed objects within 6 object streams
+ 192 named destinations out of 1000 (max. 500000)
+ 329 words of extra memory for PDF output out of 10000 (max. 10000000)
 
