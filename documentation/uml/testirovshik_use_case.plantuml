@@ -1,0 +1,26 @@
+@startuml d
+left to right direction
+
+actor "Тестировщик" as QA
+
+usecase "Получить рекомендации по типу тестирования для задачи" as UC1
+usecase "Автоматически создать протокол тестирования на основе описания" as UC2
+usecase "Получить рекомендации по приоритетности тестирования" as UC3
+usecase "Управлять задачами" as UC4
+usecase "Взаимодействие через естественный язык" as UC5
+usecase "Взаимодействие с ядром системы" as idro
+usecase "Получить рекомендацию" as rek
+usecase "Получить анализ" as analiz
+usecase "Получить прогноз" as prognoz
+
+QA -- UC5
+UC5 .> idro
+rek ..> idro
+analiz ..> idro
+prognoz ..> idro
+UC1 ..> UC5
+UC2 ..> UC5
+UC3 ..> UC5
+UC4 ..> UC5
+
+@enduml
