@@ -9,8 +9,16 @@ usecase "Сгенерировать шаблоны кода или докуме�
 usecase "Получить рекомендацию о необходимости уточнения требований" as UC4
 usecase "Управлять задачами" as UC5
 usecase "Взаимодействие через естественный язык" as UC6
+usecase "Взаимодействие с ядром системы" as idro
+usecase "Получить рекомендацию" as rek
+usecase "Получить анализ" as analiz
+usecase "Получить прогноз" as prognoz
 
 Dev -- UC6
+UC6 ..> idro
+rek ..> idro
+analiz ..> idro
+prognoz ..> idro
 UC1 ..> UC6
 UC2 ..> UC6
 UC3 ..> UC6

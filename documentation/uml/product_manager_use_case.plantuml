@@ -8,8 +8,16 @@ usecase "Получить рекомендации по приоритизаци
 usecase "Получить анализ рисков для элементов списка отложенных задач" as UC3
 usecase "Автоматически сформировать отчет о выполнении этапов проекта" as UC4
 usecase "Взаимодействие через естественный язык" as UC5
+usecase "Взаимодействие с ядром системы" as idro
+usecase "Получить рекомендацию" as rek
+usecase "Получить анализ" as analiz
+usecase "Получить прогноз" as prognoz
 
 PM -- UC5
+UC5 ..> idro
+rek ..> idro
+analiz ..> idro
+prognoz ..> idro
 UC1 ..> UC5
 UC2 ..> UC5
 UC3 ..> UC5

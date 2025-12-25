@@ -1,0 +1,18 @@
+@startuml 6
+!theme plain
+title Процесс анализа данных системой
+
+actor Пользователь as User
+participant "Интеллектуальное ядро" as Core
+participant "Внешняя система управления проектами" as ProjectSystem
+database "Внешнее хранилище" as ExternalStorage
+
+User -> Core: 1. Запрос на естественном языке
+Core -> ProjectSystem: 2. Запрос к внешней системе управления проектами
+ProjectSystem -> ExternalStorage: 3. Получение данных из внешнего хранилища
+ExternalStorage --> ProjectSystem: 4. Возврат запрошенных данных
+ProjectSystem --> Core: 5. Возврат данных ядру
+Core -> Core: 6. Анализ данных на базе запроса пользователя
+Core --> User: 7. Возврат обоснованного результата анализа
+
+@enduml

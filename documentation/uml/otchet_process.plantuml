@@ -1,0 +1,19 @@
+@startuml 6555
+!theme plain
+title Процесс генерации отчета
+    participant User
+    participant Core as Интеллектуальное ядро
+    participant ProjectSystem as Внешняя система управления проектами
+    participant ExternalStorage as Внешнее хранилище
+    participant ReportGenerator as Генератор отчетов
+    
+    User->>Core: 1. Запрос на создание отчета
+    Core->>ProjectSystem: 2. Запрос данных
+    ProjectSystem->>ExternalStorage: 3. Получение данных
+    ExternalStorage-->>ProjectSystem: 4. Возврат данных
+    ProjectSystem-->>Core: 5. Передача данных ядру
+    Core->>Core: 6. Обработка и форматирование данных
+    Core->>ReportGenerator: 7. Запрос генерации отчета
+    ReportGenerator->>ReportGenerator: 8. Создание отчета
+    ReportGenerator-->>Core: 9. Возврат готового отчета
+    Core-->>User: 10. Предоставление отчета пользователю

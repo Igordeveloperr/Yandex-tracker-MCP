@@ -1,0 +1,21 @@
+@startuml 8
+!theme plain
+title Процесс генерации рекомендаций системой
+
+actor Пользователь as User
+participant "Интеллектуальное ядро" as Core
+participant "Внешняя система управления проектами" as ProjectSystem
+database "Внешнее хранилище" as ExternalStorage
+participant "Сервис знаний" as KnowledgeService
+
+User -> Core: 1. Запрос на естественном языке
+Core -> ProjectSystem: 2. Запрос необходимых данных
+ProjectSystem -> ExternalStorage: 3. Запрос извлечения данных
+ExternalStorage --> ProjectSystem: 4. Возврат данных
+ProjectSystem --> Core: 5. Возврат данных для рекомендации
+Core -> KnowledgeService: 6. Запрос дополнительной информации
+KnowledgeService --> Core: 7. Возврат дополнительных данных
+Core -> Core: 8. Формирование обоснованной рекомендации
+Core --> User: 9. Возврат рекомендации пользователю
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml 7
+!theme plain
+title Процесс прогнозирования трудозатрат системой
+
+actor Пользователь as User
+participant "Интеллектуальное ядро" as Core
+participant "Внешняя система управления проектами" as ProjectSystem
+database "Внешнее хранилище" as ExternalStorage
+participant "Сервис прогнозирования" as ForecastService
+
+User -> Core: 1. Запрос на естественном языке
+Core -> ProjectSystem: 2. Запрос получения проектных данных
+ProjectSystem -> ExternalStorage: 3. Запрос извлечения данных
+ExternalStorage --> ProjectSystem: 4. Возврат данных
+ProjectSystem --> Core: 5. Возврат данных для анализа
+Core -> Core: 6. Предобработка данных
+Core -> ForecastService: 7. Запрос прогноза
+ForecastService -> ForecastService: 8. Прогнозирование
+ForecastService --> Core: 9. Возврат прогноза ядру
+Core --> User: 10. Возврат прогноза пользователю
+
+@enduml
