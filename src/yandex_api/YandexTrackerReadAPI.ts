@@ -1,26 +1,30 @@
+import type { Issue } from "../models/issues/issue";
+import { issueSchema, issueSchemaSimple } from "../models/issues/issue";
+import type { ExpandQueue, Queue } from "../models/queues/queue";
+import { queueSchema } from "../models/queues/queue";
+import type { SimpleUser, User } from "../models/users/user";
+import { userSchemaSimple, userSchema } from "../models/users/user";
+import type { Priority, IssueType, Status } from "../models/baseSchemas";
 import {
-  Issue,
-  issueSchema,
-  issueSchemaSimple,
-} from "../models/issues/issue";
-import { ExpandQueue, Queue, queueSchema } from "../models/queues/queue";
-import { userSchemaSimple, SimpleUser, userSchema, User } from "../models/users/user";
-import {
-  Priority,
   prioritySchema,
-  IssueType,
   issueTypeSchema,
-  Status,
   statusSchema,
 } from "../models/baseSchemas";
-import { transitionSchema, TransitionType } from "../models/issues/transition";
-import { changelogItemSchema, ChangelogItemType } from "../models/issues/changelogItem";
-import { checkListSchema, CheckListType } from "../models/issues/checklist";
-import { commentSchema, CommentType } from "../models/issues/comment";
-import { issueFieldSchema, IssueFieldType } from "../models/issues/issueField";
-import { sprintSchema, SprintType } from "../models/boards/sprint";
-import { boardSchema, BoardType } from "../models/boards/board";
-import { IYandexTrackerReadAPI } from "./interfaces/IYandexTrackerReadAPI";
+import type { TransitionType } from "../models/issues/transition";
+import { transitionSchema } from "../models/issues/transition";
+import type { ChangelogItemType } from "../models/issues/changelogItem";
+import { changelogItemSchema } from "../models/issues/changelogItem";
+import type { CheckListType } from "../models/issues/checklist";
+import { checkListSchema } from "../models/issues/checklist";
+import type { CommentType } from "../models/issues/comment";
+import { commentSchema } from "../models/issues/comment";
+import type { IssueFieldType } from "../models/issues/issueField";
+import { issueFieldSchema } from "../models/issues/issueField";
+import type { SprintType } from "../models/boards/sprint";
+import { sprintSchema } from "../models/boards/sprint";
+import type { BoardType } from "../models/boards/board";
+import { boardSchema } from "../models/boards/board";
+import type { IYandexTrackerReadAPI } from "./interfaces/IYandexTrackerReadAPI";
 import { YandexTrackerAPI } from "./YandexTrackerAPI";
 import { logger } from "../settings/logger";
 
@@ -29,123 +33,91 @@ export class YandexTrackerReadAPI
   extends YandexTrackerAPI
   implements IYandexTrackerReadAPI
 {
-  private static _instance: YandexTrackerReadAPI;
+  private static instance: YandexTrackerReadAPI;
 
   private constructor() {
     super();
   }
 
   public static getInstance(): YandexTrackerReadAPI {
-    if (!YandexTrackerReadAPI._instance) {
+    if (!YandexTrackerReadAPI.instance) {
       try {
         logger.debug("Создание экземпляра YandexTrackerAPI");
-        YandexTrackerReadAPI._instance = new YandexTrackerReadAPI();
+        YandexTrackerReadAPI.instance = new YandexTrackerReadAPI();
       } catch (error) {
         logger.error("Не удалось создать экземпляр YandexTrackerAPI");
         throw error;
       }
     }
-    return YandexTrackerReadAPI._instance;
+    return YandexTrackerReadAPI.instance;
   }
 
   // получение досок
   public async getBoards(): Promise<BoardType[]> {
-    try {
-      const response = await super.get(`boards`);
-      return boardSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(`boards`);
+    return boardSchema.array().parse(response);
   }
 
   // получение спринтов доски
   public async getBoardSprints(boardId: string): Promise<SprintType[]> {
-    try {
-      const response = await super.get(`boards/${boardId}/sprints`);
-      return sprintSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(`boards/${boardId}/sprints`);
+    return sprintSchema.array().parse(response);
   }
 
   // получение спринта
   public async getSprint(sprintId: string): Promise<SprintType> {
-    try {
-      const response = await super.get(`sprints/${sprintId}`);
-      return sprintSchema.parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(`sprints/${sprintId}`);
+    return sprintSchema.parse(response);
   }
 
   // получение полей задачи
   public async getIssueFields(): Promise<IssueFieldType[]> {
-    try {
-      const response = await super.get(`fields`);
-      return issueFieldSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(`fields`);
+    return issueFieldSchema.array().parse(response);
   }
 
   // получение комментариев задачи
   public async getIssueComments(
     issueKey: string,
     perPage: number = 50,
-    page: number = 1
+    page: number = 1,
   ): Promise<CommentType[]> {
-    try {
-      const response = await super.get(
-        `issues/${issueKey}/comments?perPage=${perPage}&page=${page}`
-      );
-      return commentSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(
+      `issues/${issueKey}/comments?perPage=${perPage}&page=${page}`,
+    );
+    return commentSchema.array().parse(response);
   }
 
   // получение параметров чеклиста задачи
   public async getIssueCheckList(
     issueKey: string,
     perPage: number = 50,
-    page: number = 1
+    page: number = 1,
   ): Promise<CheckListType[]> {
-    try {
-      const response = await super.get(
-        `issues/${issueKey}/checklistItems?perPage=${perPage}&page=${page}`
-      );
-      return checkListSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(
+      `issues/${issueKey}/checklistItems?perPage=${perPage}&page=${page}`,
+    );
+    return checkListSchema.array().parse(response);
   }
 
   // пролучить историю изменений задачи
   public async getIssueChangeLog(
     issueKey: string,
     perPage: number = 50,
-    page: number = 1
+    page: number = 1,
   ): Promise<ChangelogItemType[]> {
-    try {
-      const response = await super.get(
-        `issues/${issueKey}/changelog?perPage=${perPage}&page=${page}`
-      );
-      return changelogItemSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(
+      `issues/${issueKey}/changelog?perPage=${perPage}&page=${page}`,
+    );
+    return changelogItemSchema.array().parse(response);
   }
 
   // получение переходов задачи по issueKey
   public async getIssueTransitions(
-    issueKey: string
+    issueKey: string,
   ): Promise<TransitionType[]> {
-    try {
-      const response = await super.get(`issues/${issueKey}/transitions`);
-      return transitionSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(`issues/${issueKey}/transitions`);
+    return transitionSchema.array().parse(response);
   }
 
   /**
@@ -155,12 +127,8 @@ export class YandexTrackerReadAPI
    * @memberof YandexTrackerAPI
    */
   public async getMyself(): Promise<User> {
-    try {
-      const response = await super.get("myself");
-      return userSchema.parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get("myself");
+    return userSchema.parse(response);
   }
 
   /**
@@ -172,33 +140,25 @@ export class YandexTrackerReadAPI
   public async getQueues(options?: {
     expand?: ExpandQueue[];
   }): Promise<Queue[]> {
-    try {
-      const params: Record<string, string> = {};
-      if (options?.expand) {
-        params.expand = options.expand.join(",");
-      }
-
-      const response = await super.get("queues", params);
-      return queueSchema.array().parse(response);
-    } catch (error) {
-      throw error;
+    const params: Record<string, string> = {};
+    if (options?.expand) {
+      params.expand = options.expand.join(",");
     }
+
+    const response = await super.get("queues", params);
+    return queueSchema.array().parse(response);
   }
 
   /**
    * Получение очереди по ключу или id
    *
-   * @param {(string | number)} queue_key - ключ (обязательно большими буквами) или id
+   * @param {(string | number)} queueKey - ключ (обязательно большими буквами) или id
    * @return {*}  {Promise<Queue>} - модель очереди
    * @memberof YandexTrackerAPI
    */
-  public async getQueue(queue_key: string | number): Promise<Queue> {
-    try {
-      const response = await super.get(`queues/${queue_key}`);
-      return queueSchema.parse(response);
-    } catch (error) {
-      throw error;
-    }
+  public async getQueue(queueKey: string | number): Promise<Queue> {
+    const response = await super.get(`queues/${queueKey}`);
+    return queueSchema.parse(response);
   }
 
   /**
@@ -207,12 +167,8 @@ export class YandexTrackerReadAPI
    * @returns {Promise<Issue>} - модель задачи
    */
   public async getIssue(issueKey: string): Promise<Issue> {
-    try {
-      const response = await super.get(`issues/${issueKey}`);
-      return issueSchema.parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get(`issues/${issueKey}`);
+    return issueSchema.parse(response);
   }
 
   /**
@@ -225,16 +181,12 @@ export class YandexTrackerReadAPI
    * @memberof YandexTrackerAPI
    */
   public async searchIssueSimple(input: string): Promise<Issue[]> {
-    try {
-      const response = await super.get("issues/_suggest", {
-        input: input,
-        full: true,
-        fields: "summary",
-      });
-      return issueSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.get("issues/_suggest", {
+      input,
+      full: true,
+      fields: "summary",
+    });
+    return issueSchema.array().parse(response);
   }
 
   /**
@@ -259,22 +211,18 @@ export class YandexTrackerReadAPI
     filter: Record<string, any>,
     order?: string,
     perPage: number = 50,
-    page: number = 1
+    page: number = 1,
   ): Promise<Issue[]> {
     const body = {
       filter,
       order,
     };
 
-    try {
-      const response = await super.post(
-        `issues/_search?perPage=${perPage}&page=${page}`,
-        body
-      );
-      return issueSchema.array().parse(response);
-    } catch (error) {
-      throw error;
-    }
+    const response = await super.post(
+      `issues/_search?perPage=${perPage}&page=${page}`,
+      body,
+    );
+    return issueSchema.array().parse(response);
   }
 
   /**
@@ -296,20 +244,16 @@ export class YandexTrackerReadAPI
     query: string,
     isSimple: boolean = true,
     perPage: number = 50,
-    page: number = 1
+    page: number = 1,
   ): Promise<Issue[]> {
-    try {
-      const response = await super.post(
-        `issues/_search?perPage=${perPage}&page=${page}`,
-        { query }
-      );
-      if (isSimple) {
-        return issueSchemaSimple.array().parse(response);
-      }
-      return issueSchema.array().parse(response);
-    } catch (error) {
-      throw error;
+    const response = await super.post(
+      `issues/_search?perPage=${perPage}&page=${page}`,
+      { query },
+    );
+    if (isSimple) {
+      return issueSchemaSimple.array().parse(response);
     }
+    return issueSchema.array().parse(response);
   }
 
   /**

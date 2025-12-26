@@ -62,12 +62,13 @@ export type Priority = z.infer<typeof prioritySchema>;
 
 export const projectSchema = z.object({
   primary: z
-  .object({
-    self: z.string().optional(),
-    id: z.string(),
-    display: z.string().optional(),
-  })
-  .nullable().optional(),
+    .object({
+      self: z.string().optional(),
+      id: z.string(),
+      display: z.string().optional(),
+    })
+    .nullable()
+    .optional(),
   secondary: z.array(z.object({})).optional(),
 });
 
@@ -77,4 +78,3 @@ export const typeSchema = z.object({
   key: z.string(),
   display: z.string().optional(),
 });
-

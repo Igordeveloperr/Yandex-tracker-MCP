@@ -1,6 +1,9 @@
-import { CallToolResult, GetPromptResult } from "@modelcontextprotocol/sdk/types";
+import type {
+  CallToolResult,
+  GetPromptResult,
+} from "@modelcontextprotocol/sdk/types";
 
-export class McpRequestManagerService{
+export class McpRequestManagerService {
   // формирование ответа для tools
   public static receiveCallToolResult<Type>(response: Type): CallToolResult {
     try {
@@ -44,7 +47,7 @@ export class McpRequestManagerService{
           },
         ],
       };
-    } catch (error) {
+    } catch {
       return {
         messages: [
           {

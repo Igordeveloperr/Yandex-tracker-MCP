@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { userSchemaSimple } from "../users/user";
 
 export const sprintSchema = z.object({
   id: z.number(),
@@ -29,7 +28,7 @@ export const createSprintSchema = z.object({
     id: z.string(),
   }),
   startDate: z.string(), // формат YYYY-MM-DD
-  endDate: z.string(),   // формат YYYY-MM-DD
+  endDate: z.string(), // формат YYYY-MM-DD
 });
 
 export type CreateSprint = z.infer<typeof createSprintSchema>;

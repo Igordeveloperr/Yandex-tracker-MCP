@@ -1,5 +1,5 @@
-import { ZodRawShape } from "zod";
-import { ICallback } from "../../mcp/callback_interfaces/ICallback";
+import type { ZodRawShape } from "zod";
+import type { ICallback } from "../../mcp/callback_interfaces/ICallback";
 
 export interface IParamConfig<ICallbackType extends ICallback> {
   name: string;

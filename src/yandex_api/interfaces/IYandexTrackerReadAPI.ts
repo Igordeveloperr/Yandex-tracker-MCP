@@ -1,14 +1,14 @@
-import { IssueType, Priority, Status } from "../../models/baseSchemas";
-import { BoardType } from "../../models/boards/board";
-import { SprintType } from "../../models/boards/sprint";
-import { ChangelogItemType } from "../../models/issues/changelogItem";
-import { CheckListType } from "../../models/issues/checklist";
-import { CommentType } from "../../models/issues/comment";
-import { Issue } from "../../models/issues/issue";
-import { IssueFieldType } from "../../models/issues/issueField";
-import { TransitionType } from "../../models/issues/transition";
-import { ExpandQueue, Queue } from "../../models/queues/queue";
-import { SimpleUser, User } from "../../models/users/user";
+import type { IssueType, Priority, Status } from "../../models/baseSchemas";
+import type { BoardType } from "../../models/boards/board";
+import type { SprintType } from "../../models/boards/sprint";
+import type { ChangelogItemType } from "../../models/issues/changelogItem";
+import type { CheckListType } from "../../models/issues/checklist";
+import type { CommentType } from "../../models/issues/comment";
+import type { Issue } from "../../models/issues/issue";
+import type { IssueFieldType } from "../../models/issues/issueField";
+import type { TransitionType } from "../../models/issues/transition";
+import type { ExpandQueue, Queue } from "../../models/queues/queue";
+import type { SimpleUser, User } from "../../models/users/user";
 
 export interface IYandexTrackerReadAPI {
   getBoards(): Promise<BoardType[]>;
@@ -22,19 +22,19 @@ export interface IYandexTrackerReadAPI {
   getIssueComments(
     issueKey: string,
     perPage?: number,
-    page?: number
+    page?: number,
   ): Promise<CommentType[]>;
 
   getIssueCheckList(
     issueKey: string,
     perPage?: number,
-    page?: number
+    page?: number,
   ): Promise<CheckListType[]>;
 
   getIssueChangeLog(
     issueKey: string,
     perPage?: number,
-    page?: number
+    page?: number,
   ): Promise<ChangelogItemType[]>;
 
   getIssueTransitions(issueKey: string): Promise<TransitionType[]>;
@@ -49,7 +49,7 @@ export interface IYandexTrackerReadAPI {
     query: string,
     isSimple?: boolean,
     perPage?: number,
-    page?: number
+    page?: number,
   ): Promise<Issue[]>;
 
   getUsers(): Promise<SimpleUser[]>;

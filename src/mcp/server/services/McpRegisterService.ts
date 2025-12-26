@@ -1,16 +1,16 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
-import { IParamConfig } from "../../../models/mcp_params/IParamConfig";
-import { ICallback } from "../../callback_interfaces/ICallback";
-import { IMcpComponent } from "../components/IMcpComponent";
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
+import type { IParamConfig } from "../../../models/mcp_params/IParamConfig";
+import type { ICallback } from "../../callback_interfaces/ICallback";
+import type { IMcpComponent } from "../components/IMcpComponent";
 
 export class McpRegisterService {
   public static registerPrompts<
     ClassComponentType extends IMcpComponent,
-    ICallbackType extends ICallback
+    ICallbackType extends ICallback,
   >(
     mcpServer: McpServer,
     componentInstance: ClassComponentType,
-    data: IParamConfig<ICallbackType>[]
+    data: IParamConfig<ICallbackType>[],
   ) {
     data.forEach((prompt) => {
       const method =
@@ -20,7 +20,7 @@ export class McpRegisterService {
           prompt.name,
           prompt.systemPrompt,
           prompt.paramsSchema,
-          method.bind(componentInstance)
+          method.bind(componentInstance),
         );
       }
     });
@@ -28,11 +28,11 @@ export class McpRegisterService {
 
   public static registerTools<
     ClassComponentType extends IMcpComponent,
-    ICallbackType extends ICallback
+    ICallbackType extends ICallback,
   >(
     mcpServer: McpServer,
     componentInstance: ClassComponentType,
-    data: IParamConfig<ICallbackType>[]
+    data: IParamConfig<ICallbackType>[],
   ) {
     data.forEach((tool) => {
       const method =
@@ -42,7 +42,7 @@ export class McpRegisterService {
           tool.name,
           tool.systemPrompt,
           tool.paramsSchema,
-          method.bind(componentInstance)
+          method.bind(componentInstance),
         );
       }
     });

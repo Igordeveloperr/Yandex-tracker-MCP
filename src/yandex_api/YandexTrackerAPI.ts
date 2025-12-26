@@ -3,23 +3,23 @@ import { config } from "../settings/config";
 import { logger } from "../settings/logger";
 
 export class YandexTrackerAPI {
-  private readonly _yandexTrackerClient: Tracker;
+  private readonly yandexTrackerClient: Tracker;
   protected constructor() {
-    this._yandexTrackerClient = new Tracker(
+    this.yandexTrackerClient = new Tracker(
       config.YANDEX_TRACKER_TOKEN,
       undefined,
       config.YANDEX_TRACKER_CLOUD_ORG_ID,
       config.YANDEX_TRACKER_BASE_URL,
-      config.REQUEST_TIMEOUT
+      config.REQUEST_TIMEOUT,
     );
   }
 
   protected async get(
     path: string,
-    params?: Record<string, any>
+    params?: Record<string, any>,
   ): Promise<any> {
     try {
-      const response = await this._yandexTrackerClient.get(path, params);
+      const response = await this.yandexTrackerClient.get(path, params);
       logger.info({ path, params }, "GET");
       return response;
     } catch (error) {
@@ -30,7 +30,7 @@ export class YandexTrackerAPI {
 
   protected async post(path: string, data?: Record<string, any>): Promise<any> {
     try {
-      const response = await this._yandexTrackerClient.post(path, data);
+      const response = await this.yandexTrackerClient.post(path, data);
       logger.info({ status: response.status, path, data }, "POST");
       return response;
     } catch (error) {
@@ -41,7 +41,7 @@ export class YandexTrackerAPI {
 
   protected async put(path: string, data?: Record<string, any>): Promise<any> {
     try {
-      const response = await this._yandexTrackerClient.put(path, data);
+      const response = await this.yandexTrackerClient.put(path, data);
       logger.info({ status: response.status, path, data }, "PUT");
       return response;
     } catch (error) {
@@ -52,10 +52,10 @@ export class YandexTrackerAPI {
 
   protected async patch(
     path: string,
-    data?: Record<string, any>
+    data?: Record<string, any>,
   ): Promise<any> {
     try {
-      const response = await this._yandexTrackerClient.patch(path, data);
+      const response = await this.yandexTrackerClient.patch(path, data);
       logger.info({ status: response.status, path, data }, "PATCH");
       return response;
     } catch (error) {
@@ -64,11 +64,9 @@ export class YandexTrackerAPI {
     }
   }
 
-  protected async delete(
-    path: string
-  ): Promise<any> {
+  protected async delete(path: string): Promise<any> {
     try {
-      const response = await this._yandexTrackerClient.delete(path);
+      const response = await this.yandexTrackerClient.delete(path);
       logger.info({ status: response.status, path }, "DELETE");
       return response;
     } catch (error) {

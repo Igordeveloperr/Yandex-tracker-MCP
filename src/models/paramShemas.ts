@@ -1,12 +1,12 @@
 import { z } from "zod";
-import {ExpandQueueEnum} from "./queues/queue"
+import { ExpandQueueEnum } from "./queues/queue";
 
 export const getBoardSprintsParamSchema = z.object({
   boardId: z.string(),
 });
 
 export const getSprintParamSchema = z.object({
-  sprintId: z.string()
+  sprintId: z.string(),
 });
 
 export const getDocumentationParamSchema = z.object({
@@ -16,16 +16,20 @@ export const getDocumentationParamSchema = z.object({
       Например если пользователь просит найти задачу, то можно сначала получить поля задачи из базы знаний
       query = Поля задачи, а потом информацию о том как использовать язык запросов яндекс трекера
       query = язык запросов
-    `),
-  offset: z.number().default(0).describe(
-    `
+    `,
+  ),
+  offset: z
+    .number()
+    .default(0)
+    .describe(
+      `
       offset - это смещение относительно начала базы знаний
       offset = (page - 1) * limit
       page – текущая страница (начинается с 1),
       limit – количество элементов на странице(по умолчанию 10),
       offset – смещение (сколько элементов пропустить).
-    `
-  ),
+    `,
+    ),
 });
 
 export const getIssueDefaultParamSchema = z.object({
@@ -48,16 +52,19 @@ export const getIssueDefaultParamSchema = z.object({
 
 // схема для определения входных параметром getIssueTool
 export const getIssueParamsSchema = z.object({
-    issueKey: z
-      .string()
-      .describe("Ключ задачи в Yandex Tracker (например: TEST-123)"),
+  issueKey: z
+    .string()
+    .describe("Ключ задачи в Yandex Tracker (например: TEST-123)"),
 });
 
 export const searchIssueByQueryParamsShema = z.object({
   query: z.string().describe("Запрос на языке запросов Яндекс Трекера"),
-  isSimple: z.boolean()
-  .describe("true - вывод сжатой информации по задаче, false - вывод всей информации по задаче")
-  .default(true),
+  isSimple: z
+    .boolean()
+    .describe(
+      "true - вывод сжатой информации по задаче, false - вывод всей информации по задаче",
+    )
+    .default(true),
   perPage: z
     .number()
     .int()
@@ -95,13 +102,14 @@ export const searchIssueByFilterParamsSchema = z.object({
 });
 
 export const getUserParamsSchema = z.object({
-  key: z
-    .string()
-    .describe("id или login пользователя Yandex Tracker"),
+  key: z.string().describe("id или login пользователя Yandex Tracker"),
 });
 
 export const getQueuesParamsSchema = z.object({
-  expand: z.array(ExpandQueueEnum).describe(`
+  expand: z
+    .array(ExpandQueueEnum)
+    .describe(
+      `
               Получение дополнительных полей в модели очереди
               projects — проекты очереди;
               components — компоненты;
@@ -109,5 +117,7 @@ export const getQueuesParamsSchema = z.object({
               types — типы задач;
               team — список участников команды;
               workflows — жизненные циклы.
-            `).optional()
+            `,
+    )
+    .optional(),
 });

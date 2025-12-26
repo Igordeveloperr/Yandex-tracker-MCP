@@ -1,0 +1,134 @@
+@startuml class_diagram
+!theme plain
+skinparam backgroundColor #FFFFFF
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #0000
+skinparam classFontColor #000000
+skinparam classFontSize 10
+skinparam arrowColor #000000
+skinparam packageStyle rectangle
+
+' Установка ориентации
+!define RECTANGLE class
+skinparam maxMessageSize 120
+
+' Определение направления
+top to bottom direction
+
+package "MCP Server Core" {
+  class McpServer {
+    +connect(transport: Transport): Promise<void>
+  }
+  
+  interface Transport {
+  }
+}
+
+package "Yandex Tracker MCP Server" {
+  class YandexTrackerMcpServer {
+    -_mcpServer: McpServer
+    -_components: IMcpComponent[]
+    +transports: {sse: Record<string, SSEServerTransport>}
+    +constructor(name: string, version: string)
+    +handleSSEMessages(req: Request, res: Response): Promise<void>
+    +connectWithStrategy(strategy: TransportStrategy): Promise<Transport>
+  }
+}
+
+package "Components" {
+  interface IMcpComponent {
+    +addTools(): void
+    +addResources(): void
+    +addPrompts(): void
+  }
+  
+  class McpReadComponent {
+    -_mcpServer: McpServer
+    +constructor(mcpServer: McpServer)
+    +addTools(): void
+    +addResources(): void
+    +addPrompts(): void
+  }
+  
+  class McpDeleteComponent {
+    -_mcpServer: McpServer
+    +constructor(mcpServer: McpServer)
+    +addTools(): void
+    +addResources(): void
+    +addPrompts(): void
+  }
+  
+  class McpUpdateComponent {
+    -_mcpServer: McpServer
+    +constructor(mcpServer: McpServer)
+    +addTools(): void
+    +addResources(): void
+    +addPrompts(): void
+  }
+  
+  class McpWriteComponent {
+    -_mcpServer: McpServer
+    +constructor(mcpServer: McpServer)
+    +addTools(): void
+    +addResources(): void
+    +addPrompts(): void
+  }
+}
+
+package "Transport Strategy" {
+  interface TransportStrategy {
+    +createTransport(): Transport
+  }
+  
+  class SSETransportStrategy {
+    -endpoint: string
+    -response: Response
+    -transportsRegistry: Record<string, SSEServerTransport>
+    +constructor(endpoint: string, response: Response, transportsRegistry: Record<string, SSEServerTransport>)
+    +createTransport(): Transport
+  }
+  
+  class StdioTransportStrategy {
+    +createTransport(): Transport
+  }
+}
+
+package "External Types" {
+  class SSEServerTransport {
+}
+  
+  class Request {
+  }
+  
+  class Response {
+  }
+}
+
+' Relationships
+YandexTrackerMcpServer *-- McpServer : содержит >
+YandexTrackerMcpServer *-- IMcpComponent : содержит >
+YandexTrackerMcpServer --> Request : использует
+YandexTrackerMcpServer --> Response : использует
+YandexTrackerMcpServer --> TransportStrategy : использует
+
+IMcpComponent <|.. McpReadComponent
+IMcpComponent <|.. McpDeleteComponent
+IMcpComponent <|.. McpUpdateComponent
+IMcpComponent <|.. McpWriteComponent
+
+McpReadComponent *-- McpServer : использует >
+McpDeleteComponent *-- McpServer : использует >
+McpUpdateComponent *-- McpServer : использует >
+McpWriteComponent *-- McpServer : использует >
+
+TransportStrategy <|.. SSETransportStrategy
+TransportStrategy <|.. StdioTransportStrategy
+
+SSETransportStrategy --> SSEServerTransport : создает >
+SSETransportStrategy --> Response : использует >
+SSETransportStrategy --> Transport : возвращает >
+
+StdioTransportStrategy --> Transport : возвращает >
+
+YandexTrackerMcpServer --> SSEServerTransport : хранит в >
+@enduml

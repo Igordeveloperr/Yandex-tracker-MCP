@@ -42,7 +42,6 @@ export const ExpandQueueEnum = z.enum([
 export type Queue = z.infer<typeof queueSchema>;
 export type ExpandQueue = z.infer<typeof ExpandQueueEnum>;
 
-
 export const createQueueSchema = z.object({
   key: z.string(),
   name: z.string(),

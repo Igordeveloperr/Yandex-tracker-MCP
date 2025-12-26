@@ -1,30 +1,30 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
-import { Response, Request } from "express";
-import { TransportStrategy } from "../transport_strategy/TransportStrategy";
-import { Transport } from "@modelcontextprotocol/sdk/shared/transport";
-import { config } from "../../settings/config";
-import { IMcpComponent } from "./components/IMcpComponent";
+import type { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+import type { Response, Request } from "express";
+import type { Transport } from "@modelcontextprotocol/sdk/shared/transport";
+import type { TransportStrategy } from "../transport_strategy/TransportStrategy";
+import type { IMcpComponent } from "./components/IMcpComponent";
 import { McpReadComponent } from "./components/McpReadComponent";
 import { McpDeleteComponent } from "./components/McpDeleteComponent";
 import { McpUpdateComponent } from "./components/McpUpdateComponent";
 import { McpWriteComponent } from "./components/McpWriteComponent";
 
 export class YandexTrackerMcpServer {
-  private _mcpServer: McpServer;
-  private _components: IMcpComponent[];
   public transports = {
     sse: {} as Record<string, SSEServerTransport>,
   };
+
+  private mcpServer: McpServer;
+  private components: IMcpComponent[];
 
   /**
    * создаем экземпляр mcp сервера
    */
   constructor(name: string, version: string) {
-    this._mcpServer = new McpServer(
+    this.mcpServer = new McpServer(
       {
-        name: name,
-        version: version,
+        name,
+        version,
       },
       {
         capabilities: {
@@ -32,36 +32,21 @@ export class YandexTrackerMcpServer {
             listChanged: true, // уведомление при изменении списка инструментов
           },
         },
-      }
+      },
     );
 
-    this._components = [
-      new McpReadComponent(this._mcpServer),
-      new McpDeleteComponent(this._mcpServer),
-      new McpUpdateComponent(this._mcpServer),
-      new McpWriteComponent(this._mcpServer),
+    this.components = [
+      new McpReadComponent(this.mcpServer),
+      new McpDeleteComponent(this.mcpServer),
+      new McpUpdateComponent(this.mcpServer),
+      new McpWriteComponent(this.mcpServer),
     ];
 
-    this._components.forEach(component=>{
+    this.components.forEach((component) => {
       component.addPrompts();
       component.addResources();
       component.addTools();
     });
-  }
-
-  // подключение MCP сервера по выбранной стратегии
-  public async connectWithStrategy(
-    strategy: TransportStrategy
-  ): Promise<Transport> {
-    try {
-      const transport = strategy.createTransport();
-      // Делегируем подключение mcpServer
-      await this._mcpServer.connect(transport);
-      console.info(`Connect in ${config.OPERATING_MODE} mode to MCP server...`);
-      return transport;
-    } catch (err) {
-      throw err;
-    }
   }
 
   public async handleSSEMessages(req: Request, res: Response): Promise<void> {
@@ -87,9 +72,22 @@ export class YandexTrackerMcpServer {
 
       await transport.handlePostMessage(req, res, req.body);
       res.status(200).end();
-    } catch (error) {
-      console.error("Message handling error:", error);
+    } catch {
+      // Log the error using a proper logging service
+      // console.error("Message handling error:", _error);
       res.status(500).json({ error: "Internal server error" });
     }
+  }
+
+  // подключение MCP сервера по выбранной стратегии
+  public async connectWithStrategy(
+    strategy: TransportStrategy,
+  ): Promise<Transport> {
+    const transport = strategy.createTransport();
+    // Делегируем подключение mcpServer
+    await this.mcpServer.connect(transport);
+    // Log the connection using a proper logging service
+    // console.info(`Connect in ${config.OPERATING_MODE} mode to MCP server...`);
+    return transport;
   }
 }

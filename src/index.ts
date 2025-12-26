@@ -2,27 +2,22 @@ import express from "express";
 import { YandexTrackerMcpServer } from "./mcp/server/YandexTrackerMcpServer";
 import { YandexTrackerEndpoint } from "./enums/YandexTrackerEndpoint";
 import { config } from "./settings/config";
-import { Transport } from "@modelcontextprotocol/sdk/shared/transport";
 import { SSETransportStrategy } from "./mcp/transport_strategy/SSETransportStrategy";
 import { OperatingModeName } from "./enums/env/OperatingModeName";
 import { StdioTransportStrategy } from "./mcp/transport_strategy/StdioTransportStrategy";
 
 // запуск в режиме stdio
-async function startStdioServer():Promise<void> {
+async function startStdioServer(): Promise<void> {
   const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
-  let transport: Transport | null = null;
   (async () => {
     const transportStrategy = new StdioTransportStrategy();
-    transport = await yandexTrackerMcpServer.connectWithStrategy(
-      transportStrategy
-    );
+    await yandexTrackerMcpServer.connectWithStrategy(transportStrategy);
   })();
 }
 
 // запуск в режиме sse
-async function startSseServer(port: number = 3000):Promise<void> {
+async function startSseServer(port: number = 3000): Promise<void> {
   const yandexTrackerMcpServer = new YandexTrackerMcpServer("shiza", "v1.0.0");
-  let transport: Transport | null = null;
   const app = express();
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -36,12 +31,10 @@ async function startSseServer(port: number = 3000):Promise<void> {
       const transportStrategy = new SSETransportStrategy(
         YandexTrackerEndpoint.messagesEdnpoint,
         res,
-        yandexTrackerMcpServer.transports.sse
+        yandexTrackerMcpServer.transports.sse,
       );
-      transport = await yandexTrackerMcpServer.connectWithStrategy(
-        transportStrategy
-      );
-    } catch (error) {
+      await yandexTrackerMcpServer.connectWithStrategy(transportStrategy);
+    } catch {
       res.status(500).json({ error: "Internal server error" });
     }
   });
@@ -56,7 +49,7 @@ export async function startYandexTrackerMcpMain() {
   // Создаем словарь с функциями
   const serverStartFunctions: Record<string, () => Promise<void>> = {
     [OperatingModeName.StdioMode]: startStdioServer,
-    [OperatingModeName.SSEMode]: startSseServer
+    [OperatingModeName.SSEMode]: startSseServer,
   };
 
   await serverStartFunctions[config.OPERATING_MODE]();

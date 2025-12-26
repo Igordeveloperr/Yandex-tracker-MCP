@@ -1,4 +1,4 @@
-import { array, string, z } from "zod";
+import { z } from "zod";
 import {
   statusSchema,
   prioritySchema,
@@ -8,7 +8,6 @@ import {
 } from "../baseSchemas";
 import { userSchemaSimple } from "../users/user";
 import { queueSchema } from "../queues/queue";
-import { describe, number } from "yargs";
 import { sprintSchema } from "../boards/sprint";
 import { checkListSchema } from "./checklist";
 
@@ -17,7 +16,7 @@ export const issueSchemaSimple = z.object({
   key: z.string(),
   storyPoints: z.number().optional(),
 });
-export type SimpleIssue = z.infer<typeof issueSchema>;
+export type SimpleIssue = z.infer<typeof issueSchemaSimple>;
 
 export const issueSchema = issueSchemaSimple.extend({
   self: z.string().url().optional(),
@@ -42,7 +41,7 @@ export const issueSchema = issueSchemaSimple.extend({
   status: statusSchema.optional(),
   previousStatus: statusSchema.optional(),
   favorite: z.boolean().optional(),
-  checklistItems: z.array(checkListSchema).optional()
+  checklistItems: z.array(checkListSchema).optional(),
 });
 
 export type Issue = z.infer<typeof issueSchema>;
@@ -79,7 +78,13 @@ export const updateIssueSchema = z.object({
   sprint: z.union([z.array(z.string()), z.array(sprintSchema)]).optional(),
   type: z.union([issueTypeSchema, z.string(), z.number()]).optional(),
   priority: z.union([prioritySchema, z.string(), z.number()]).optional(),
-  followers: z.union([z.array(userSchemaSimple), z.array(z.string()), z.array(z.number())]).optional(),
+  followers: z
+    .union([
+      z.array(userSchemaSimple),
+      z.array(z.string()),
+      z.array(z.number()),
+    ])
+    .optional(),
   project: projectSchema.optional(),
   attachmentIds: z.array(z.string()).optional(),
   descriptionAttachmentIds: z.array(z.string()).optional(),

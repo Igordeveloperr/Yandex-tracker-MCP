@@ -1,8 +1,6 @@
 @startuml ComponentPattern
 ' Диаграмма классов UML для паттерна Component в YandexTrackerMcpServer
 
-title пупапипа - Чмандекс Tracker MCP Сервер
-
 top to bottom direction
 
 package "Паттерн Component" {

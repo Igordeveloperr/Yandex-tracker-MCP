@@ -11,7 +11,9 @@
     "compile": "npx tsc",
     "run": "node dist/index.js",
     "mcpJAM": "npx @mcpjam/inspector@latest",
-    "test": "node dist/tests/yandex_api1.test.js"
+    "test": "node dist/tests/yandex_api1.test.js",
+    "lintT": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/index.ts --fix"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@tinkoff/eslint-config": "^5.0.1",
+    "@tinkoff/eslint-plugin": "^5.0.0",
     "@types/express": "^5.0.3",
     "@types/node": "^22.15.30",
     "@types/yargs": "^17.0.33",
